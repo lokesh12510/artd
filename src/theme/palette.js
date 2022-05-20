@@ -88,6 +88,7 @@ const palette = {
 	dark: { ...DARK },
 	grey: GREY,
 	gradients: GRADIENTS,
+	disabled: "#F5F5F9",
 	border: "#A0A0A0",
 	divider: GREY[500_24],
 	body: { ...BODY },

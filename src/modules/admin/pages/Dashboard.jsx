@@ -11,17 +11,25 @@ import {
 	InputAdornment,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useState } from "react";
 import palette from "../../../theme/palette";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { StyledBtn, StyledBox, StyledInput, StyledCheckBoxWrapper } from "../../../theme/GlobalStyles";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
-import { AddCircle as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
+import { CopyIcon, DeleteIcon, EditIcon, EyeIcon } from "../../../constants/icons";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const Dashboard = () => {
+	const [selectionModel, setSelectionModel] = React.useState();
+
+	const [tableRow, setTableRow] = useState(rows);
+
+	const handleAddRow = () => {
+		setTableRow([...tableRow, { id: Math.floor(Math.random() * 1000) }]);
+	};
+
 	return (
 		<Stack spacing={2}>
 			<StyledBox>
@@ -58,14 +66,30 @@ const Dashboard = () => {
 				<GridContainer>
 					<DataGrid
 						autoHeight
-						rows={rows}
+						autoWidth
+						rows={tableRow}
 						columns={columns}
-						pageSize={5}
-						rowsPerPageOptions={[5]}
 						disableSelectionOnClick
 						disableColumnMenu
+						hideFooterPagination
+						checkboxSelection
+						hideFooter
+						onSelectionModelChange={(newSelectionModel) => {
+							setSelectionModel(newSelectionModel);
+						}}
+						selectionModel={selectionModel}
 					/>
 				</GridContainer>
+				<div className="">
+					<StyledBtn variant="contained" color="primary" onClick={handleAddRow}>
+						<AddCircleIcon />
+					</StyledBtn>
+				</div>
+				<Stack direction={"row"} alignItems="center" justifyContent={"space-between"} mt={4}>
+					<Typography variant="h5" color="primary" gutterBottom>
+						Deliverables
+					</Typography>
+				</Stack>
 			</TableContainer>
 		</Stack>
 	);
@@ -80,7 +104,6 @@ const ProjectInfo = styled(Stack)(({ theme }) => ({
 const TableHeader = styled(Stack)(({ theme }) => ({
 	backgroundColor: palette.secondary.light,
 	padding: theme.spacing(1.5),
-	flex: 1,
 }));
 
 const ButtonStack = styled(Stack)(({ theme }) => ({
@@ -98,6 +121,7 @@ const TableContainer = styled(StyledBox)(({ theme }) => ({
 }));
 
 const GridContainer = styled("div")(({ theme }) => ({
+	position: "relative",
 	width: "100%",
 	"& .MuiDataGrid-columnHeaders": {
 		backgroundColor: palette.secondary.main,
@@ -105,13 +129,23 @@ const GridContainer = styled("div")(({ theme }) => ({
 	},
 	"& .MuiDataGrid-columnHeader": {
 		outline: "none!important",
-		"& .MuiSvgIcon-fontSizeMedium": {
-			display: "none",
+		padding: "0 5px",
+	},
+
+	"& .MuiDataGrid-root": {
+		"& .MuiDataGrid-cell": {
+			padding: "0 5px",
 		},
 	},
 
 	"& .MuiSvgIcon-fontSizeLarge": {
 		backgroundColor: "#10577680",
+	},
+	"& .MuiDataGrid-columnHeaderCheckbox": {
+		display: "none!important",
+	},
+	"& .MuiDataGrid-cellCheckbox": {
+		display: "none!important",
 	},
 
 	"& .MuiOutlinedInput-root": { paddingRight: 0 },
@@ -123,21 +157,39 @@ const GridContainer = styled("div")(({ theme }) => ({
 		letterSpacing: 1.2,
 		fontSize: 14,
 	},
+	"& .MuiDataGrid-row.Mui-selected": {
+		backgroundColor: palette.disabled,
+		"& .tableField": {
+			pointerEvents: "none",
+		},
+		"& input": {
+			color: palette.grey[400],
+		},
+	},
 	"& .MuiDataGrid-columnSeparator": {
 		display: "none!important",
 	},
 	"& .MuiDataGrid-iconButtonContainer": {
 		display: "none!important",
 	},
-	"& .MuiDataGrid-footerContainer": {
-		display: "none!important",
-	},
+
 	"& .MuiOutlinedInput-input": {
 		padding: theme.spacing(0.8),
 	},
 	"& .MuiDataGrid-columnHeaderTitleContainer": {
 		justifyContent: "center",
 	},
+	"& .MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+		outline: "none!important",
+	},
+	// "& .MuiDataGrid-root .pinnedColumns": {
+	// 	position: "absolute",
+	// 	overflow: "hidden",
+	// 	height: "100%",
+	// 	zIndex: 1,
+	// 	display: "flex",
+	// 	left: 0,
+	// },
 }));
 
 // Dummy data
@@ -146,81 +198,148 @@ const columns = [
 	{
 		field: "completed",
 		headerName: "Completed",
+		headerClassName: ["pinnedColumns"],
+		cellClassName: ["pinnedColumns"],
+
 		minWidth: 120,
-		renderCell: (params) => [<Checkbox fontSize="large" />],
+		align: "center",
+
+		renderCell: (params) => {
+			const isSelected = params.api.isRowSelected(params.id);
+			return (
+				<Checkbox
+					fontSize="large"
+					checked={isSelected}
+					onChange={(event) => {
+						params.api.selectRow(params.id, !isSelected);
+					}}
+				/>
+			);
+		},
 	},
 	{
 		field: "action",
 		headerName: "Action",
-		minWidth: 120,
-		renderCell: (params) => [
-			<GridActionsCellItem icon={<FileCopyIcon />} label="Delete" />,
-			<GridActionsCellItem icon={<EditIcon />} label="Edit" />,
-			<GridActionsCellItem icon={<DeleteIcon />} label="Delete" />,
-		],
+		headerClassName: ["pinnedColumns"],
+		cellClassName: ["pinnedColumns"],
+		minWidth: 100,
+		align: "center",
+
+		renderCell: (params) => {
+			const isSelected = params.api.isRowSelected(params.id);
+
+			return isSelected ? (
+				<>
+					<GridActionsCellItem icon={<EyeIcon bg={palette.primary.main} />} label="Delete" />
+					<GridActionsCellItem icon={<DeleteIcon bg={palette.grey[400]} />} label="Delete" />
+				</>
+			) : (
+				<>
+					<GridActionsCellItem icon={<CopyIcon bg={palette.primary.main} />} label="Copy" />
+					<GridActionsCellItem icon={<EditIcon bg={palette.primary.main} />} label="Edit" />
+					<GridActionsCellItem icon={<DeleteIcon bg={palette.primary.main} />} label="Delete" />
+				</>
+			);
+		},
 	},
 	{
 		field: "Phase",
 		headerName: "Phase",
+		headerClassName: ["pinnedColumns"],
+		cellClassName: ["tableField", "pinnedColumns"],
 		width: 80,
 		editable: true,
+
 		renderCell: () => <TextField />,
 	},
 	{
 		field: "Task",
 		headerName: "Task",
 		width: 80,
+		headerClassName: ["pinnedColumns"],
+		cellClassName: ["tableField", "pinnedColumns"],
 		editable: true,
+		cellAlign: "center",
+
 		renderCell: () => <TextField />,
 	},
 	{
 		field: "desc",
 		headerName: "Description",
-		width: 200,
-		renderCell: () => <TextField />,
+		headerClassName: ["pinnedColumns, colDesc"],
+		cellClassName: ["tableField", "pinnedColumns, colDesc"],
+		minWidth: 200,
+		flex: 3,
+		renderCell: () => <TextField fullWidth />,
 	},
 	{
 		field: "date",
 		headerName: "Date",
+		headerClassName: ["pinnedColumns"],
+		cellClassName: ["tableField", "pinnedColumns"],
 		width: 150,
+
 		renderCell: () => <TextField />,
 	},
 	{
 		field: "time",
 		headerName: "Time",
 		width: 80,
+		headerClassName: ["pinnedColumns"],
+		cellClassName: ["tableField", "pinnedColumns"],
+
 		renderCell: () => <TextField />,
 	},
 	{
 		field: "timeRate",
 		headerName: "Time X Rate",
 		width: 150,
+		headerClassName: ["pinnedColumns"],
+		cellClassName: ["tableField", "pinnedColumns"],
+
 		renderCell: () => <TextField />,
 	},
 	{
 		field: "expense",
 		headerName: "Expense",
 		width: 120,
+		headerClassName: ["pinnedColumns"],
+		cellClassName: ["tableField", "pinnedColumns"],
+
 		renderCell: () => <TextField />,
 	},
 	{
 		field: "NATC",
 		headerName: "NATC",
 		minWidth: 100,
+		cellClassName: "tableField",
 		renderCell: () => <TextField />,
 	},
 	{
 		field: "DAVC",
 		headerName: "DAVC",
 		minWidth: 100,
+		cellClassName: "tableField",
 		renderCell: () => <TextField />,
 	},
 	{
 		field: "JENT",
 		headerName: "JENT",
 		minWidth: 100,
-
+		cellClassName: "tableField",
 		renderCell: () => <TextField />,
+	},
+	{
+		field: "add",
+		headerName: "Add",
+		minWidth: 100,
+		minHeight: 120,
+		cellClassName: "tableField",
+		renderHeader: () => (
+			<StyledBtn variant="contained" color="primary">
+				<AddCircleIcon />
+			</StyledBtn>
+		),
 	},
 ];
 
