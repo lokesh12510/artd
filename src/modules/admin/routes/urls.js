@@ -1,5 +1,6 @@
 import React from "react";
 import Dashboard from "../pages/Dashboard";
+import AddProject from "../pages/AddProject";
 
 const urls = {
 	Dashboard: "/",
@@ -16,7 +17,7 @@ const routes = [
 	},
 	{
 		path: urls.add,
-		element: <Dashboard />,
+		element: <AddProject />,
 		auth: true,
 		roles: [],
 	},

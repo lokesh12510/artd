@@ -20,6 +20,8 @@ import { StyledBtn, StyledBox, StyledInput, StyledCheckBoxWrapper } from "../../
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { CopyIcon, DeleteIcon, EditIcon, EyeIcon } from "../../../constants/icons";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import StickyColTable from "../../../components/StickyColTable";
+import { data } from '../../../mockup/stickytableData';
 
 const Dashboard = () => {
 	const [selectionModel, setSelectionModel] = React.useState();
@@ -63,7 +65,7 @@ const Dashboard = () => {
 						</StyledBtn>
 					</ButtonStack>
 				</TableHeader>
-				<GridContainer>
+				{/* <GridContainer>
 					<DataGrid
 						autoHeight
 						autoWidth
@@ -84,12 +86,13 @@ const Dashboard = () => {
 					<StyledBtn variant="contained" color="primary" onClick={handleAddRow}>
 						<AddCircleIcon />
 					</StyledBtn>
-				</div>
-				<Stack direction={"row"} alignItems="center" justifyContent={"space-between"} mt={4}>
+				</div> */}
+				<StickyColTable  data={data}/>
+				{/* <Stack direction={"row"} alignItems="center" justifyContent={"space-between"} mt={4}>
 					<Typography variant="h5" color="primary" gutterBottom>
 						Deliverables
 					</Typography>
-				</Stack>
+				</Stack> */}
 			</TableContainer>
 		</Stack>
 	);
