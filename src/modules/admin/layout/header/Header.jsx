@@ -58,7 +58,12 @@ const Root = styled(Box)(({ theme }) => ({
 }));
 
 const SearchBar = styled(StyledInput)(({ theme }) => ({
-	maxWidth: "600px",
+	[theme.breakpoints.down("md")]: {
+		maxWidth: "300px",
+	},
+	[theme.breakpoints.up("md")]: {
+		maxWidth: "600px",
+	},
 }));
 
 const PageTitle = styled(Typography)(({ theme }) => ({
@@ -79,7 +84,7 @@ const BreadcrumbItem = styled(Typography)(({ theme, active }) => ({
 		paddingInline: theme.spacing(1.2),
 	},
 	paddingRight: active ? 0 : theme.spacing(2),
-	"&:first-child": {
+	"&:first-of-type": {
 		paddingInline: theme.spacing(3),
 		[theme.breakpoints.down("md")]: {
 			paddingInline: theme.spacing(2),

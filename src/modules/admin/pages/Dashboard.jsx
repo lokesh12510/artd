@@ -21,7 +21,7 @@ import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { CopyIcon, DeleteIcon, EditIcon, EyeIcon } from "../../../constants/icons";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import StickyColTable from "../../../components/StickyColTable";
-import { data } from '../../../mockup/stickytableData';
+import { data } from "../../../mockup/stickytableData";
 
 const Dashboard = () => {
 	const [selectionModel, setSelectionModel] = React.useState();
@@ -54,13 +54,13 @@ const Dashboard = () => {
 					</StyledCheckBoxWrapper>
 
 					<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"}>
-						<StyledBtn variant="outlined" color={"primary"}>
+						<StyledBtn variant="outlined" color={"primary"} size="small">
 							Description
 						</StyledBtn>
-						<StyledBtn variant="outlined" color={"primary"}>
+						<StyledBtn variant="outlined" color={"primary"} size="small">
 							outputs
 						</StyledBtn>
-						<StyledBtn variant="outlined" color={"primary"}>
+						<StyledBtn variant="outlined" color={"primary"} size="small">
 							Bump
 						</StyledBtn>
 					</ButtonStack>
@@ -87,7 +87,7 @@ const Dashboard = () => {
 						<AddCircleIcon />
 					</StyledBtn>
 				</div> */}
-				<StickyColTable  data={data}/>
+				<StickyColTable data={data} />
 				{/* <Stack direction={"row"} alignItems="center" justifyContent={"space-between"} mt={4}>
 					<Typography variant="h5" color="primary" gutterBottom>
 						Deliverables
@@ -113,7 +113,7 @@ const ButtonStack = styled(Stack)(({ theme }) => ({
 	gap: theme.spacing(1),
 	"& .MuiButton-root": {
 		backgroundColor: palette.common.white,
-		minWidth: 130,
+		minWidth: 90,
 	},
 }));
 
