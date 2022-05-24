@@ -5,7 +5,7 @@ import palette from "./palette";
 export const StyledBox = styled(Box)(({ theme }) => ({
 	minHeight: "60px",
 	backgroundColor: palette.common.white,
-	padding: theme.spacing(1),
+	padding: theme.spacing(2),
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "flex-start",
@@ -42,6 +42,8 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 	position: "relative",
 	width: "100%",
 	overflow: "hidden",
+	borderTopLeftRadius: 10,
+	borderTopRightRadius: 10,
 
 	"& .MuiTableHead-root": {
 		minHeight: 80,
@@ -55,7 +57,7 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 		backgroundColor: palette.secondary.main,
 		color: palette.common.white,
 		padding: theme.spacing(1.5),
-		minWidth: 55,
+		textTransform: "uppercase",
 	},
 	"& .MuiTableRow-root.Mui-selected": {
 		"&:hover": {

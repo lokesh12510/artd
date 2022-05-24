@@ -32,6 +32,6 @@ const BodyContainer = styled("div")(({ theme }) => ({
 	flexGrow: 1,
 	overflow: "auto",
 	minHeight: "100%",
-	padding: theme.spacing(1.5),
+	padding: theme.spacing(1.2),
 	backgroundColor: palette.body.main,
 }));

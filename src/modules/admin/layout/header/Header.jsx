@@ -14,12 +14,12 @@ const Header = () => {
 			</PageTitle>
 			{/* SearchBar */}
 			<SearchBar
-				placeholder="search"
+				placeholder="Search"
 				variant="outlined"
 				InputProps={{
 					endAdornment: (
 						<InputAdornment position="end">
-							<img src={AppIcons.Search} alt="search" />
+							<img src={AppIcons.Search} alt="Search" />
 						</InputAdornment>
 					),
 				}}
