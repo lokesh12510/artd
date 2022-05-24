@@ -6,10 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { visuallyHidden } from "@mui/utils";
 import { CopyIcon, DeleteIcon, EditIcon, EyeIcon } from "../constants/icons";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -20,17 +17,18 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 import { StyledBtn, StyledInput } from "../theme/GlobalStyles";
 
-import { Box, Checkbox, Stack, Typography } from "@mui/material";
+import { Checkbox, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import palette from "../theme/palette";
-import moment from "moment";
+// import moment from "moment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { Link } from "react-router-dom";
 
 const StickyColTable = ({ data }) => {
-	const [tableData, setTableData] = useState(data);
+	// const [tableData, setTableData] = useState(data);
 	const [selected, setSelected] = React.useState([]);
 
+	// eslint-disable-next-line
 	const [col, setCol] = useState(data.columns);
 	const [row, setRow] = useState(data.rows);
 
@@ -58,11 +56,13 @@ const StickyColTable = ({ data }) => {
 	// find row isSelected or not
 	const isSelected = (id) => selected.indexOf(id) !== -1;
 
+	// func to add new row to table
 	const handleAddRow = () => {
 		let colObj = {};
-		const cols = col.list.map((item) => ({ ...colObj, [item]: "" }));
 
-		console.log(cols);
+		col.list.forEach((item) => (colObj[item] = ""));
+
+		console.log(colObj);
 
 		// generate row data to append
 		setRow({
@@ -70,7 +70,8 @@ const StickyColTable = ({ data }) => {
 			list: [
 				...row.list,
 				{
-					...cols,
+					...colObj,
+					date: null,
 					id: Math.floor(Math.random() * 100),
 					isCompleted: false,
 				},
@@ -78,13 +79,29 @@ const StickyColTable = ({ data }) => {
 		});
 	};
 
+	// handling change event in table `text` input fields
 	const handleChange = (e, id) => {
-		console.log(e.target.name, e.target.value);
+		console.log(e, id);
 		setRow((r) => ({
 			count: r.count,
-			list: r.list.map((item, i) => {
+			list: r.list.map((item) => {
 				if (item.id === id) {
 					return { ...item, [e.target.name]: e.target.value };
+				} else {
+					return item;
+				}
+			}),
+		}));
+	};
+
+	// handling change event in table `date` input fields
+	const handleDateChange = (val, id) => {
+		console.log(val, id);
+		setRow((r) => ({
+			count: r.count,
+			list: r.list.map((item) => {
+				if (item.id === id) {
+					return { ...item, date: val };
 				} else {
 					return item;
 				}
@@ -155,7 +172,7 @@ const StickyColTable = ({ data }) => {
 								<TableRow
 									key={row.id}
 									sx={row.isCompleted && !open && visuallyHidden}
-									// onClick={(event) => handleClick(event, row.name)}
+									// onClick={(event) => handleClick(event, row.id)}
 									selected={row.isCompleted ? true : isItemSelected}
 									className={row.isCompleted && open ? "shown" : "hidden"}
 									style={{ transition: "all 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms", height: "auto", transitionDuration: "266ms" }}
@@ -205,9 +222,18 @@ const StickyColTable = ({ data }) => {
 															<DatePicker
 																views={["year", "month"]}
 																value={row[col]}
+																onChange={(newValue) => {
+																	console.log(newValue._d);
+																	handleDateChange(newValue._d, row.id);
+																}}
+																// value={value}
 																// onChange={(newValue) => {
-																//   setValue(newValue);
+																// 	console.log(newValue._d);
+																// 	handleDateChange(newValue._d, row.id);
 																// }}
+																components={{
+																	OpenPickerIcon: ArrowDropDownIcon,
+																}}
 																renderInput={(params) => <StyledInput {...params} />}
 															/>
 														</LocalizationProvider>
@@ -271,7 +297,7 @@ const StickyColTable = ({ data }) => {
 						{row.list.map((row, index) => {
 							const isItemSelected = isSelected(row.id);
 
-							const labelId = `enhanced-table-checkbox-${index}`;
+							// const labelId = `enhanced-table-checkbox-${index}`;
 
 							return (
 								<TableRow
@@ -344,7 +370,7 @@ const StickyColTable = ({ data }) => {
 								</TableCell>
 							</TableRow>
 							{row.list.map((row, index) => {
-								const isItemSelected = isSelected(row.id);
+								// const isItemSelected = isSelected(row.id);
 								return (
 									<TableRow
 										key={index}
@@ -415,6 +441,7 @@ const GridContainer = styled("div")(({ theme }) => ({
 	"& .MuiTableCell-head": {
 		color: "#fff",
 		padding: theme.spacing(1.5),
+		minWidth: 55,
 	},
 	"& .MuiTableRow-root.Mui-selected": {
 		"&:hover": {
@@ -441,6 +468,9 @@ const GridContainer = styled("div")(({ theme }) => ({
 				height: 32,
 			},
 		},
+		"& .MuiInputAdornment-root": {
+			marginLeft: 0,
+		},
 	},
 
 	"& .MuiTableCell-body": {
@@ -465,11 +495,19 @@ const GridContainer = styled("div")(({ theme }) => ({
 	"& .date": {
 		"& .MuiFormControl-root": {
 			overflow: "hidden",
+			backgroundColor: "rgb(255 255 255 / 8%)",
 			"& .MuiButtonBase-root": {
-				backgroundColor: palette.grey[400],
+				padding: 1,
+				backgroundColor: "rgba(16, 87, 118, 0.08)",
 				borderRadius: 0,
 				position: "relative",
 				right: -3,
+			},
+			"& .MuiSvgIcon-root": {
+				fontSize: "2.3rem",
+			},
+			"& input": {
+				backgroundColor: "transparent",
 			},
 		},
 	},

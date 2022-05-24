@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography, TextField, FormGroup } from "@mui/material";
+import { Box, Button, TextField, FormGroup } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "./palette";
 

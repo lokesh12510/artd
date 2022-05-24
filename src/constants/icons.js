@@ -5,7 +5,6 @@ import ReportDark from "../assets/Img/report.svg";
 import ReportSearchDark from "../assets/Img/report-search.png";
 import HelpDark from "../assets/Img/help.svg";
 import Search from "../assets/Img/search.svg";
-import palette from "../theme/palette";
 
 export const HomeIcon = ({ bg }) => {
 	return (

@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import React from "react";
-import { Box, Divider, InputAdornment, Stack, TextField, Typography } from "@mui/material";
+import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
 import palette from "../../../../theme/palette";
 import AppIcons, { HomeIcon } from "../../../../constants/icons";
 import { StyledInput } from "../../../../theme/GlobalStyles";
