@@ -23,6 +23,8 @@ import palette from "../theme/palette";
 // import moment from "moment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { Link } from "react-router-dom";
+import DataTableModal from "./DataTableModal";
+import CustomDialog from "./CustomDialog";
 
 const StickyColTable = ({ data }) => {
 	// const [tableData, setTableData] = useState(data);
@@ -34,6 +36,27 @@ const StickyColTable = ({ data }) => {
 
 	// Accordion Toggle state
 	const [open, setOpen] = React.useState(false);
+
+	// Column Modal Toggle State
+	const [visible, setVisible] = useState(false);
+
+	// Edit Modal Toggle State
+	const [editModal, setEditModal] = useState(false);
+
+	const handleEditModal = () => {
+		setEditModal((v) => !v);
+	};
+
+	// Delete Modal Toggle State
+	const [deleteModal, setDeleteModal] = useState(false);
+
+	const handleDeleteModal = () => {
+		setDeleteModal((v) => !v);
+	};
+
+	const handleModalState = () => {
+		setVisible((v) => !v);
+	};
 
 	// ----------------Checkbox select row function------------------
 	const handleClick = (event, id) => {
@@ -113,254 +136,188 @@ const StickyColTable = ({ data }) => {
 		console.log(row);
 	}, [row]);
 
+	const editModalActions = [
+		{ title: "Save", variant: "contained", color: "primary", handleAction: handleEditModal },
+		{ title: "Reset", variant: "outlined", color: "primary", handleAction: handleEditModal },
+		{ title: "Cancel", variant: "outlined", color: "dark", handleAction: handleEditModal },
+	];
+
+	const deleteModalActions = [
+		{ title: "Delete", variant: "contained", color: "primary", handleAction: handleDeleteModal },
+		{ title: "Cancel", variant: "outlined", color: "dark", handleAction: handleDeleteModal },
+	];
+
 	return (
-		<GridContainer>
-			<TableContainer component={Paper} sx={{ display: "flex", alignItems: "flex-start", flexDirection: "row" }}>
-				{/* Sticky */}
-				<Table aria-label="simple table" size={"small"} className="sticky-table">
-					{/*----------- Sticky Header-------- */}
-					<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
-						<TableRow>
-							<TableCell align="center">Completed</TableCell>
-							<TableCell align="center">Action</TableCell>
-							{col.list
-								.slice(2)
-								.filter((item) => !item.includes("_"))
-								.map((item, index) => {
-									return (
-										<StyledTableCell align="center" label={item} key={index}>
-											{item}
-										</StyledTableCell>
-									);
-								})}
-						</TableRow>
-					</TableHead>
-					{/*----------- Sticky Header-------- */}
-					<TableBody>
-						{/* Accordion Row */}
-						<TableRow sx={{ backgroundColor: "#e3f9ff" }} onClick={() => setOpen(!open)}>
-							<TableCell colSpan={10} className="accordion">
-								<Stack direction="row" alignItems="center">
-									<Typography
-										variant="body1"
-										component="div"
-										color={"primary"}
-										fontWeight="bold"
-										sx={{ maxWidth: "300px", paddingLeft: "10px", position: "sticky", left: 10 }}
+		<>
+			<GridContainer>
+				<TableContainer component={Paper} sx={{ display: "flex", alignItems: "flex-start", flexDirection: "row" }}>
+					{/* Sticky */}
+					<Table aria-label="simple table" size={"small"} className="sticky-table">
+						{/*----------- Sticky Header-------- */}
+						<TableHead>
+							<TableRow>
+								<TableCell align="center">Completed</TableCell>
+								<TableCell align="center">Action</TableCell>
+								{col.list
+									.slice(2)
+									.filter((item) => !item.includes("_"))
+									.map((item, index) => {
+										return (
+											<StyledTableCell align="center" label={item} key={index}>
+												{item}
+											</StyledTableCell>
+										);
+									})}
+							</TableRow>
+						</TableHead>
+						{/*----------- Sticky Header-------- */}
+						<TableBody>
+							{/* Accordion Row */}
+							<TableRow sx={{ backgroundColor: "#e3f9ff" }} onClick={() => setOpen(!open)}>
+								<TableCell colSpan={10} className="accordion">
+									<Stack direction="row" alignItems="center">
+										<Typography
+											variant="body1"
+											component="div"
+											color={"primary"}
+											fontWeight="bold"
+											sx={{ maxWidth: "300px", paddingLeft: "10px", position: "sticky", left: 10 }}
+										>
+											Completed Task
+										</Typography>
+										<IconButton aria-label="expand row" size="small" className="dropdown" sx={{ visibility: "hidden" }}>
+											{open ? (
+												<ArrowDropUpIcon fontSize="large" style={{ color: palette.primary.main }} />
+											) : (
+												<ArrowDropDownIcon fontSize="large" style={{ color: palette.primary.main }} />
+											)}
+										</IconButton>
+									</Stack>
+								</TableCell>
+							</TableRow>
+							{/* Accordion Row */}
+
+							{/* ----------------- Sticky Table row -------------- */}
+							{row.list.map((row, index) => {
+								const isItemSelected = isSelected(row.id);
+
+								const labelId = `enhanced-table-checkbox-${index}`;
+
+								return (
+									<TableRow
+										key={row.id}
+										sx={row.isCompleted && !open && visuallyHidden}
+										// onClick={(event) => handleClick(event, row.id)}
+										selected={row.isCompleted ? true : isItemSelected}
+										className={row.isCompleted && open ? "shown" : "hidden"}
+										style={{ transition: "all 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms", height: "auto", transitionDuration: "266ms" }}
 									>
-										Completed Task
-									</Typography>
-									<IconButton aria-label="expand row" size="small" className="dropdown" sx={{ visibility: "hidden" }}>
-										{open ? (
-											<ArrowDropUpIcon fontSize="large" style={{ color: palette.primary.main }} />
-										) : (
-											<ArrowDropDownIcon fontSize="large" style={{ color: palette.primary.main }} />
-										)}
-									</IconButton>
-								</Stack>
-							</TableCell>
-						</TableRow>
-						{/* Accordion Row */}
-
-						{/* ----------------- Sticky Table row -------------- */}
-						{row.list.map((row, index) => {
-							const isItemSelected = isSelected(row.id);
-
-							const labelId = `enhanced-table-checkbox-${index}`;
-
-							return (
-								<TableRow
-									key={row.id}
-									sx={row.isCompleted && !open && visuallyHidden}
-									// onClick={(event) => handleClick(event, row.id)}
-									selected={row.isCompleted ? true : isItemSelected}
-									className={row.isCompleted && open ? "shown" : "hidden"}
-									style={{ transition: "all 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms", height: "auto", transitionDuration: "266ms" }}
-								>
-									<TableCell component="th" scope="row" align="center">
-										<Checkbox
-											color="primary"
-											checked={row.isCompleted ? true : isItemSelected}
-											inputProps={{
-												"aria-labelledby": labelId,
-											}}
-											onChange={(event) => handleClick(event, row.id)}
-										/>
-									</TableCell>
-									<TableCell align="center" style={{ width: 100 }}>
-										{isItemSelected || row.isCompleted ? (
-											<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
-												<IconButton color="primary" aria-label="upload picture" component="span">
-													<EyeIcon bg={palette.primary.main} />
-												</IconButton>
-												<IconButton color="primary" aria-label="upload picture" component="span">
-													<DeleteIcon bg={palette.grey[400]} />
-												</IconButton>
-											</Stack>
-										) : (
-											<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
-												<IconButton color="primary" aria-label="upload picture" component="span">
-													<CopyIcon bg={palette.primary.main} />
-												</IconButton>
-												<IconButton color="primary" aria-label="upload picture" component="span">
-													<EditIcon bg={palette.primary.main} />
-												</IconButton>
-												<IconButton color="primary" aria-label="upload picture" component="span">
-													<DeleteIcon bg={palette.primary.main} />
-												</IconButton>
-											</Stack>
-										)}
-									</TableCell>
-									{col.list
-										.slice(2)
-										.filter((item) => !item.includes("_"))
-										.map((col, index) => {
-											return (
-												<StyledTableCell align="center" key={index} className={col} label={col}>
-													{col === "date" ? (
-														<LocalizationProvider dateAdapter={AdapterMoment}>
-															<DatePicker
-																views={["year", "month"]}
-																value={row[col]}
-																onChange={(newValue) => {
-																	console.log(newValue._d);
-																	handleDateChange(newValue._d, row.id);
-																}}
-																// value={value}
-																// onChange={(newValue) => {
-																// 	console.log(newValue._d);
-																// 	handleDateChange(newValue._d, row.id);
-																// }}
-																components={{
-																	OpenPickerIcon: ArrowDropDownIcon,
-																}}
-																renderInput={(params) => <StyledInput {...params} />}
-															/>
-														</LocalizationProvider>
-													) : (
-														<StyledInput
-															name={col}
-															value={row[col]}
-															component={col === "expenses" && Link}
-															to="/"
-															onChange={(e) => handleChange(e, row.id)}
-														/>
-													)}
-												</StyledTableCell>
-											);
-										})}
-								</TableRow>
-							);
-						})}
-
-						{/* ----------------- Sticky Table row -------------- */}
-					</TableBody>
-				</Table>
-				{/* Sticky */}
-
-				{/* Scroll Table */}
-				<Table aria-label="simple table" className="scroll-table" size={"small"}>
-					{/*----------- Scroll Header-------- */}
-					<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
-						<TableRow>
-							{col.list
-								.filter((item) => item.includes("_"))
-								.map((col, index) => {
-									return (
-										<TableCell align="center" style={{ minWidth: "80px", textTransform: "uppercase" }} key={index}>
-											{col.replace("_", "")}
+										<TableCell component="th" scope="row" align="center">
+											<Checkbox
+												color="primary"
+												checked={row.isCompleted ? true : isItemSelected}
+												inputProps={{
+													"aria-labelledby": labelId,
+												}}
+												onChange={(event) => handleClick(event, row.id)}
+											/>
 										</TableCell>
-									);
-								})}
-						</TableRow>
-					</TableHead>
-					{/*----------- Scroll Header-------- */}
-					<TableBody>
-						{/* Accordion Row */}
-						<TableRow
-							sx={{ backgroundColor: "#e3f9ff", cursor: "pointer", color: palette.common.white }}
-							onClick={() => setOpen(!open)}
-						>
-							<TableCell colSpan={10} className="accordion">
-								<IconButton aria-label="expand row" size="small" className="dropdown" sx={{ visibility: "hidden" }}>
-									{open ? (
-										<ArrowDropUpIcon fontSize="large" style={{ color: palette.primary.main }} />
-									) : (
-										<ArrowDropDownIcon fontSize="large" style={{ color: palette.primary.main }} />
-									)}
-								</IconButton>
-							</TableCell>
-						</TableRow>
-						{/* Accordion Row */}
+										<TableCell align="center" style={{ width: 100 }}>
+											{isItemSelected || row.isCompleted ? (
+												<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
+													<IconButton color="primary" aria-label="upload picture" component="span">
+														<EyeIcon bg={palette.primary.main} />
+													</IconButton>
+													<IconButton color="primary" aria-label="upload picture" component="span">
+														<DeleteIcon bg={palette.grey[400]} />
+													</IconButton>
+												</Stack>
+											) : (
+												<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
+													<IconButton color="primary" aria-label="copy" component="span">
+														<CopyIcon bg={palette.primary.main} />
+													</IconButton>
+													<IconButton color="primary" aria-label="edit" component="span" onClick={handleEditModal}>
+														<EditIcon bg={palette.primary.main} />
+													</IconButton>
+													<IconButton color="primary" aria-label="delete" component="span" onClick={handleDeleteModal}>
+														<DeleteIcon bg={palette.primary.main} />
+													</IconButton>
+												</Stack>
+											)}
+										</TableCell>
+										{col.list
+											.slice(2)
+											.filter((item) => !item.includes("_"))
+											.map((col, index) => {
+												return (
+													<StyledTableCell align="center" key={index} className={col} label={col}>
+														{col === "date" ? (
+															<LocalizationProvider dateAdapter={AdapterMoment}>
+																<DatePicker
+																	views={["year", "month"]}
+																	value={row[col]}
+																	onChange={(newValue) => {
+																		console.log(newValue._d);
+																		handleDateChange(newValue._d, row.id);
+																	}}
+																	// value={value}
+																	// onChange={(newValue) => {
+																	// 	console.log(newValue._d);
+																	// 	handleDateChange(newValue._d, row.id);
+																	// }}
+																	components={{
+																		OpenPickerIcon: ArrowDropDownIcon,
+																	}}
+																	renderInput={(params) => <StyledInput {...params} />}
+																/>
+															</LocalizationProvider>
+														) : (
+															<StyledInput
+																name={col}
+																value={row[col]}
+																component={col === "expenses" && Link}
+																to="/"
+																onChange={(e) => handleChange(e, row.id)}
+															/>
+														)}
+													</StyledTableCell>
+												);
+											})}
+									</TableRow>
+								);
+							})}
 
-						{/* ----------------- Scroll Table row -------------- */}
-						{row.list.map((row, index) => {
-							const isItemSelected = isSelected(row.id);
+							{/* ----------------- Sticky Table row -------------- */}
+						</TableBody>
+					</Table>
+					{/* Sticky */}
 
-							// const labelId = `enhanced-table-checkbox-${index}`;
-
-							return (
-								<TableRow
-									key={row.id}
-									sx={row.isCompleted && !open && visuallyHidden}
-									// onClick={(event) => handleClick(event, row.name)}
-									selected={row.isCompleted ? true : isItemSelected}
-									className={row.isCompleted && open ? "shown" : "hidden"}
-									style={{ transition: "all 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms", height: "auto", transitionDuration: "266ms" }}
-								>
-									{col.list
-										.filter((item) => item.includes("_"))
-										.map((col, index) => {
-											return (
-												<TableCell align="center" key={index}>
-													<StyledInput value={row[col]} />
-												</TableCell>
-											);
-										})}
-								</TableRow>
-							);
-						})}
-
-						{/* ----------------- Scroll Table row -------------- */}
-					</TableBody>
-				</Table>
-				{/* Scroll Table */}
-
-				{/* Add btn sticky Right */}
-				<Table sx={{ position: "sticky", right: 0, maxWidth: 70 }} aria-label="simple table" size={"small"}>
-					<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
-						<TableRow>
-							<TableCell align="right" style={{ minWidth: "50px" }}>
-								<div
-									style={{
-										maxWidth: 50,
-										paddingBlock: 6,
-										paddingInline: 10,
-										backgroundColor: palette.primary.main,
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-										borderRadius: 3,
-									}}
-								>
-									<AddCircleIcon fontSize="small" />
-								</div>
-							</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						<React.Fragment>
+					{/* Scroll Table */}
+					<Table aria-label="simple table" className="scroll-table" size={"small"}>
+						{/*----------- Scroll Header-------- */}
+						<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
+							<TableRow>
+								{col.list
+									.filter((item) => item.includes("_"))
+									.map((col, index) => {
+										return (
+											<TableCell align="center" style={{ minWidth: "80px", textTransform: "uppercase" }} key={index}>
+												{col.replace("_", "")}
+											</TableCell>
+										);
+									})}
+							</TableRow>
+						</TableHead>
+						{/*----------- Scroll Header-------- */}
+						<TableBody>
+							{/* Accordion Row */}
 							<TableRow
-								sx={{
-									backgroundColor: "#e3f9ff",
-									cursor: "pointer",
-									color: palette.common.white,
-									border: `1px solid ${palette.primary.main}`,
-								}}
+								sx={{ backgroundColor: "#e3f9ff", cursor: "pointer", color: palette.common.white }}
 								onClick={() => setOpen(!open)}
 							>
-								<TableCell align="right" colSpan={3} className="accordion">
-									<IconButton aria-label="expand row" size="small" className="dropdown">
+								<TableCell colSpan={10} className="accordion">
+									<IconButton aria-label="expand row" size="small" className="dropdown" sx={{ visibility: "hidden" }}>
 										{open ? (
 											<ArrowDropUpIcon fontSize="large" style={{ color: palette.primary.main }} />
 										) : (
@@ -369,29 +326,179 @@ const StickyColTable = ({ data }) => {
 									</IconButton>
 								</TableCell>
 							</TableRow>
+							{/* Accordion Row */}
+
+							{/* ----------------- Scroll Table row -------------- */}
 							{row.list.map((row, index) => {
-								// const isItemSelected = isSelected(row.id);
+								const isItemSelected = isSelected(row.id);
+
+								// const labelId = `enhanced-table-checkbox-${index}`;
+
 								return (
 									<TableRow
-										key={index}
+										key={row.id}
 										sx={row.isCompleted && !open && visuallyHidden}
-										// style={{ backgroundColor: row.isCompleted ? true : isItemSelected ? "transparent" : palette.common.white }}
+										// onClick={(event) => handleClick(event, row.name)}
+										selected={row.isCompleted ? true : isItemSelected}
+										className={row.isCompleted && open ? "shown" : "hidden"}
+										style={{ transition: "all 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms", height: "auto", transitionDuration: "266ms" }}
 									>
-										<TableCell align="center">
-											<div style={{ height: 36, width: 23 }}></div>
-										</TableCell>
+										{col.list
+											.filter((item) => item.includes("_"))
+											.map((col, index) => {
+												return (
+													<TableCell align="center" key={index}>
+														<StyledInput value={row[col]} />
+													</TableCell>
+												);
+											})}
 									</TableRow>
 								);
 							})}
-						</React.Fragment>
-					</TableBody>
-				</Table>
-			</TableContainer>
 
-			<StyledBtn variant="contained" onClick={handleAddRow}>
-				<AddCircleIcon />
-			</StyledBtn>
-		</GridContainer>
+							{/* ----------------- Scroll Table row -------------- */}
+						</TableBody>
+					</Table>
+					{/* Scroll Table */}
+
+					{/* Add btn sticky Right */}
+					<Table sx={{ position: "sticky", right: 0, maxWidth: 70 }} aria-label="simple table" size={"small"}>
+						<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
+							<TableRow>
+								<TableCell align="right" style={{ minWidth: "50px" }}>
+									<StyledBtn
+										style={{
+											maxWidth: 50,
+											minWidth: 50,
+											paddingBlock: 6,
+											paddingInline: 7,
+											backgroundColor: palette.primary.main,
+											display: "flex",
+											alignItems: "center",
+											justifyContent: "center",
+											borderRadius: 3,
+										}}
+										onClick={handleModalState}
+									>
+										<AddCircleIcon fontSize="small" sx={{ color: "#fff" }} />
+									</StyledBtn>
+								</TableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							<React.Fragment>
+								<TableRow
+									sx={{
+										backgroundColor: "#e3f9ff",
+										cursor: "pointer",
+										color: palette.common.white,
+										border: `1px solid ${palette.primary.main}`,
+									}}
+									onClick={() => setOpen(!open)}
+								>
+									<TableCell align="right" colSpan={3} className="accordion">
+										<IconButton aria-label="expand row" size="small" className="dropdown">
+											{open ? (
+												<ArrowDropUpIcon fontSize="large" style={{ color: palette.primary.main }} />
+											) : (
+												<ArrowDropDownIcon fontSize="large" style={{ color: palette.primary.main }} />
+											)}
+										</IconButton>
+									</TableCell>
+								</TableRow>
+								{row.list.map((row, index) => {
+									// const isItemSelected = isSelected(row.id);
+									return (
+										<TableRow
+											key={index}
+											sx={row.isCompleted && !open && visuallyHidden}
+											// style={{ backgroundColor: row.isCompleted ? true : isItemSelected ? "transparent" : palette.common.white }}
+										>
+											<TableCell align="center">
+												<div style={{ height: 36, width: 23 }}></div>
+											</TableCell>
+										</TableRow>
+									);
+								})}
+							</React.Fragment>
+						</TableBody>
+					</Table>
+				</TableContainer>
+
+				<StyledBtn variant="contained" onClick={handleAddRow}>
+					<AddCircleIcon />
+				</StyledBtn>
+			</GridContainer>
+			{/* Col Addition Modal */}
+			<DataTableModal open={visible} handleClose={handleModalState} row={row} col={col} />
+			{/* Col Addition Modal */}
+
+			{/* Edit Row Modal */}
+			<CustomDialog
+				title="Edit Phase & Task description"
+				visible={editModal}
+				handleModalState={handleEditModal}
+				actions={editModalActions}
+				minWidth="sm"
+				fullWidth={true}
+				actionPosition="center"
+			>
+				<Stack justifyContent={"center"} alignItems="start" direction={"column"} px={3} spacing={2}>
+					<Stack justifyContent={"center"} alignItems="center" direction={"row"} spacing={2} style={{ width: "100%" }}>
+						<Typography style={{ minWidth: 100 }}>Phase</Typography>
+						<StyledInput style={{ maxWidth: 50 }} value="2" />
+						<StyledInput style={{ flex: 2 }} />
+					</Stack>
+					<Stack justifyContent={"center"} alignItems="center" direction={"row"} spacing={2} style={{ width: "100%" }}>
+						<Typography style={{ minWidth: 100 }}>Task</Typography>
+						<StyledInput style={{ maxWidth: 50 }} value="2" />
+						<StyledInput style={{ flex: 2 }} />
+					</Stack>
+				</Stack>
+			</CustomDialog>
+			{/* Edit Row Modal */}
+			{/* Delete Row Modal */}
+			<CustomDialog
+				title="Delete Task?"
+				visible={deleteModal}
+				handleModalState={handleDeleteModal}
+				actions={deleteModalActions}
+				minWidth="sm"
+			>
+				<Stack justifyContent={"flex-start"} alignItems="start" direction={"column"} px={3} spacing={2}>
+					<Stack
+						justifyContent={"space-between"}
+						alignItems="start"
+						direction={"row"}
+						spacing={2}
+						mb={2}
+						style={{ width: "100%" }}
+					>
+						<Stack justifyContent={"flex-start"} alignItems="center" direction={"row"} spacing={2} style={{ width: "100%" }}>
+							<Typography style={{ minWidth: 100 }}>Phase</Typography>
+							<StyledInput style={{ maxWidth: 70 }} value="2" />
+						</Stack>
+						<Stack justifyContent={"flex-end"} alignItems="center" direction={"row"} spacing={2} style={{ width: "100%" }}>
+							<Typography style={{ minWidth: 100 }}>Task</Typography>
+							<StyledInput style={{ maxWidth: 70 }} value="2" />
+						</Stack>
+					</Stack>
+					<Stack justifyContent={"flex-start"} alignItems="center" direction={"row"} spacing={2} style={{ width: "100%" }}>
+						<Typography style={{ minWidth: 100 }}>Task Month</Typography>
+						<Typography style={{ minWidth: 100 }} color={palette.grey[400]}>
+							28 Jun 2022
+						</Typography>
+					</Stack>
+					<Stack justifyContent={"flex-start"} alignItems="center" direction={"row"} spacing={2} style={{ width: "100%" }}>
+						<Typography style={{ minWidth: 100 }}>Description</Typography>
+						<Typography style={{ minWidth: 100 }} color={palette.grey[400]}>
+							Inception meeting
+						</Typography>
+					</Stack>
+				</Stack>
+			</CustomDialog>
+			{/* Delete Row Modal */}
+		</>
 	);
 };
 
@@ -439,9 +546,10 @@ const GridContainer = styled("div")(({ theme }) => ({
 		cursor: "pointer",
 	},
 	"& .MuiTableCell-head": {
-		color: "#fff",
 		padding: theme.spacing(1.5),
 		minWidth: 55,
+		backgroundColor: palette.secondary.main,
+		color: palette.common.white,
 	},
 	"& .MuiTableRow-root.Mui-selected": {
 		"&:hover": {
