@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { CloseBtn, StyledBtn, StyledDialog, StyledInput } from "../theme/GlobalStyles";
+import { CloseBtn, StyledBtn, StyledDialog, StyledInput } from "../../../../theme/GlobalStyles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Divider, IconButton, MenuItem, Stack, TableContainer } from "@mui/material";
-import { DeleteIcon } from "../constants/icons";
-import palette from "../theme/palette";
+import { DeleteIcon } from "../../../../constants/icons";
+import palette from "../../../../theme/palette";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CloseIcon from "@mui/icons-material/Close";
-import CustomDialog from "./CustomDialog";
+import CustomDialog from "../../../../components/CustomDialog";
 
 export default function DataTableModal({ open, handleClose, col: colData }) {
 	const [row, setRow] = useState([]);

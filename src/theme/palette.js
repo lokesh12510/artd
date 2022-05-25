@@ -91,6 +91,7 @@ const palette = {
 	disabled: "#F5F5F9",
 	border: "#EFEFEF",
 	divider: GREY[500_24],
+	copyright: "#F18448",
 	body: { ...BODY },
 	text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
 	background: { paper: "#fff", default: GREY[100], neutral: GREY[200] },

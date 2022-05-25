@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { Stack, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 import React from "react";
-import { StyledInput } from "../theme/GlobalStyles";
-import palette from "../theme/palette";
+import { StyledInput } from "../../../../theme/GlobalStyles";
+import palette from "../../../../theme/palette";
 
 const TaskInput = () => {
 	return (

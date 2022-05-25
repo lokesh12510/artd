@@ -1,14 +1,20 @@
 import { Stack, Typography, Checkbox, FormControlLabel, Grid, TableContainer } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React from "react";
-import palette from "../../../theme/palette";
+import palette from "../../../../theme/palette";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { StyledBtn, StyledBox, StyledInput, StyledCheckBoxWrapper, HeaderContainer } from "../../../theme/GlobalStyles";
-import StickyColTable from "../../../components/StickyColTable";
-import { data } from "../../../mockup/stickytableData";
-import MiniGrid from "../../../components/MiniGrid";
-import TaskInput from "../../../components/TaskInput";
+import {
+	StyledBtn,
+	StyledBox,
+	StyledInput,
+	StyledCheckBoxWrapper,
+	HeaderContainer,
+} from "../../../../theme/GlobalStyles";
+import StickyColTable from "./StickyColTable";
+import { data } from "../../../../mockup/stickytableData";
+import MiniGrid from "./MiniGrid";
+import TaskInput from "./TaskInput";
 
 const Dashboard = () => {
 	return (
@@ -33,7 +39,7 @@ const Dashboard = () => {
 							<FormControlLabel control={<Checkbox />} label="Automatic numbering ?" />
 						</StyledCheckBoxWrapper>
 
-						<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"}>
+						<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"} btnWidth={100}>
 							<StyledBtn variant="outlined" color={"primary"} size="small">
 								Description
 							</StyledBtn>

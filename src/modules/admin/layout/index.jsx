@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./sidebar/Sidebar";
 import Header from "./header/Header";
 import palette from "../../../theme/palette";
+import Footer from "./footer/Footer";
 
 const AdminLayout = () => {
 	return (
@@ -13,6 +14,7 @@ const AdminLayout = () => {
 			<BodyContainer>
 				<Header />
 				<Outlet />
+				<Footer />
 			</BodyContainer>
 		</RootLayout>
 	);

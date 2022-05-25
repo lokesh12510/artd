@@ -5,12 +5,12 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { StyledInput, StyledTableContainer } from "../theme/GlobalStyles";
+import { StyledInput, StyledTableContainer } from "../../../../theme/GlobalStyles";
 import { IconButton, MenuItem } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { AddIcon, DeleteIcon } from "../constants/icons";
-import palette from "../theme/palette";
+import { AddIcon, DeleteIcon } from "../../../../constants/icons";
+import palette from "../../../../theme/palette";
 
 const MiniGrid = () => {
 	const initialValue = [{ id: 1, phase: 1, task: 2, desc: "Inception Meeting", when: new Date() }];

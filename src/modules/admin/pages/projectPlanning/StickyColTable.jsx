@@ -8,23 +8,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import { visuallyHidden } from "@mui/utils";
-import { CopyIcon, DeleteIcon, EditIcon, EyeIcon } from "../constants/icons";
+import { CopyIcon, DeleteIcon, EditIcon, EyeIcon } from "../../../../constants/icons";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
-import { StyledBtn, StyledInput } from "../theme/GlobalStyles";
+import { StyledBtn, StyledInput } from "../../../../theme/GlobalStyles";
 
 import { Checkbox, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import palette from "../theme/palette";
+import palette from "../../../../theme/palette";
 // import moment from "moment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { Link } from "react-router-dom";
 import DataTableModal from "./DataTableModal";
-import CustomDialog from "./CustomDialog";
+import CustomDialog from "../../../../components/CustomDialog";
 
 const StickyColTable = ({ data }) => {
 	// const [tableData, setTableData] = useState(data);

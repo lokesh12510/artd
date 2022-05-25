@@ -1,5 +1,5 @@
 import React from "react";
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/projectPlanning/Dashboard";
 
 const urls = {
 	Dashboard: "/",
@@ -7,7 +7,7 @@ const urls = {
 };
 
 // routes
-const routes = [
+const adminRoutes = [
 	{
 		path: urls.Dashboard,
 		element: <Dashboard />,
@@ -16,4 +16,4 @@ const routes = [
 	},
 ];
 
-export default routes;
+export default adminRoutes;
