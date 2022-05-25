@@ -132,6 +132,19 @@ const StickyColTable = ({ data }) => {
 		}));
 	};
 
+	// handling duplicate row
+	const handleDuplicateRow = (index) => {
+		function dup(rowData) {
+			const duplicateRow = rowData[index];
+			const firstPart = rowData.slice(0, index + 1);
+			const secondPart = rowData.slice(index + 1, rowData.length);
+
+			return [...firstPart, { ...duplicateRow, id: Math.floor(Math.random() * 100) }, ...secondPart];
+		}
+
+		setRow((r) => ({ count: r.count + 1, list: dup(r.list) }));
+	};
+
 	useEffect(() => {}, [row]);
 
 	return (
@@ -220,13 +233,13 @@ const StickyColTable = ({ data }) => {
 											</Stack>
 										) : (
 											<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
-												<IconButton color="primary" aria-label="copy" component="span">
+												<IconButton color="primary" aria-label="copy" component="span" onClick={() => handleDuplicateRow(index)}>
 													<CopyIcon bg={palette.primary.main} />
 												</IconButton>
-												<IconButton color="primary" aria-label="edit" component="span" onClick={handleEditModal}>
+												<IconButton color="primary" aria-label="edit" component="span" onClick={() => handleEditModal()}>
 													<EditIcon bg={palette.primary.main} />
 												</IconButton>
-												<IconButton color="primary" aria-label="delete" component="span" onClick={handleDeleteModal}>
+												<IconButton color="primary" aria-label="delete" component="span" onClick={() => handleDeleteModal()}>
 													<DeleteIcon bg={palette.primary.main} />
 												</IconButton>
 											</Stack>
@@ -261,7 +274,7 @@ const StickyColTable = ({ data }) => {
 															name={col}
 															value={row[col]}
 															component={col === "expenses" && Link}
-															onClick={col === "expenses" && handleExpenseListModal}
+															onClick={col === "expenses" ? handleExpenseListModal : undefined}
 															onChange={(e) => handleChange(e, row.id)}
 														/>
 													)}
