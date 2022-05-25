@@ -25,13 +25,11 @@ const MiniGrid = () => {
 	};
 
 	const handleChange = (e, id) => {
-		console.log(e.target.value, e.target.name);
 		setRows((r) => r.map((item) => (item.id === id ? { ...item, [e.target.name]: e.target.value } : item)));
 	};
 
 	// handling change event in table `date` input fields
 	const handleDateChange = (val, id) => {
-		console.log(val, id);
 		setRows((r) =>
 			r.map((item) => {
 				if (item.id === id) {
@@ -63,10 +61,9 @@ const MiniGrid = () => {
 				<TableBody>
 					{rows.map((item, index) => {
 						return (
-							<TableRow>
+							<TableRow key={index}>
 								<TableCell component="th" scope="row">
 									<StyledInput name="phase" value={item.phase} select onChange={(e) => handleChange(e, item.id)}>
-										<MenuItem value={""}></MenuItem>
 										<MenuItem value={"1"}>1</MenuItem>
 										<MenuItem value={"2"}>2</MenuItem>
 										<MenuItem value={"3"}>3</MenuItem>
@@ -74,7 +71,6 @@ const MiniGrid = () => {
 								</TableCell>
 								<TableCell component="th" scope="row">
 									<StyledInput name="task" value={item.task} select onChange={(e) => handleChange(e, item.id)}>
-										<MenuItem value={""}></MenuItem>
 										<MenuItem value={"1"}>1</MenuItem>
 										<MenuItem value={"2"}>2</MenuItem>
 										<MenuItem value={"3"}>3</MenuItem>
@@ -89,7 +85,6 @@ const MiniGrid = () => {
 										<DatePicker
 											value={item.when}
 											onChange={(newValue) => {
-												console.log(newValue._d);
 												handleDateChange(newValue._d, item.id);
 											}}
 											renderInput={(params) => <StyledInput {...params} />}
@@ -122,4 +117,12 @@ const Root = styled(StyledTableContainer)(({ theme }) => ({
 	backgroundColor: "#045a701a",
 	height: "100%",
 	overflow: "auto",
+	"& .MuiSelect-select": {
+		"&::after": {
+			width: "25px",
+		},
+	},
+	"& .MuiSelect-icon.MuiSelect-iconOutlined": {
+		right: 1,
+	},
 }));

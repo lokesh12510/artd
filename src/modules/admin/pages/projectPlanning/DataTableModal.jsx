@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { CloseBtn, StyledBtn, StyledDialog, StyledInput } from "../../../../theme/GlobalStyles";
+import { StyledBtn, StyledInput, StyledTableContainer } from "../../../../theme/GlobalStyles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Divider, IconButton, MenuItem, Stack, TableContainer } from "@mui/material";
+import { IconButton, MenuItem, Stack } from "@mui/material";
 import { DeleteIcon } from "../../../../constants/icons";
 import palette from "../../../../theme/palette";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import CloseIcon from "@mui/icons-material/Close";
 import CustomDialog from "../../../../components/CustomDialog";
 
 export default function DataTableModal({ open, handleClose, col: colData }) {
@@ -40,8 +36,6 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 	}, [col.list]);
 
 	const handleTextChange = (e, id) => {
-		console.log(e.target.name, e.target.value, id);
-
 		setRow((r) => r.map((item) => (item.id === id ? { ...item, [e.target.name]: e.target.value } : item)));
 	};
 
@@ -79,7 +73,7 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 				actions={modalActions}
 				maxWidth={"lg"}
 			>
-				<TableContainer>
+				<StyledTableContainer>
 					<Table sx={{ minWidth: 650 }} aria-label="simple table">
 						<TableHead>
 							<TableRow>
@@ -93,7 +87,7 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 								<TableCell align="left" sx={{ width: 120, minWidth: 120 }}>
 									Rate EX-GST
 								</TableCell>
-								<TableCell align="left" sx={{ minWidth: 130 }}>
+								<TableCell align="left" sx={{ minWidth: 170 }}>
 									Rate Type
 								</TableCell>
 								<TableCell align="left" sx={{ minWidth: 250 }}>
@@ -115,7 +109,6 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 										</StyledInput>
 									</TableCell>
 									<TableCell align="left">
-										{console.log(row.position)}
 										<StyledInput name="position" value={row.position} select onChange={(e) => handleTextChange(e, row.id)}>
 											<MenuItem value="Select" disabled>
 												Select Position
@@ -150,7 +143,7 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 							))}
 						</TableBody>
 					</Table>
-				</TableContainer>
+				</StyledTableContainer>
 				<Stack direction={"row"} alignItems={"center"} justifyContent={"flex-end"}>
 					<StyledBtn variant="contained" onClick={handleAddRow}>
 						<AddCircleIcon />

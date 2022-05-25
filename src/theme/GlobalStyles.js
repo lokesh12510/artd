@@ -1,4 +1,4 @@
-import { Box, Button, TextField, FormGroup, TableContainer, Dialog, IconButton } from "@mui/material";
+import { Box, Button, TextField, FormGroup, TableContainer, Dialog, IconButton, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "./palette";
 
@@ -20,7 +20,16 @@ export const StyledCheckBoxWrapper = styled(FormGroup)(({ theme }) => ({
 		marginLeft: 0,
 	},
 }));
-export const HeaderContainer = styled(StyledBox)(({ theme }) => ({
+export const ButtonStack = styled(Stack)(({ theme, btnwidth }) => ({
+	gap: theme.spacing(1),
+	"& .MuiButton-root": {
+		minWidth: btnwidth ? btnwidth : "auto",
+	},
+	"& .MuiButton-outlined": {
+		backgroundColor: palette.common.white,
+	},
+}));
+export const StyledPageHeader = styled(StyledBox)(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "flex-start",
@@ -47,11 +56,40 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 	position: "relative",
 	width: "100%",
 	overflow: "hidden",
+	boxShadow: "0px 0px 1px -1px rgb(0 0 0 / 20%), 0px 1px 0px 0px rgb(0 0 0 / 14%), 0px -2px 0px 0px rgb(0 0 0 / 12%)",
 	borderTopLeftRadius: 10,
 	borderTopRightRadius: 10,
 
 	"& .MuiTableHead-root": {
 		minHeight: 80,
+	},
+	[theme.breakpoints.up("md")]: {
+		"& .sticky-table": {
+			backgroundColor: "#fff",
+			position: "sticky",
+			left: 0,
+			zIndex: 2,
+		},
+	},
+	"& .sticky-table": {
+		"& .MuiTableCell-head": {
+			color: "#fff",
+			textTransform: "uppercase",
+			padding: theme.spacing(1),
+			paddingBlock: theme.spacing(2),
+		},
+	},
+	"& .scroll-table": {
+		flex: 2,
+		backgroundColor: "#fff",
+		"& .MuiTableCell-body": {
+			paddingBlock: theme.spacing(1),
+		},
+		"& .MuiTableCell-head": {
+			color: "#fff",
+			padding: theme.spacing(1),
+			paddingBlock: theme.spacing(2),
+		},
 	},
 
 	"& .MuiTableRow-root": {
@@ -59,10 +97,11 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 		cursor: "pointer",
 	},
 	"& .MuiTableCell-head": {
+		padding: theme.spacing(1.5),
+		fontSize: 16,
+		textTransform: "uppercase",
 		backgroundColor: palette.secondary.main,
 		color: palette.common.white,
-		padding: theme.spacing(1.5),
-		textTransform: "uppercase",
 	},
 	"& .MuiTableRow-root.Mui-selected": {
 		"&:hover": {
@@ -79,6 +118,20 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 		},
 		"& .MuiInputBase-input": {
 			pointerEvents: "none",
+		},
+	},
+	"& .MuiSelect-select": {
+		position: "relative",
+		overflow: "hidden",
+		"&::after": {
+			content: '""',
+			position: "absolute",
+			right: 0,
+			top: 0,
+			width: 35,
+			height: "100%",
+			backgroundColor: palette.border,
+			borderLeft: `1px solid #bfbebe`,
 		},
 	},
 	"& .MuiTableCell-root": {
@@ -100,14 +153,21 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 		"& .MuiInputBase-input": {
 			padding: theme.spacing(1),
 		},
+		"& .MuiButtonBase-root": {
+			padding: theme.spacing(0.5),
+		},
 		"& .MuiCheckbox-root": {
-			padding: theme.spacing(0.6),
+			padding: theme.spacing(0.4),
 		},
 		"& input": {
 			textAlign: "center",
 			whiteSpace: "nowrap",
 			wordBreak: "keep-all",
 		},
+	},
+
+	"& .accordion": {
+		borderBottom: `1px solid ${palette.primary.main}`,
 	},
 	"& .date": {
 		"& .MuiFormControl-root": {
@@ -116,12 +176,13 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 			"& .MuiButtonBase-root": {
 				padding: 1,
 				backgroundColor: "rgba(16, 87, 118, 0.08)",
+				borderLeft: `1px solid #bfbebe`,
 				borderRadius: 0,
 				position: "relative",
 				right: -3,
 			},
 			"& .MuiSvgIcon-root": {
-				fontSize: "2.3rem",
+				fontSize: "2rem",
 			},
 			"& input": {
 				backgroundColor: "transparent",
@@ -135,71 +196,28 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 			cursor: "pointer",
 		},
 	},
-}));
+	"& .sticky-right-table": {
+		"& .MuiTableCell-root.hiddenCell": {
+			borderBottom: "none",
+		},
+	},
+	"& .sticky-cell": {
+		position: "sticky",
+		backgroundColor: palette.common.white,
+		right: -1,
+	},
 
-export const StyledDialog = styled(Dialog)(({ theme }) => ({
-	"& .MuiDialogTitle-root": {
-		color: palette.primary.main,
-		fontWeight: "bold",
+	"& .MuiTableBody-root ": {
+		border: `1px solid ${palette.border}`,
 	},
-	"& .MuiDivider-root": {
-		marginInline: theme.spacing(3),
-	},
-	"& .MuiDialogActions-root": {
-		padding: theme.spacing(3),
-		paddingTop: 0,
-		"& .MuiButton-root": {
-			minWidth: 120,
-		},
-		gap: theme.spacing(2),
-	},
-	"& .MuiTableContainer-root": {
-		borderTopLeftRadius: 10,
-		borderTopRightRadius: 10,
-		position: "relative",
-		overflow: "auto",
-		"& .sticky-cell": {
-			position: "sticky",
-			backgroundColor: palette.common.white,
-			right: -1,
-		},
-
-		"& .MuiTableCell-head": {
-			fontSize: 16,
-			textTransform: "uppercase",
-			backgroundColor: palette.secondary.main,
-			color: palette.common.white,
-			padding: theme.spacing(1.5),
-		},
-		"& .MuiTableBody-root ": {
-			border: `1px solid ${palette.border}`,
-		},
-		"& .MuiTableCell-root": {
-			borderBottom: `1px solid ${palette.border}`,
-			padding: theme.spacing(1),
-			"& .MuiInputBase-input": {
-				padding: theme.spacing(0.6),
+	"& .stripped": {
+		"& .MuiTableRow-root": {
+			"&:nth-of-type(even)": {
+				backgroundColor: palette.action.hover,
 			},
-			"& .MuiCheckbox-root": {
-				padding: theme.spacing(0.6),
-			},
-			"& input": {
-				whiteSpace: "nowrap",
-				wordBreak: "keep-all",
-			},
-			"& .MuiSelect-select": {
-				position: "relative",
-				overflow: "hidden",
-				"&::after": {
-					content: '""',
-					position: "absolute",
-					right: 0,
-					top: 0,
-					width: 35,
-					height: "100%",
-					backgroundColor: palette.border,
-					borderLeft: `1px solid #bfbebe`,
-				},
+			// hide last border
+			"&:last-child td, &:last-child th": {
+				border: 0,
 			},
 		},
 	},
