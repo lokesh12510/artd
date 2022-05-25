@@ -13,7 +13,7 @@ export const StyledBox = styled(Box)(({ theme }) => ({
 
 export const StyledBtn = styled(Button)(({ theme }) => ({
 	padding: theme.spacing(0.9),
-	paddingInline: theme.spacing(2),
+	paddingInline: theme.spacing(3),
 }));
 export const StyledCheckBoxWrapper = styled(FormGroup)(({ theme }) => ({
 	"& .MuiFormControlLabel-root ": {

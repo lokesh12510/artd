@@ -19,6 +19,7 @@ import TaskInput from "./TaskInput";
 import SummaryModal from "./SummaryModal";
 import DescriptionModal from "./DescriptionModal";
 import ExpenseModal from "./ExpenseModal";
+import OutputModal from "./OutputModal";
 
 const Dashboard = () => {
 	// Summary modal Toggle State
@@ -35,6 +36,11 @@ const Dashboard = () => {
 	const [descModal, setDescModal] = useState(false);
 	const handleDescModal = () => {
 		setDescModal((e) => !e);
+	};
+	// Proposal Output Modal
+	const [outputModal, setOutputModal] = useState(false);
+	const handleOutputModal = () => {
+		setOutputModal((o) => !o);
 	};
 
 	return (
@@ -64,7 +70,7 @@ const Dashboard = () => {
 								<StyledBtn variant="outlined" color={"primary"} size="small" onClick={handleDescModal}>
 									Description
 								</StyledBtn>
-								<StyledBtn variant="outlined" color={"primary"} size="small">
+								<StyledBtn variant="outlined" color={"primary"} size="small" onClick={handleOutputModal}>
 									outputs
 								</StyledBtn>
 								<StyledBtn variant="outlined" color={"primary"} size="small">
@@ -114,6 +120,7 @@ const Dashboard = () => {
 			<SummaryModal summaryModal={summaryModal} handleSummaryModal={handleSummaryModal} />
 			<DescriptionModal descModal={descModal} handleDescModal={handleDescModal} />
 			<ExpenseModal expenseModal={expenseModal} handleExpenseModal={handleExpenseModal} />
+			<OutputModal outputModal={outputModal} handleOutputModal={handleOutputModal} />
 		</>
 	);
 };

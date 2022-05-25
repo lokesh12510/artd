@@ -16,16 +16,16 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 import { StyledBtn, StyledInput, StyledTableContainer } from "../../../../theme/GlobalStyles";
 
-import { Checkbox, Collapse, Stack, Typography } from "@mui/material";
+import { Checkbox, Collapse, Link, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import palette from "../../../../theme/palette";
 // import moment from "moment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import { Link } from "react-router-dom";
 import DataTableModal from "./DataTableModal";
 import CustomDialog from "../../../../components/CustomDialog";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
+import ExpenseListModal from "./ExpenseListModal";
 
 const StickyColTable = ({ data }) => {
 	// const [tableData, setTableData] = useState(data);
@@ -54,6 +54,12 @@ const StickyColTable = ({ data }) => {
 	const [deleteModal, setDeleteModal] = useState(false);
 	const handleDeleteModal = () => {
 		setDeleteModal((v) => !v);
+	};
+
+	// Expense List Modal Toggle State
+	const [expenseList, setExpenseList] = useState(false);
+	const handleExpenseListModal = () => {
+		setExpenseList((v) => !v);
 	};
 
 	// ----------------Checkbox select row function------------------
@@ -255,7 +261,7 @@ const StickyColTable = ({ data }) => {
 															name={col}
 															value={row[col]}
 															component={col === "expenses" && Link}
-															to="/"
+															onClick={col === "expenses" && handleExpenseListModal}
 															onChange={(e) => handleChange(e, row.id)}
 														/>
 													)}
@@ -423,6 +429,9 @@ const StickyColTable = ({ data }) => {
 			{/* Delete Row Modal */}
 			<DeleteModal deleteModal={deleteModal} handleDeleteModal={handleDeleteModal} />
 			{/* Delete Row Modal */}
+			{/* ExpenseListModal */}
+			<ExpenseListModal expenseList={expenseList} handleExpenseListModal={handleExpenseListModal} />
+			{/* ExpenseListModal */}
 		</>
 	);
 };
