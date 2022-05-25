@@ -32,13 +32,13 @@ const Header = () => {
 				</BreadcrumbItem>
 				<BreadcrumbDivider orientation="vertical" variant="middle" flexItem />
 				<BreadcrumbItem>
-					<Typography className="title" variant="body2" fontWeight={"bold"}>
+					<Typography className="title" variant="body2">
 						Add Project
 					</Typography>
 				</BreadcrumbItem>
 				<BreadcrumbDivider orientation="vertical" variant="middle" flexItem />
 				<BreadcrumbItem active>
-					<Typography active className="title" variant="body2" fontWeight={"bold"}>
+					<Typography active className="title" variant="body2">
 						Project Planning
 					</Typography>
 				</BreadcrumbItem>
@@ -54,7 +54,7 @@ const Root = styled(Box)(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "space-between",
-	marginBottom: theme.spacing(1.2),
+	marginBottom: theme.spacing(1.5),
 }));
 
 const SearchBar = styled(StyledInput)(({ theme }) => ({

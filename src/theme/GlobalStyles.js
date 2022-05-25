@@ -6,9 +6,6 @@ export const StyledBox = styled(Box)(({ theme }) => ({
 	minHeight: "60px",
 	backgroundColor: palette.common.white,
 	padding: theme.spacing(2),
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "flex-start",
 	borderRadius: 5,
 	boxShadow: "0px 0px 4px rgba(166, 166, 166, 0.25)",
 	gap: theme.spacing(3),
@@ -23,6 +20,11 @@ export const StyledCheckBoxWrapper = styled(FormGroup)(({ theme }) => ({
 		marginLeft: 0,
 	},
 }));
+export const HeaderContainer = styled(StyledBox)(({ theme }) => ({
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "flex-start",
+}));
 
 export const StyledInput = styled(TextField)(({ theme }) => ({
 	flex: 1,
@@ -35,6 +37,9 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
 		padding: theme.spacing(1.2),
 		// fontSize: 14,
 		color: palette.grey[600],
+	},
+	"& .MuiOutlinedInput-notchedOutline": {
+		border: `1px solid #6d6a6a3b`,
 	},
 }));
 

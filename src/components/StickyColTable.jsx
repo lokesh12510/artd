@@ -362,7 +362,12 @@ const StickyColTable = ({ data }) => {
 					{/* Scroll Table */}
 
 					{/* Add btn sticky Right */}
-					<Table sx={{ position: "sticky", right: 0, maxWidth: 70 }} aria-label="simple table" size={"small"}>
+					<Table
+						sx={{ position: "sticky", right: 0, maxWidth: 70 }}
+						className="sticky-right-table"
+						aria-label="simple table"
+						size={"small"}
+					>
 						<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
 							<TableRow>
 								<TableCell align="right" style={{ minWidth: "50px" }}>
@@ -414,7 +419,7 @@ const StickyColTable = ({ data }) => {
 											sx={row.isCompleted && !open && visuallyHidden}
 											// style={{ backgroundColor: row.isCompleted ? true : isItemSelected ? "transparent" : palette.common.white }}
 										>
-											<TableCell align="center">
+											<TableCell align="center" className="hiddenCell">
 												<div style={{ height: 36, width: 23 }}></div>
 											</TableCell>
 										</TableRow>
@@ -587,13 +592,17 @@ const GridContainer = styled("div")(({ theme }) => ({
 		"& .MuiInputBase-input": {
 			padding: theme.spacing(1),
 		},
+		"& .MuiButtonBase-root": {
+			padding: theme.spacing(0.5),
+		},
 		"& .MuiCheckbox-root": {
-			padding: theme.spacing(0.6),
+			padding: theme.spacing(0.4),
 		},
 		"& input": {
 			textAlign: "center",
 			whiteSpace: "nowrap",
 			wordBreak: "keep-all",
+			height: 15,
 		},
 	},
 
@@ -607,12 +616,13 @@ const GridContainer = styled("div")(({ theme }) => ({
 			"& .MuiButtonBase-root": {
 				padding: 1,
 				backgroundColor: "rgba(16, 87, 118, 0.08)",
+				borderLeft: `1px solid #bfbebe`,
 				borderRadius: 0,
 				position: "relative",
 				right: -3,
 			},
 			"& .MuiSvgIcon-root": {
-				fontSize: "2.3rem",
+				fontSize: "2rem",
 			},
 			"& input": {
 				backgroundColor: "transparent",
@@ -624,6 +634,11 @@ const GridContainer = styled("div")(({ theme }) => ({
 			backgroundColor: "#e3f9ff",
 			textDecoration: "underline",
 			cursor: "pointer",
+		},
+	},
+	"& .sticky-right-table": {
+		"& .MuiTableCell-root.hiddenCell": {
+			borderBottom: "none",
 		},
 	},
 }));

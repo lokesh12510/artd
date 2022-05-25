@@ -1,18 +1,19 @@
-import { Stack, Typography, Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { Stack, Typography, Checkbox, FormControlLabel, Grid, TableContainer } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React from "react";
 import palette from "../../../theme/palette";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { StyledBtn, StyledBox, StyledInput, StyledCheckBoxWrapper } from "../../../theme/GlobalStyles";
+import { StyledBtn, StyledBox, StyledInput, StyledCheckBoxWrapper, HeaderContainer } from "../../../theme/GlobalStyles";
 import StickyColTable from "../../../components/StickyColTable";
 import { data } from "../../../mockup/stickytableData";
 import MiniGrid from "../../../components/MiniGrid";
+import TaskInput from "../../../components/TaskInput";
 
 const Dashboard = () => {
 	return (
 		<Stack spacing={2}>
-			<StyledBox>
+			<HeaderContainer>
 				<StyledBtn variant="outlined" color="primary" startIcon={<ArrowBackIosIcon />}>
 					Back
 				</StyledBtn>
@@ -24,27 +25,28 @@ const Dashboard = () => {
 					<StyledInput value="23443" variant="outlined" />
 				</ProjectInfo>
 				<StyledInput value="The Big Project" variant="outlined" />
-			</StyledBox>
-			<TableContainer>
-				<TableHeader direction={"row"} alignItems="center" justifyContent={"space-between"}>
-					<StyledCheckBoxWrapper>
-						<FormControlLabel control={<Checkbox />} label="Automatic numbering ?" />
-					</StyledCheckBoxWrapper>
+			</HeaderContainer>
+			<StyledBox>
+				<ScrollTableContainer>
+					<TableHeader direction={"row"} alignItems="center" justifyContent={"space-between"}>
+						<StyledCheckBoxWrapper>
+							<FormControlLabel control={<Checkbox />} label="Automatic numbering ?" />
+						</StyledCheckBoxWrapper>
 
-					<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"}>
-						<StyledBtn variant="outlined" color={"primary"} size="small">
-							Description
-						</StyledBtn>
-						<StyledBtn variant="outlined" color={"primary"} size="small">
-							outputs
-						</StyledBtn>
-						<StyledBtn variant="outlined" color={"primary"} size="small">
-							Bump
-						</StyledBtn>
-					</ButtonStack>
-				</TableHeader>
-
-				<StickyColTable data={data} />
+						<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"}>
+							<StyledBtn variant="outlined" color={"primary"} size="small">
+								Description
+							</StyledBtn>
+							<StyledBtn variant="outlined" color={"primary"} size="small">
+								outputs
+							</StyledBtn>
+							<StyledBtn variant="outlined" color={"primary"} size="small">
+								Bump
+							</StyledBtn>
+						</ButtonStack>
+					</TableHeader>
+					<StickyColTable data={data} />
+				</ScrollTableContainer>
 				<Stack direction={"row"} alignItems="center" justifyContent={"space-between"} my={2}>
 					<Typography variant="h6" color="primary" fontWeight={"600"}>
 						Deliverables
@@ -63,10 +65,23 @@ const Dashboard = () => {
 						<MiniGrid />
 					</Grid>
 					<Grid item xs={12} md={7} lg={7}>
-						Task Input
+						<TaskInput />
 					</Grid>
 				</Grid>
-			</TableContainer>
+				<Stack direction={"row"} alignItems="center" justifyContent={"flex-end"} my={3}>
+					<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"} btnWidth={120}>
+						<StyledBtn variant="contained" color={"primary"}>
+							Save
+						</StyledBtn>
+						<StyledBtn variant="outlined" color={"primary"}>
+							Reset
+						</StyledBtn>
+						<StyledBtn variant="outlined" color={"dark"}>
+							Cancel
+						</StyledBtn>
+					</ButtonStack>
+				</Stack>
+			</StyledBox>
 		</Stack>
 	);
 };
@@ -82,17 +97,18 @@ const TableHeader = styled(Stack)(({ theme }) => ({
 	padding: theme.spacing(1.5),
 }));
 
-const ButtonStack = styled(Stack)(({ theme }) => ({
+const ButtonStack = styled(Stack)(({ theme, btnWidth }) => ({
 	gap: theme.spacing(1),
+	"& .MuiButton-root": {
+		minWidth: btnWidth ? btnWidth : "auto",
+	},
 	"& .MuiButton-outlined": {
 		backgroundColor: palette.common.white,
-		minWidth: 90,
 	},
 }));
 
-const TableContainer = styled(StyledBox)(({ theme }) => ({
+const ScrollTableContainer = styled(TableContainer)(({ theme }) => ({
 	flexDirection: "column",
 	alignItems: "stretch",
 	gap: 0,
-	padding: theme.spacing(2),
 }));
