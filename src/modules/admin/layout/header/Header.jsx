@@ -32,13 +32,13 @@ const Header = () => {
 				</BreadcrumbItem>
 				<BreadcrumbDivider orientation="vertical" variant="middle" flexItem />
 				<BreadcrumbItem>
-					<Typography className="title" variant="body2">
+					<Typography className="title" variant="subtitle2">
 						Add Project
 					</Typography>
 				</BreadcrumbItem>
 				<BreadcrumbDivider orientation="vertical" variant="middle" flexItem />
 				<BreadcrumbItem active>
-					<Typography active className="title" variant="body2">
+					<Typography active className="title" variant="subtitle2">
 						Project Planning
 					</Typography>
 				</BreadcrumbItem>
@@ -72,7 +72,6 @@ const PageTitle = styled(Typography)(({ theme }) => ({
 	[theme.breakpoints.down("md")]: {
 		marginLeft: 30,
 		marginRight: 10,
-		fontSize: 16,
 	},
 }));
 

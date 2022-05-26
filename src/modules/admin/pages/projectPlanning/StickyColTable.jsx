@@ -64,6 +64,7 @@ const StickyColTable = ({ data }) => {
 
 	// ----------------Checkbox select row function------------------
 	const handleClick = (event, id) => {
+		console.log(id);
 		const selectedIndex = selected.indexOf(id);
 		let newSelected = [];
 
@@ -156,11 +157,11 @@ const StickyColTable = ({ data }) => {
 					<TableHead>
 						<TableRow>
 							<TableCell align="center">
-								<Typography variant="body1">Completed</Typography>
+								<Typography variant="subtitle2">Completed</Typography>
 							</TableCell>
 							<TableCell align="center">
 								{" "}
-								<Typography variant="body1">Action</Typography>
+								<Typography variant="subtitle2">Action</Typography>
 							</TableCell>
 							{col.list
 								.slice(2)
@@ -168,7 +169,7 @@ const StickyColTable = ({ data }) => {
 								.map((item, index) => {
 									return (
 										<StyledTableCell align="center" label={item} key={index}>
-											<Typography variant="body1">{item}</Typography>
+											<Typography variant="subtitle2">{item}</Typography>
 										</StyledTableCell>
 									);
 								})}
@@ -181,10 +182,11 @@ const StickyColTable = ({ data }) => {
 							<TableCell colSpan={10} className="accordion">
 								<Stack direction="row" alignItems="center">
 									<Typography
-										variant="body1"
+										variant="subtitle2"
 										component="div"
 										color={"primary"}
 										fontWeight="bold"
+										textTransform={"uppercase"}
 										sx={{ maxWidth: "300px", paddingLeft: "10px", position: "sticky", left: 10 }}
 									>
 										Completed Task
@@ -214,7 +216,6 @@ const StickyColTable = ({ data }) => {
 									// onClick={(event) => handleClick(event, row.id)}
 									selected={row.isCompleted ? true : isItemSelected}
 									className={row.isCompleted && open ? "shown" : "hidden"}
-									style={{ transition: "all 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms", height: "auto", transitionDuration: "266ms" }}
 								>
 									<TableCell component="th" scope="row" align="center">
 										<Checkbox
@@ -271,7 +272,7 @@ const StickyColTable = ({ data }) => {
 																components={{
 																	OpenPickerIcon: ArrowDropDownIcon,
 																}}
-																renderInput={(params) => <StyledInput {...params} />}
+																renderInput={(params) => <StyledInput variant="outlined" {...params} />}
 															/>
 														</LocalizationProvider>
 													) : (
@@ -305,7 +306,7 @@ const StickyColTable = ({ data }) => {
 								.map((col, index) => {
 									return (
 										<TableCell align="center" style={{ minWidth: "80px", textTransform: "uppercase" }} key={index}>
-											<Typography variant="body1">{col.replace("_", "")}</Typography>
+											<Typography variant="subtitle2">{col.replace("_", "")}</Typography>
 										</TableCell>
 									);
 								})}
@@ -343,7 +344,6 @@ const StickyColTable = ({ data }) => {
 									// onClick={(event) => handleClick(event, row.name)}
 									selected={row.isCompleted ? true : isItemSelected}
 									className={row.isCompleted && open ? "shown" : "hidden"}
-									style={{ transition: "all 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms", height: "auto", transitionDuration: "266ms" }}
 								>
 									{col.list
 										.filter((item) => item.includes("_"))
@@ -372,7 +372,7 @@ const StickyColTable = ({ data }) => {
 				>
 					<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
 						<TableRow>
-							<TableCell align="right" style={{ minWidth: "50px" }}>
+							<TableCell align="right" style={{ minWidth: "50px", padding: 7 }}>
 								<StyledBtn
 									style={{
 										maxWidth: 50,

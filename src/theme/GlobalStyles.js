@@ -14,6 +14,10 @@ export const StyledBox = styled(Box)(({ theme }) => ({
 export const StyledBtn = styled(Button)(({ theme }) => ({
 	padding: theme.spacing(0.9),
 	paddingInline: theme.spacing(3),
+	[theme.breakpoints.down("lg")]: {
+		padding: theme.spacing(0.6),
+		paddingInline: theme.spacing(2),
+	},
 }));
 export const StyledCheckBoxWrapper = styled(FormGroup)(({ theme }) => ({
 	"& .MuiFormControlLabel-root ": {
@@ -76,7 +80,7 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 			color: "#fff",
 			textTransform: "uppercase",
 			padding: theme.spacing(1),
-			paddingBlock: theme.spacing(2),
+			paddingBlock: theme.spacing(1.5),
 		},
 	},
 	"& .scroll-table": {
@@ -85,10 +89,13 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 		"& .MuiTableCell-body": {
 			paddingBlock: theme.spacing(1),
 		},
+		"& .MuiTableCell-body.accordion": {
+			paddingBlock: 0,
+		},
 		"& .MuiTableCell-head": {
 			color: "#fff",
 			padding: theme.spacing(1),
-			paddingBlock: theme.spacing(2),
+			paddingBlock: theme.spacing(1.5),
 		},
 	},
 
@@ -98,7 +105,7 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 	},
 	"& .MuiTableCell-head": {
 		padding: theme.spacing(1.5),
-		fontSize: 16,
+		// fontSize: 16,
 		textTransform: "uppercase",
 		backgroundColor: palette.secondary.main,
 		color: palette.common.white,
@@ -168,6 +175,7 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 
 	"& .accordion": {
 		borderBottom: `1px solid ${palette.primary.main}`,
+		paddingBlock: 0,
 	},
 	"& .date": {
 		"& .MuiFormControl-root": {

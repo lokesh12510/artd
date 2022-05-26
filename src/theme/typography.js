@@ -6,6 +6,8 @@ function pxToRem(value) {
 
 function responsiveFontSizes({ sm, md, lg }) {
 	return {
+		fontSize: pxToRem(sm),
+
 		"@media (min-width:600px)": {
 			fontSize: pxToRem(sm),
 		},
@@ -18,7 +20,7 @@ function responsiveFontSizes({ sm, md, lg }) {
 	};
 }
 
-const FONT_PRIMARY = "Public Sans, sans-serif";
+const FONT_PRIMARY = "Poppins, sans-serif";
 
 const typography = {
 	fontFamily: FONT_PRIMARY,
@@ -58,8 +60,7 @@ const typography = {
 	h6: {
 		fontWeight: 700,
 		lineHeight: 28 / 18,
-		fontSize: pxToRem(16),
-		...responsiveFontSizes({ sm: 14, md: 16, lg: 18 }),
+		...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
 	},
 	subtitle1: {
 		fontWeight: 600,
@@ -70,13 +71,16 @@ const typography = {
 		fontWeight: 600,
 		lineHeight: 22 / 14,
 		fontSize: pxToRem(14),
+		letterSpacing: 1.02,
 	},
 	body1: {
 		lineHeight: 1.5,
-		fontSize: pxToRem(16),
+		fontSize: pxToRem(14),
+		...responsiveFontSizes({ sm: 14, md: 14, lg: 14 }),
 	},
 	body2: {
 		lineHeight: 22 / 14,
+		fontWeight: 400,
 		fontSize: pxToRem(14),
 	},
 	caption: {
@@ -91,10 +95,15 @@ const typography = {
 		textTransform: "uppercase",
 	},
 	button: {
-		fontWeight: 700,
+		fontWeight: 600,
 		lineHeight: 24 / 14,
 		fontSize: pxToRem(14),
 		textTransform: "uppercase",
+		letterSpacing: 1.15,
+	},
+	input: {
+		fontSize: pxToRem(14),
+		...responsiveFontSizes({ sm: 14, md: 14, lg: 14 }),
 	},
 };
 
