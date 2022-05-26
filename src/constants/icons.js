@@ -6,7 +6,7 @@ import ReportSearchDark from "../assets/Img/report-search.png";
 import HelpDark from "../assets/Img/help.svg";
 import Search from "../assets/Img/search.svg";
 
-export const HomeIcon = ({ bg }) => {
+export const HomeIcon = ({ bg = "white" }) => {
 	return (
 		<svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -16,7 +16,7 @@ export const HomeIcon = ({ bg }) => {
 		</svg>
 	);
 };
-export const CopyIcon = ({ bg }) => {
+export const CopyIcon = ({ bg = "white" }) => {
 	return (
 		<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<g clip-path="url(#clip0_2057_9222)">
@@ -38,7 +38,7 @@ export const CopyIcon = ({ bg }) => {
 		</svg>
 	);
 };
-export const EditIcon = ({ bg }) => {
+export const EditIcon = ({ bg = "white" }) => {
 	return (
 		<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<g clip-path="url(#clip0_2056_9163)">
@@ -56,7 +56,7 @@ export const EditIcon = ({ bg }) => {
 		</svg>
 	);
 };
-export const DeleteIcon = ({ bg }) => {
+export const DeleteIcon = ({ bg = "white" }) => {
 	return (
 		<svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -67,7 +67,7 @@ export const DeleteIcon = ({ bg }) => {
 		</svg>
 	);
 };
-export const EyeIcon = ({ bg }) => {
+export const EyeIcon = ({ bg = "white" }) => {
 	return (
 		<svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -77,7 +77,7 @@ export const EyeIcon = ({ bg }) => {
 		</svg>
 	);
 };
-export const AddIcon = ({ bg }) => {
+export const AddIcon = ({ bg = "white" }) => {
 	return (
 		<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
