@@ -55,7 +55,7 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
 export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 	position: "relative",
 	width: "100%",
-	overflow: "hidden",
+	overflow: "auto",
 	boxShadow: "0px 0px 1px -1px rgb(0 0 0 / 20%), 0px 1px 0px 0px rgb(0 0 0 / 14%), 0px -2px 0px 0px rgb(0 0 0 / 12%)",
 	borderTopLeftRadius: 10,
 	borderTopRightRadius: 10,

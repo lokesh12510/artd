@@ -155,15 +155,20 @@ const StickyColTable = ({ data }) => {
 					{/*----------- Sticky Header-------- */}
 					<TableHead>
 						<TableRow>
-							<TableCell align="center">Completed</TableCell>
-							<TableCell align="center">Action</TableCell>
+							<TableCell align="center">
+								<Typography variant="body1">Completed</Typography>
+							</TableCell>
+							<TableCell align="center">
+								{" "}
+								<Typography variant="body1">Action</Typography>
+							</TableCell>
 							{col.list
 								.slice(2)
 								.filter((item) => !item.includes("_"))
 								.map((item, index) => {
 									return (
 										<StyledTableCell align="center" label={item} key={index}>
-											{item}
+											<Typography variant="body1">{item}</Typography>
 										</StyledTableCell>
 									);
 								})}
@@ -300,7 +305,7 @@ const StickyColTable = ({ data }) => {
 								.map((col, index) => {
 									return (
 										<TableCell align="center" style={{ minWidth: "80px", textTransform: "uppercase" }} key={index}>
-											{col.replace("_", "")}
+											<Typography variant="body1">{col.replace("_", "")}</Typography>
 										</TableCell>
 									);
 								})}
@@ -452,6 +457,7 @@ const StickyColTable = ({ data }) => {
 export default StickyColTable;
 
 const CustomStyledContainer = styled(StyledTableContainer)(({ theme }) => ({
+	overflow: "auto",
 	borderRadius: 0,
 	"& .MuiTableBody-root ": {
 		border: "none",

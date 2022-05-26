@@ -2,12 +2,14 @@ import { createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from "@
 import React, { useMemo } from "react";
 
 import palette from "./palette";
+import typography from "./typography";
 
 const ThemeWrapper = ({ children }) => {
 	// Option to override default Mui Theme
 	const themeOptions = useMemo(
 		() => ({
 			palette,
+			// typography,
 			breakpoints: {
 				values: {
 					xs: 0,
