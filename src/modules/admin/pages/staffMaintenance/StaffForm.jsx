@@ -10,7 +10,7 @@ import {
 	Stack,
 	Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import InputField from "../../../../components/InputField";
 import { StyledBox, StyledInput, StyledSelect, StyledTableContainer } from "../../../../theme/GlobalStyles";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -20,6 +20,11 @@ import palette from "../../../../theme/palette";
 import { AddIcon, DeleteIcon, EditIcon } from "../../../../constants/icons";
 
 const StaffForm = ({ selectedStaff }) => {
+	const [field, setField] = useState("");
+
+	const handleField = (id) => {
+		setField(id);
+	};
 	return (
 		<Grid container rowSpacing={2} columnSpacing={2}>
 			{/* ------------- Staff Form ----------------- */}
@@ -101,26 +106,38 @@ const StaffForm = ({ selectedStaff }) => {
 							<DateIndicator>07 Apr 2022</DateIndicator>
 						</div>
 						<Divider />
-						<Stack direction={"row"} alignItems="flex-end" justifyContent={"space-between"} spacing={1}>
+						<MergeStack
+							direction={"row"}
+							alignItems="flex-end"
+							justifyContent={"space-between"}
+							spacing={1}
+							className={`field  ${field === "role" && "merge"}`}
+						>
 							<InputField name="Role" value={selectedStaff?.role || ""} select>
 								<MenuItem value={"Analyst"}>Analyst</MenuItem>
 								<MenuItem value={"FrontEnd"}>Developer</MenuItem>
 							</InputField>
 
-							<IconButton style={{ marginBottom: "10px" }}>
+							<IconButton style={{ marginBottom: "10px" }} onClick={() => handleField("role")}>
 								<EditIcon bg={palette.primary.main} />
 							</IconButton>
-						</Stack>
-						<Stack direction={"row"} alignItems="flex-end" justifyContent={"space-between"} spacing={1}>
+						</MergeStack>
+						<MergeStack
+							direction={"row"}
+							alignItems="flex-end"
+							justifyContent={"space-between"}
+							spacing={1}
+							className={`field  ${field === "rate" && "merge"}`}
+						>
 							<InputField name="Rate" value={selectedStaff?.rate || ""} select>
 								<MenuItem value={"$940"}>$940</MenuItem>
 								<MenuItem value={"$840"}>$840</MenuItem>
 							</InputField>
 
-							<IconButton style={{ marginBottom: "10px" }}>
+							<IconButton style={{ marginBottom: "10px" }} onClick={() => handleField("rate")}>
 								<EditIcon bg={palette.primary.main} />
 							</IconButton>
-						</Stack>
+						</MergeStack>
 						<Stack direction={"row"} alignItems="flex-end" justifyContent={"space-between"} spacing={1}>
 							<InputField name="Portfolio" value={0} select>
 								<MenuItem value={0}>KoE</MenuItem>
@@ -239,4 +256,40 @@ const DateIndicator = styled("div")(({ theme }) => ({
 	margin: "auto",
 	borderRadius: 3,
 	color: palette.grey[600],
+}));
+
+const MergeStack = styled(Stack)(({ theme }) => ({
+	position: "relative",
+	"&.merge": {
+		transform: "translate(11px, -2px) scale(1.1)",
+		padding: "15px",
+		border: `1px solid ${palette.grey[300]}`,
+		zIndex: 2,
+		background: "#fff",
+		borderRight: "none",
+		borderRadius: "10px",
+		borderTopRightRadius: 0,
+		borderBottomRightRadius: 0,
+		transition: "all .2s ease",
+		// "&::after": {
+		// 	content: '""',
+		// 	zIndex: 2,
+		// 	position: "absolute",
+		// 	right: "-54px",
+		// 	width: 40,
+		// 	height: 40,
+		// 	border: `1px solid ${palette.grey[300]}`,
+		// 	borderTopColor: "transparent",
+		// 	borderRightColor: "transparent",
+		// 	backgroundColor: palette.common.white,
+		// 	boxShadow: "-1px 1px 0.5px 0px rgb(229 229 229)",
+		// 	transform: "translate(11px, -2px) scale(1.1)",
+		// 	// borderTop: `1px solid ${palette.grey[300]}`,
+		// 	// borderBottom: `1px solid ${palette.grey[300]}`,
+		// 	//     borderTopLeftRadius: 21
+		// },
+		"& .MuiOutlinedInput-input": {
+			border: `1px solid ${palette.secondary.main}`,
+		},
+	},
 }));
