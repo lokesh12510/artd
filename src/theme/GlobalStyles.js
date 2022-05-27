@@ -7,8 +7,9 @@ export const StyledBox = styled(Box)(({ theme }) => ({
 	backgroundColor: palette.common.white,
 	padding: theme.spacing(2),
 	borderRadius: 5,
-	boxShadow: "0px 0px 4px rgba(166, 166, 166, 0.25)",
+	// boxShadow: "0px 0px 4px rgba(166, 166, 166, 0.25)",
 	gap: theme.spacing(3),
+	border: "1px solid rgba(0, 0, 0, 0.1)",
 }));
 
 export const StyledBtn = styled(Button)(({ theme }) => ({
@@ -39,7 +40,7 @@ export const StyledPageHeader = styled(StyledBox)(({ theme }) => ({
 	justifyContent: "flex-start",
 }));
 
-export const StyledInput = styled(TextField)(({ theme }) => ({
+export const StyledInput = styled(TextField)(({ theme, align = "left" }) => ({
 	flex: 1,
 	width: "100%",
 	borderRadius: 5,
@@ -47,12 +48,32 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
 	borderColor: palette.border,
 
 	"& .MuiOutlinedInput-input": {
+		// height: "100%",
 		padding: theme.spacing(1.2),
 		// fontSize: 14,
+		textAlign: align,
 		color: palette.grey[600],
 	},
 	"& .MuiOutlinedInput-notchedOutline": {
 		border: `1px solid #6d6a6a3b`,
+	},
+}));
+
+export const StyledSelect = styled(StyledInput)(({ theme, align = "left" }) => ({
+	"& .MuiSelect-select": {
+		padding: theme.spacing(0.7),
+		position: "relative",
+		overflow: "hidden",
+		"&::after": {
+			content: '""',
+			position: "absolute",
+			right: 0,
+			top: 0,
+			width: 35,
+			height: "100%",
+			backgroundColor: palette.border,
+			borderLeft: `1px solid #bfbebe`,
+		},
 	},
 }));
 
@@ -99,10 +120,6 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 		},
 	},
 
-	"& .MuiTableRow-root": {
-		border: "none",
-		cursor: "pointer",
-	},
 	"& .MuiTableCell-head": {
 		padding: theme.spacing(1.5),
 		// fontSize: 16,

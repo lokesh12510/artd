@@ -48,14 +48,14 @@ const typography = {
 	h4: {
 		fontWeight: 700,
 		lineHeight: 1.5,
-		fontSize: pxToRem(20),
-		...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
+		fontSize: pxToRem(24),
+		...responsiveFontSizes({ sm: 20, md: 22, lg: 24 }),
 	},
 	h5: {
 		fontWeight: 700,
 		lineHeight: 1.5,
-		fontSize: pxToRem(18),
-		...responsiveFontSizes({ sm: 16, md: 16, lg: 16 }),
+		fontSize: pxToRem(20),
+		...responsiveFontSizes({ sm: 18, md: 18, lg: 20 }),
 	},
 	h6: {
 		fontWeight: 700,
@@ -101,9 +101,9 @@ const typography = {
 		textTransform: "uppercase",
 		letterSpacing: 1.15,
 	},
-	input: {
-		fontSize: pxToRem(14),
-		...responsiveFontSizes({ sm: 14, md: 14, lg: 14 }),
+	label: {
+		fontSize: pxToRem(16),
+		...responsiveFontSizes({ sm: 16, md: 16, lg: 16 }),
 	},
 };
 

@@ -39,6 +39,7 @@ const ThemeWrapper = ({ children }) => {
 						},
 					},
 				},
+
 				MuiButton: {
 					defaultProps: {
 						disableElevation: true,

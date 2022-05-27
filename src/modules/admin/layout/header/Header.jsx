@@ -62,7 +62,7 @@ const SearchBar = styled(StyledInput)(({ theme }) => ({
 		maxWidth: "300px",
 	},
 	[theme.breakpoints.up("md")]: {
-		maxWidth: "600px",
+		maxWidth: "500px",
 	},
 }));
 

@@ -92,8 +92,9 @@ const palette = {
 	border: "#EFEFEF",
 	divider: GREY[500_24],
 	copyright: "#F18448",
-	hightLight: "#e0eff480",
+	highlight: "#e0eff480",
 	body: { ...BODY },
+	label: "#000000c4",
 	text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
 	background: { paper: "#fff", default: GREY[100], neutral: GREY[200] },
 	action: {

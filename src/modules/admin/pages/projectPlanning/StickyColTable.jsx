@@ -461,12 +461,19 @@ const CustomStyledContainer = styled(StyledTableContainer)(({ theme }) => ({
 	borderRadius: 0,
 	"& .MuiTableBody-root ": {
 		border: "none",
+		"& .MuiTableRow-root": {
+			border: "none",
+			cursor: "pointer",
+		},
 	},
 	"& .MuiTableCell-root": {
 		"& input": {
 			whiteSpace: "nowrap",
 			wordBreak: "keep-all",
 			height: 15,
+		},
+		"& .PrivateSwitchBase-input": {
+			height: "100%",
 		},
 	},
 }));

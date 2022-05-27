@@ -38,7 +38,7 @@ const Root = styled(Accordion)(({ theme }) => ({
 	"& .MuiAccordionDetails-root": {
 		padding: 0,
 		"& .MuiTableCell-head": {
-			backgroundColor: palette.hightLight,
+			backgroundColor: palette.highlight,
 			borderBottom: `1px solid ${palette.secondary.main}`,
 			color: palette.primary.main,
 			textTransform: "uppercase",
