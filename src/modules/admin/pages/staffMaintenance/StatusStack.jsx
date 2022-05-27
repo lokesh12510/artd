@@ -1,4 +1,4 @@
-import { Grid, Stack, Typography } from "@mui/material";
+import { Button, Grid, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
 import { StyledBox, StyledBtn, StyledInput } from "../../../../theme/GlobalStyles";
@@ -14,9 +14,9 @@ const StatusStack = () => {
 							Number of weeks (Prior to the current week) displayed in combo boxes
 						</Typography>
 						<StyledInput align="center" style={{ maxWidth: 100 }} value="3015" />
-						<StyledBtn variant="outlined" fullWidth>
+						<Button variant="outlined" fullWidth>
 							Accept New Week
-						</StyledBtn>
+						</Button>
 					</StatusCard>
 				</Grid>
 				<Grid item xs={12} sm={6} lg={3}>
@@ -59,7 +59,7 @@ export default StatusStack;
 const StatusCard = styled(Stack)(({ theme }) => ({
 	backgroundColor: palette.highlight,
 	height: "100%",
-	padding: theme.spacing(1.5),
+	padding: theme.spacing(2),
 	borderRadius: 5,
 	border: `1px solid ${palette.border}`,
 }));

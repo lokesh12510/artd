@@ -9,7 +9,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import { ArrowCheckIcon } from "../../../../constants/icons";
 
-const StaffList = () => {
+const StaffList = ({ selectedStaff, handleSelectStaff, data }) => {
 	return (
 		<StaffListContainer direction={"column"}>
 			<ListHeader direction={"row"} justifyContent="space-between" alignItems={"center"}>
@@ -75,12 +75,16 @@ const StaffList = () => {
 				</FormControl>
 			</ListHeader>
 			<ListBody direction={"column"} spacing={1}>
-				{[...Array(15)].map((item, i) => {
+				{data.map((item, i) => {
 					return (
-						<ListItem key={i} direction={"row"} justifyContent="space-between" alignItems={"center"} spacing={1}>
-							<Checkbox checkedIcon={<ArrowCheckIcon />} />
-							<StyledInput value={"David Crotty"} />
-							<StyledInput style={{ maxWidth: 50 }} value="AL" align="center" />
+						<ListItem key={item.id} direction={"row"} justifyContent="space-between" alignItems={"center"} spacing={1}>
+							<Checkbox
+								checkedIcon={<ArrowCheckIcon />}
+								checked={selectedStaff && selectedStaff.id === item.id ? true : false}
+								onChange={() => handleSelectStaff(item)}
+							/>
+							<StyledInput value={item.name} />
+							<StyledInput style={{ maxWidth: 50 }} value={item.code} align="center" />
 						</ListItem>
 					);
 				})}

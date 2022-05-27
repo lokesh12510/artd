@@ -19,7 +19,7 @@ import styled from "@emotion/styled";
 import palette from "../../../../theme/palette";
 import { AddIcon, DeleteIcon, EditIcon } from "../../../../constants/icons";
 
-const StaffForm = () => {
+const StaffForm = ({ selectedStaff }) => {
 	return (
 		<Grid container rowSpacing={2} columnSpacing={2}>
 			{/* ------------- Staff Form ----------------- */}
@@ -28,18 +28,33 @@ const StaffForm = () => {
 					<Grid container spacing={3}>
 						<Grid item xs>
 							<Stack direction={"column"} spacing={2}>
-								<InputField name="code" value="NM2" style={{ maxWidth: 100 }} />
-								<InputField name="name" value="Brad Astbury" />
-								<InputField name="email" value="demo@gmail.com.au" />
-								<InputField name="User Type" value={0} select>
-									<MenuItem value={0}>Marketing</MenuItem>
-									<MenuItem value={1}>News</MenuItem>
+								<InputField name="code" value={selectedStaff?.code || ""} style={{ maxWidth: 100 }} />
+								<InputField name="name" value={selectedStaff?.name || ""} />
+								<InputField name="email" value={selectedStaff?.email || ""} />
+								<InputField name="User Type" value={selectedStaff?.userType || ""} select>
+									<MenuItem value={"Marketing"}>Marketing</MenuItem>
+									<MenuItem value={"Developer"}>Developer</MenuItem>
 								</InputField>
 
 								<FormGroup aria-label="position" row>
-									<FormControlLabel value="top" control={<Checkbox />} label="Active?" />
-									<FormControlLabel value="start" control={<Checkbox />} label="Available for project?" />
-									<FormControlLabel value="bottom" control={<Checkbox />} label="Left ARTD?" />
+									<FormControlLabel
+										value="top"
+										control={<Checkbox />}
+										checked={selectedStaff && selectedStaff?.status === "active" ? true : false}
+										label="Active?"
+									/>
+									<FormControlLabel
+										value="start"
+										control={<Checkbox />}
+										checked={selectedStaff && selectedStaff?.status === "available" ? true : false}
+										label="Available for project?"
+									/>
+									<FormControlLabel
+										value="bottom"
+										control={<Checkbox />}
+										checked={selectedStaff && selectedStaff?.status === "left" ? true : false}
+										label="Left ARTD?"
+									/>
 								</FormGroup>
 							</Stack>
 						</Grid>
@@ -51,7 +66,7 @@ const StaffForm = () => {
 								</InputField>
 								<LocalizationProvider dateAdapter={AdapterMoment}>
 									<DatePicker
-										// value={item.when}
+										value={selectedStaff?.date || null}
 										// onChange={(newValue) => {
 										// 	handleDateChange(newValue._d, item.id);
 										// }}
@@ -87,9 +102,9 @@ const StaffForm = () => {
 						</div>
 						<Divider />
 						<Stack direction={"row"} alignItems="flex-end" justifyContent={"space-between"} spacing={1}>
-							<InputField name="Role" value={0} select>
-								<MenuItem value={0}>Analyst</MenuItem>
-								<MenuItem value={1}>News</MenuItem>
+							<InputField name="Role" value={selectedStaff?.role || ""} select>
+								<MenuItem value={"Analyst"}>Analyst</MenuItem>
+								<MenuItem value={"FrontEnd"}>Developer</MenuItem>
 							</InputField>
 
 							<IconButton style={{ marginBottom: "10px" }}>
@@ -97,9 +112,9 @@ const StaffForm = () => {
 							</IconButton>
 						</Stack>
 						<Stack direction={"row"} alignItems="flex-end" justifyContent={"space-between"} spacing={1}>
-							<InputField name="Rate" value={0} select>
-								<MenuItem value={0}>$990</MenuItem>
-								<MenuItem value={1}>$920</MenuItem>
+							<InputField name="Rate" value={selectedStaff?.rate || ""} select>
+								<MenuItem value={"$940"}>$940</MenuItem>
+								<MenuItem value={"$840"}>$840</MenuItem>
 							</InputField>
 
 							<IconButton style={{ marginBottom: "10px" }}>
@@ -175,34 +190,34 @@ const StaffForm = () => {
 						<Typography color={"primary"} variant="h5">
 							Edit Parameters
 						</Typography>
-						{[...new Array(4)].map((item, i) => {
-							return (
-								<Stack key={i} direction={"row"} alignItems="center" justifyContent={"space-between"} spacing={1}>
-									<StyledSelect name="phase" select>
-										<MenuItem value={"1"}>1</MenuItem>
-										<MenuItem value={"2"}>2</MenuItem>
-										<MenuItem value={"3"}>3</MenuItem>
-									</StyledSelect>
-									<StyledSelect name="phase" select>
-										<MenuItem value={"1"}>1</MenuItem>
-										<MenuItem value={"2"}>2</MenuItem>
-										<MenuItem value={"3"}>3</MenuItem>
-									</StyledSelect>
-									<StyledSelect name="phase" select>
-										<MenuItem value={"1"}>1</MenuItem>
-										<MenuItem value={"2"}>2</MenuItem>
-										<MenuItem value={"3"}>3</MenuItem>
-									</StyledSelect>
+						{selectedStaff &&
+							selectedStaff?.parameters.map((item, i) => {
+								return (
+									<Stack key={i} direction={"row"} alignItems="center" justifyContent={"space-between"} spacing={1}>
+										<StyledSelect name="param 1" select value={item.param1}>
+											<MenuItem value={823}>823</MenuItem>
+											<MenuItem value={1023}>1023</MenuItem>
+										</StyledSelect>
+										<StyledSelect name="param 2" select value={item.param2}>
+											<MenuItem value={823}>823</MenuItem>
+											<MenuItem value={2342}>2342</MenuItem>
+										</StyledSelect>
+										<StyledSelect name="Desc" select value={item.desc}>
+											<MenuItem value={"Desc 1"}>Desc 1</MenuItem>
+											<MenuItem value={"Desc 2"}>Desc 2</MenuItem>
+											<MenuItem value={"Nama Jalu"}>Nama Jalu</MenuItem>
+											<MenuItem value={"Jalu Nama"}>Jalu Nama</MenuItem>
+										</StyledSelect>
 
-									<IconButton>
-										<DeleteIcon bg={palette.primary.main} />
-									</IconButton>
-									<IconButton>
-										<AddIcon bg={palette.primary.main} />
-									</IconButton>
-								</Stack>
-							);
-						})}
+										<IconButton>
+											<DeleteIcon bg={palette.primary.main} />
+										</IconButton>
+										<IconButton>
+											<AddIcon bg={palette.primary.main} />
+										</IconButton>
+									</Stack>
+								);
+							})}
 					</Stack>
 				</StyledBox>
 			</Grid>
@@ -216,10 +231,12 @@ const DateIndicator = styled("div")(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
-	padding: theme.spacing(1),
+	padding: theme.spacing(0.8),
 	paddingInline: theme.spacing(2),
-	backgroundColor: palette.grey[300],
+	backgroundColor: palette.grey[200],
+	border: `1px solid ${palette.grey[300]}`,
 	width: "fit-content",
 	margin: "auto",
 	borderRadius: 3,
+	color: palette.grey[600],
 }));

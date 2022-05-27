@@ -48,6 +48,7 @@ export const StyledInput = styled(TextField)(({ theme, align = "left" }) => ({
 	borderColor: palette.border,
 
 	"& .MuiOutlinedInput-input": {
+		textTransform: "capitalize",
 		// height: "100%",
 		padding: theme.spacing(1.2),
 		// fontSize: 14,

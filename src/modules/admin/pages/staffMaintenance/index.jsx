@@ -1,5 +1,5 @@
 import { Grid, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { AddIcon } from "../../../../constants/icons";
 import { ButtonStack, StyledBox, StyledBtn } from "../../../../theme/GlobalStyles";
 import StaffForm from "./StaffForm";
@@ -7,6 +7,13 @@ import StaffList from "./StaffList";
 import StatusStack from "./StatusStack";
 
 const StaffMaintenance = () => {
+	const [selectedStaff, setSelectedStaff] = useState(null);
+
+	const handleSelectStaff = (staff) => {
+		console.log(staff);
+		setSelectedStaff(staff);
+	};
+
 	return (
 		<StyledBox>
 			<Stack direction={"row"} justifyContent="space-between" alignItems={"center"} mb={3}>
@@ -19,12 +26,12 @@ const StaffMaintenance = () => {
 			</Stack>
 			<Grid container spacing={2}>
 				<Grid item sm={12} md={4} lg={3}>
-					<StaffList />
+					<StaffList handleSelectStaff={handleSelectStaff} selectedStaff={selectedStaff} data={data} />
 				</Grid>
 				<Grid item sm={12} md={8} lg={9}>
 					<Stack direction={"column"} rowGap={2}>
 						<StatusStack />
-						<StaffForm />
+						<StaffForm selectedStaff={selectedStaff} />
 					</Stack>
 				</Grid>
 			</Grid>
@@ -46,3 +53,56 @@ const StaffMaintenance = () => {
 };
 
 export default StaffMaintenance;
+
+const data = [
+	{
+		id: 1,
+		name: "david crotty",
+		code: "AL",
+		email: "david.crotty@gmail.com",
+		userType: "Marketing",
+		date: new Date(),
+		role: "Analyst",
+		rate: "$940",
+		status: "active",
+		parameters: [
+			{
+				id: 1,
+				param1: 1023,
+				param2: 2342,
+				desc: "Nama Jalu",
+			},
+			{
+				id: 2,
+				param1: 1023,
+				param2: 2342,
+				desc: "Jalu Nama",
+			},
+		],
+	},
+	{
+		id: 2,
+		name: "Brad Astbury",
+		code: "NM2",
+		email: "brad.astbury@gmail.com",
+		userType: "Developer",
+		date: new Date(),
+		role: "FrontEnd",
+		rate: "$840",
+		status: "available",
+		parameters: [
+			{
+				id: 1,
+				param1: 823,
+				param2: 2342,
+				desc: "Desc 1",
+			},
+			{
+				id: 2,
+				param1: 823,
+				param2: 2342,
+				desc: "Desc 2",
+			},
+		],
+	},
+];
