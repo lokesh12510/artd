@@ -370,7 +370,7 @@ const StickyColTable = ({ data }) => {
 							}}
 							onClick={() => setOpen(!open)}
 						>
-							<TableCell colSpan={10} className="accordion">
+							<TableCell className="accordion" colSpan={col.list.length}>
 								<IconButton
 									aria-label="expand row"
 									size="small"
