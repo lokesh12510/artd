@@ -1,4 +1,13 @@
-import { Box, Button, TextField, FormGroup, TableContainer, Dialog, IconButton, Stack } from "@mui/material";
+import {
+	Box,
+	Button,
+	TextField,
+	FormGroup,
+	TableContainer,
+	Dialog,
+	IconButton,
+	Stack,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "./palette";
 
@@ -7,17 +16,21 @@ export const StyledBox = styled(Box)(({ theme }) => ({
 	backgroundColor: palette.common.white,
 	padding: theme.spacing(2),
 	borderRadius: 5,
-	// boxShadow: "0px 0px 4px rgba(166, 166, 166, 0.25)",
+	boxShadow: "0px 0px 4px rgba(166, 166, 166, 0.25)",
 	gap: theme.spacing(3),
-	border: "1px solid rgba(0, 0, 0, 0.1)",
+	// border: "1px solid rgba(0, 0, 0, 0.1)",
 }));
 
 export const StyledBtn = styled(Button)(({ theme }) => ({
 	padding: theme.spacing(0.9),
-	paddingInline: theme.spacing(3),
+	paddingInline: theme.spacing(2),
 	[theme.breakpoints.down("lg")]: {
 		padding: theme.spacing(0.6),
-		paddingInline: theme.spacing(2),
+		paddingInline: theme.spacing(1.8),
+	},
+	"& .MuiButton-startIcon": {
+		marginLeft: 0,
+		marginRight: 4,
 	},
 }));
 export const StyledCheckBoxWrapper = styled(FormGroup)(({ theme }) => ({
@@ -45,47 +58,53 @@ export const StyledInput = styled(TextField)(({ theme, align = "left" }) => ({
 	width: "100%",
 	borderRadius: 5,
 	backgroundColor: palette.common.white,
-	borderColor: palette.border,
 
 	"& .MuiOutlinedInput-input": {
 		textTransform: "capitalize",
 		// height: "100%",
-		padding: theme.spacing(1.2),
+		padding: theme.spacing(1.25),
 		// fontSize: 14,
 		textAlign: align,
-		color: palette.grey[600],
+	},
+	"& .MuiOutlinedInput-root.Mui-disabled": {
+		"& .MuiOutlinedInput-notchedOutline": {
+			borderColor: `#d4d9decc`,
+		},
 	},
 	"& .MuiOutlinedInput-notchedOutline": {
-		border: `1px solid #6d6a6a3b`,
+		border: `1px solid #d4d9decc`,
 	},
 }));
 
-export const StyledSelect = styled(StyledInput)(({ theme, align = "left" }) => ({
-	"& .MuiSelect-select": {
-		padding: theme.spacing(0.7),
-		position: "relative",
-		overflow: "hidden",
-		"&::after": {
-			content: '""',
-			position: "absolute",
-			right: 0,
-			top: 0,
-			width: 35,
-			height: "100%",
-			backgroundColor: palette.border,
-			borderLeft: `1px solid #bfbebe`,
+export const StyledSelect = styled(StyledInput)(
+	({ theme, align = "left" }) => ({
+		"& .MuiSelect-select": {
+			padding: theme.spacing(0.7),
+			position: "relative",
+			overflow: "hidden",
+			"&::after": {
+				content: '""',
+				position: "absolute",
+				right: 0,
+				top: 0,
+				width: 35,
+				height: "100%",
+				backgroundColor: palette.border,
+				borderLeft: `1px solid #bfbebe`,
+			},
 		},
-	},
-}));
+	})
+);
 
 export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 	position: "relative",
 	width: "100%",
 	overflow: "auto",
-	boxShadow: "0px 0px 1px -1px rgb(0 0 0 / 20%), 0px 1px 0px 0px rgb(0 0 0 / 14%), 0px -2px 0px 0px rgb(0 0 0 / 12%)",
+	// boxShadow:
+	// 	"0px 0px 1px -1px rgb(0 0 0 / 20%), 0px 1px 0px 0px rgb(0 0 0 / 14%), 0px -2px 0px 0px rgb(0 0 0 / 12%)",
 	borderTopLeftRadius: 10,
 	borderTopRightRadius: 10,
-
+	boxShadow: "none",
 	"& .MuiTableHead-root": {
 		minHeight: 80,
 	},
@@ -185,14 +204,14 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 			padding: theme.spacing(0.4),
 		},
 		"& input": {
-			textAlign: "center",
+			// textAlign: "center",
 			whiteSpace: "nowrap",
 			wordBreak: "keep-all",
 		},
 	},
 
 	"& .accordion": {
-		borderBottom: `1px solid ${palette.primary.main}`,
+		borderBottom: `1px solid ${palette.primary.borderLight}`,
 		paddingBlock: 0,
 	},
 	"& .date": {
@@ -202,7 +221,7 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 			"& .MuiButtonBase-root": {
 				padding: 1,
 				backgroundColor: "rgba(16, 87, 118, 0.08)",
-				borderLeft: `1px solid #bfbebe`,
+				borderLeft: `1px solid rgba(16, 87, 118, 0.08)`,
 				borderRadius: 0,
 				position: "relative",
 				right: -3,
@@ -215,13 +234,13 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 			},
 		},
 	},
-	"& .expenses": {
-		"& input": {
-			backgroundColor: "#e3f9ff",
-			textDecoration: "underline",
-			cursor: "pointer",
-		},
-	},
+	// "& .expenses": {
+	// 	"& input": {
+	// 		backgroundColor: "#e3f9ff",
+	// 		textDecoration: "underline",
+	// 		cursor: "pointer",
+	// 	},
+	// },
 	"& .sticky-right-table": {
 		"& .MuiTableCell-root.hiddenCell": {
 			borderBottom: "none",

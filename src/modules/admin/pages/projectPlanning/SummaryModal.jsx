@@ -1,6 +1,9 @@
 import React from "react";
 import CustomDialog from "../../../../components/CustomDialog";
-import { StyledInput, StyledTableContainer } from "../../../../theme/GlobalStyles";
+import {
+	StyledInput,
+	StyledTableContainer,
+} from "../../../../theme/GlobalStyles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -54,7 +57,7 @@ const SummaryModal = ({ summaryModal, handleSummaryModal }) => {
 			title="Project Time Summary"
 			visible={summaryModal}
 			handleModalState={handleSummaryModal}
-			maxWidth={"lg"}
+			maxWidth={"md"}
 			fullWidth={true}
 		>
 			<StyledTableContainer>
@@ -72,7 +75,10 @@ const SummaryModal = ({ summaryModal, handleSummaryModal }) => {
 					<TableBody>
 						{rows.map((item, index) => {
 							return (
-								<TableRow key={item.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+								<TableRow
+									key={item.id}
+									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+								>
 									<TableCell align="center">
 										<Typography color={palette.grey[600]}>{item.month}</Typography>
 									</TableCell>

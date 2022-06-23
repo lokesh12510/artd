@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import ThemeWrapper from "./theme";
 import AppRoutes from "./routes";
+import "./App.css";
 
 const App = () => {
 	return (

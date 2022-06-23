@@ -7,14 +7,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import { visuallyHidden } from "@mui/utils";
-import { CopyIcon, DeleteIcon, EditIcon, EyeIcon } from "../../../../constants/icons";
+import {
+	CopyIcon,
+	DeleteIcon,
+	EditIcon,
+	EyeIcon,
+} from "../../../../constants/icons";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
-import { StyledBtn, StyledInput, StyledTableContainer } from "../../../../theme/GlobalStyles";
+import {
+	StyledBtn,
+	StyledInput,
+	StyledTableContainer,
+} from "../../../../theme/GlobalStyles";
 
 import { Checkbox, Collapse, Link, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/system";
@@ -75,7 +84,10 @@ const StickyColTable = ({ data }) => {
 		} else if (selectedIndex === selected.length - 1) {
 			newSelected = newSelected.concat(selected.slice(0, -1));
 		} else if (selectedIndex > 0) {
-			newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+			newSelected = newSelected.concat(
+				selected.slice(0, selectedIndex),
+				selected.slice(selectedIndex + 1)
+			);
 		}
 
 		setSelected(newSelected);
@@ -140,7 +152,11 @@ const StickyColTable = ({ data }) => {
 			const firstPart = rowData.slice(0, index + 1);
 			const secondPart = rowData.slice(index + 1, rowData.length);
 
-			return [...firstPart, { ...duplicateRow, id: Math.floor(Math.random() * 100) }, ...secondPart];
+			return [
+				...firstPart,
+				{ ...duplicateRow, id: Math.floor(Math.random() * 100) },
+				...secondPart,
+			];
 		}
 
 		setRow((r) => ({ count: r.count + 1, list: dup(r.list) }));
@@ -150,7 +166,10 @@ const StickyColTable = ({ data }) => {
 
 	return (
 		<>
-			<CustomStyledContainer component={Paper} sx={{ display: "flex", alignItems: "flex-start", flexDirection: "row" }}>
+			<CustomStyledContainer
+				component={Paper}
+				sx={{ display: "flex", alignItems: "flex-start", flexDirection: "row" }}
+			>
 				{/* Sticky */}
 				<Table aria-label="simple table" size={"small"} className="sticky-table">
 					{/*----------- Sticky Header-------- */}
@@ -191,7 +210,12 @@ const StickyColTable = ({ data }) => {
 									>
 										Completed Task
 									</Typography>
-									<IconButton aria-label="expand row" size="small" className="dropdown" sx={{ visibility: "hidden" }}>
+									<IconButton
+										aria-label="expand row"
+										size="small"
+										className="dropdown"
+										sx={{ visibility: "hidden" }}
+									>
 										{open ? (
 											<ArrowDropUpIcon fontSize="large" style={{ color: palette.primary.main }} />
 										) : (
@@ -220,6 +244,7 @@ const StickyColTable = ({ data }) => {
 									<TableCell component="th" scope="row" align="center">
 										<Checkbox
 											color="primary"
+											style={{ color: palette.primary.light }}
 											checked={row.isCompleted ? true : isItemSelected}
 											inputProps={{
 												"aria-labelledby": labelId,
@@ -239,13 +264,28 @@ const StickyColTable = ({ data }) => {
 											</Stack>
 										) : (
 											<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
-												<IconButton color="primary" aria-label="copy" component="span" onClick={() => handleDuplicateRow(index)}>
+												<IconButton
+													color="primary"
+													aria-label="copy"
+													component="span"
+													onClick={() => handleDuplicateRow(index)}
+												>
 													<CopyIcon bg={palette.primary.main} />
 												</IconButton>
-												<IconButton color="primary" aria-label="edit" component="span" onClick={() => handleEditModal()}>
+												<IconButton
+													color="primary"
+													aria-label="edit"
+													component="span"
+													onClick={() => handleEditModal()}
+												>
 													<EditIcon bg={palette.primary.main} />
 												</IconButton>
-												<IconButton color="primary" aria-label="delete" component="span" onClick={() => handleDeleteModal()}>
+												<IconButton
+													color="primary"
+													aria-label="delete"
+													component="span"
+													onClick={() => handleDeleteModal()}
+												>
 													<DeleteIcon bg={palette.primary.main} />
 												</IconButton>
 											</Stack>
@@ -279,8 +319,9 @@ const StickyColTable = ({ data }) => {
 														<StyledInput
 															name={col}
 															value={row[col]}
-															component={col === "expenses" && Link}
-															onClick={col === "expenses" ? handleExpenseListModal : undefined}
+															align={col === "description" ? "left" : "center"}
+															// component={col === "expenses" && Link}
+															// onClick={col === "expenses" ? handleExpenseListModal : undefined}
 															onChange={(e) => handleChange(e, row.id)}
 														/>
 													)}
@@ -299,13 +340,19 @@ const StickyColTable = ({ data }) => {
 				{/* Scroll Table */}
 				<Table aria-label="simple table" className="scroll-table" size={"small"}>
 					{/*----------- Scroll Header-------- */}
-					<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
+					<TableHead
+						sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}
+					>
 						<TableRow>
 							{col.list
 								.filter((item) => item.includes("_"))
 								.map((col, index) => {
 									return (
-										<TableCell align="center" style={{ minWidth: "80px", textTransform: "uppercase" }} key={index}>
+										<TableCell
+											align="center"
+											style={{ minWidth: "80px", textTransform: "uppercase" }}
+											key={index}
+										>
 											<Typography variant="subtitle2">{col.replace("_", "")}</Typography>
 										</TableCell>
 									);
@@ -316,11 +363,20 @@ const StickyColTable = ({ data }) => {
 					<TableBody>
 						{/* Accordion Row */}
 						<TableRow
-							sx={{ backgroundColor: "#e3f9ff", cursor: "pointer", color: palette.common.white }}
+							sx={{
+								backgroundColor: "#e3f9ff",
+								cursor: "pointer",
+								color: palette.common.white,
+							}}
 							onClick={() => setOpen(!open)}
 						>
 							<TableCell colSpan={10} className="accordion">
-								<IconButton aria-label="expand row" size="small" className="dropdown" sx={{ visibility: "hidden" }}>
+								<IconButton
+									aria-label="expand row"
+									size="small"
+									className="dropdown"
+									sx={{ visibility: "hidden" }}
+								>
 									{open ? (
 										<ArrowDropUpIcon fontSize="large" style={{ color: palette.primary.main }} />
 									) : (
@@ -349,7 +405,7 @@ const StickyColTable = ({ data }) => {
 										.filter((item) => item.includes("_"))
 										.map((col, index) => {
 											return (
-												<TableCell align="center" key={index}>
+												<TableCell key={index}>
 													<StyledInput value={row[col]} />
 												</TableCell>
 											);
@@ -370,7 +426,9 @@ const StickyColTable = ({ data }) => {
 					aria-label="simple table"
 					size={"small"}
 				>
-					<TableHead sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}>
+					<TableHead
+						sx={{ backgroundColor: palette.secondary.main, color: palette.common.white }}
+					>
 						<TableRow>
 							<TableCell align="right" style={{ minWidth: "50px", padding: 7 }}>
 								<StyledBtn
@@ -438,7 +496,12 @@ const StickyColTable = ({ data }) => {
 			{/* ----------------------  MODALS COMPONENTS  ------------------------- */}
 
 			{/* Col Addition Modal */}
-			<DataTableModal open={visible} handleClose={handleModalState} row={row} col={col} />
+			<DataTableModal
+				open={visible}
+				handleClose={handleModalState}
+				row={row}
+				col={col}
+			/>
 			{/* Col Addition Modal */}
 
 			{/* Edit Row Modal */}
@@ -448,7 +511,10 @@ const StickyColTable = ({ data }) => {
 			<DeleteModal deleteModal={deleteModal} handleDeleteModal={handleDeleteModal} />
 			{/* Delete Row Modal */}
 			{/* ExpenseListModal */}
-			<ExpenseListModal expenseList={expenseList} handleExpenseListModal={handleExpenseListModal} />
+			<ExpenseListModal
+				expenseList={expenseList}
+				handleExpenseListModal={handleExpenseListModal}
+			/>
 			{/* ExpenseListModal */}
 		</>
 	);
@@ -480,10 +546,12 @@ const CustomStyledContainer = styled(StyledTableContainer)(({ theme }) => ({
 
 const StyledTableCell = styled(TableCell)(({ theme, label }) => ({
 	[theme.breakpoints.down("md")]: {
-		minWidth: label === "description" ? "200px" : label === "date" ? "150px" : "70px",
+		minWidth:
+			label === "description" ? "200px" : label === "date" ? "150px" : "70px",
 	},
 	[theme.breakpoints.up("md")]: {
-		width: label === "description" ? "calc(40%)" : label === "date" ? "140px" : "calc(7%)",
+		width:
+			label === "description" ? "calc(40%)" : label === "date" ? "140px" : "calc(7%)",
 		minWidth: label === "date" && 150,
 	},
 }));

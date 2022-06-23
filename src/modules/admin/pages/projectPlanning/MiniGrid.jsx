@@ -5,27 +5,46 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { StyledInput, StyledTableContainer } from "../../../../theme/GlobalStyles";
+import {
+	StyledInput,
+	StyledTableContainer,
+} from "../../../../theme/GlobalStyles";
 import { IconButton, MenuItem } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { AddIcon, DeleteIcon } from "../../../../constants/icons";
+import { AddIcon, CalenderIcon, DeleteIcon } from "../../../../constants/icons";
 import palette from "../../../../theme/palette";
 
 const MiniGrid = () => {
-	const initialValue = [{ id: 1, phase: 1, task: 2, desc: "Inception Meeting", when: new Date() }];
+	const initialValue = [
+		{ id: 1, phase: 1, task: 2, desc: "Inception Meeting", when: new Date() },
+		{ id: 2, phase: 4, task: 8, desc: "Inception Meeting 2", when: new Date() },
+	];
 
-	const [rows, setRows] = useState([...initialValue, ...initialValue]);
+	const [rows, setRows] = useState([...initialValue]);
 
 	const handleDeleteRow = (id) => {
 		setRows((r) => r.filter((item) => item.id !== id));
 	};
 	const handleAddRow = (id) => {
-		setRows((r) => [...r, { id: Math.floor(Math.random() * 30), phase: "", task: "", desc: "", when: null }]);
+		setRows((r) => [
+			...r,
+			{
+				id: Math.floor(Math.random() * 300),
+				phase: "",
+				task: "",
+				desc: "",
+				when: null,
+			},
+		]);
 	};
 
 	const handleChange = (e, id) => {
-		setRows((r) => r.map((item) => (item.id === id ? { ...item, [e.target.name]: e.target.value } : item)));
+		setRows((r) =>
+			r.map((item) =>
+				item.id === id ? { ...item, [e.target.name]: e.target.value } : item
+			)
+		);
 	};
 
 	// handling change event in table `date` input fields
@@ -63,14 +82,24 @@ const MiniGrid = () => {
 						return (
 							<TableRow key={index}>
 								<TableCell component="th" scope="row">
-									<StyledInput name="phase" value={item.phase} select onChange={(e) => handleChange(e, item.id)}>
+									<StyledInput
+										name="phase"
+										value={item.phase}
+										select
+										onChange={(e) => handleChange(e, item.id)}
+									>
 										<MenuItem value={"1"}>1</MenuItem>
 										<MenuItem value={"2"}>2</MenuItem>
 										<MenuItem value={"3"}>3</MenuItem>
 									</StyledInput>
 								</TableCell>
 								<TableCell component="th" scope="row">
-									<StyledInput name="task" value={item.task} select onChange={(e) => handleChange(e, item.id)}>
+									<StyledInput
+										name="task"
+										value={item.task}
+										select
+										onChange={(e) => handleChange(e, item.id)}
+									>
 										<MenuItem value={"1"}>1</MenuItem>
 										<MenuItem value={"2"}>2</MenuItem>
 										<MenuItem value={"3"}>3</MenuItem>
@@ -78,7 +107,11 @@ const MiniGrid = () => {
 								</TableCell>
 
 								<TableCell component="th" scope="row">
-									<StyledInput name="desc" value={item.desc} onChange={(e) => handleChange(e, item.id)} />
+									<StyledInput
+										name="desc"
+										value={item.desc}
+										onChange={(e) => handleChange(e, item.id)}
+									/>
 								</TableCell>
 								<TableCell component="th" scope="row">
 									<LocalizationProvider dateAdapter={AdapterMoment}>
@@ -87,20 +120,23 @@ const MiniGrid = () => {
 											onChange={(newValue) => {
 												handleDateChange(newValue._d, item.id);
 											}}
+											components={{
+												OpenPickerIcon: CalenderIcon,
+											}}
 											renderInput={(params) => <StyledInput {...params} />}
 										/>
 									</LocalizationProvider>
 								</TableCell>
-								{index > 0 && (
-									<TableCell component="th" scope="row" align="center">
+								<TableCell component="th" scope="row" align="left">
+									{rows.length > 1 && (
 										<IconButton onClick={() => handleDeleteRow(item.id)}>
 											<DeleteIcon bg={palette.primary.main} />
 										</IconButton>
-										<IconButton onClick={() => handleAddRow(item.id)}>
-											<AddIcon bg={palette.primary.main} />
-										</IconButton>
-									</TableCell>
-								)}
+									)}
+									<IconButton onClick={() => handleAddRow(item.id)}>
+										<AddIcon bg={palette.primary.main} />
+									</IconButton>
+								</TableCell>
 							</TableRow>
 						);
 					})}

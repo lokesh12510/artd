@@ -14,7 +14,7 @@ const GREY = {
 	300: "#DFE3E8",
 	400: "#979696CC",
 	500: "#919EAB",
-	600: "#637381",
+	600: "#000000B2",
 	700: "#454F5B",
 	800: "#212B36",
 	900: "#161C24",
@@ -29,8 +29,9 @@ const GREY = {
 };
 
 const PRIMARY = {
-	//light: '#105776',
+	light: "#105776CC",
 	main: "#105776",
+	borderLight: "#10577633",
 	//dark: '#105776',
 	//contrastText: '#fff',
 };
@@ -62,7 +63,7 @@ const LIGHT = {
 };
 
 const DARK = {
-	main: "#000",
+	main: "#000000B2",
 };
 const BODY = {
 	main: "#f1f1f1",
@@ -95,7 +96,7 @@ const palette = {
 	highlight: "#e0eff480",
 	body: { ...BODY },
 	label: "#000000c4",
-	text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
+	text: { primary: "#000000B2", secondary: GREY[600], disabled: GREY[500] },
 	background: { paper: "#fff", default: GREY[100], neutral: GREY[200] },
 	action: {
 		active: GREY[600],

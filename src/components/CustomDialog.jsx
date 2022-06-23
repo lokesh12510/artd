@@ -26,11 +26,16 @@ const CustomDialog = ({
 	// };
 
 	return (
-		<Root open={visible} onClose={handleModalState} maxWidth={maxWidth} fullWidth={fullWidth}>
+		<Root
+			open={visible}
+			onClose={handleModalState}
+			maxWidth={maxWidth}
+			fullWidth={fullWidth}
+		>
 			<CloseBtn onClick={handleModalState}>
 				<CloseIcon />
 			</CloseBtn>
-			<DialogTitle variant="h6" color={"primary"} fontWeight="bold">
+			<DialogTitle variant="h5" color={"primary"} fontWeight={"600"}>
 				{title}
 			</DialogTitle>
 			<Divider />
@@ -58,10 +63,6 @@ const CustomDialog = ({
 export default CustomDialog;
 
 const Root = styled(Dialog)(({ theme }) => ({
-	"& .MuiDialogTitle-root": {
-		color: palette.primary.main,
-		fontWeight: "bold",
-	},
 	"& .MuiDivider-root": {
 		marginInline: theme.spacing(3),
 	},

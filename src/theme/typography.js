@@ -27,6 +27,9 @@ const typography = {
 	fontWeightRegular: 400,
 	fontWeightMedium: 600,
 	fontWeightBold: 700,
+	root: {
+		color: "#000000B2",
+	},
 	h1: {
 		fontWeight: 700,
 		lineHeight: 80 / 64,
@@ -75,6 +78,7 @@ const typography = {
 	},
 	body1: {
 		lineHeight: 1.5,
+		// color: "#000",
 		fontSize: pxToRem(14),
 		...responsiveFontSizes({ sm: 14, md: 14, lg: 14 }),
 	},

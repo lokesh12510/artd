@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyledBtn, StyledInput, StyledTableContainer } from "../../../../theme/GlobalStyles";
+import {
+	StyledBtn,
+	StyledInput,
+	StyledTableContainer,
+} from "../../../../theme/GlobalStyles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -36,7 +40,11 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 	}, [col.list]);
 
 	const handleTextChange = (e, id) => {
-		setRow((r) => r.map((item) => (item.id === id ? { ...item, [e.target.name]: e.target.value } : item)));
+		setRow((r) =>
+			r.map((item) =>
+				item.id === id ? { ...item, [e.target.name]: e.target.value } : item
+			)
+		);
 	};
 
 	const handleDeleteRow = (id) => {
@@ -59,9 +67,24 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 	};
 
 	const modalActions = [
-		{ title: "Save", variant: "contained", color: "primary", handleAction: handleClose },
-		{ title: "Reset", variant: "outlined", color: "primary", handleAction: handleClose },
-		{ title: "Cancel", variant: "outlined", color: "dark", handleAction: handleClose },
+		{
+			title: "Save",
+			variant: "contained",
+			color: "primary",
+			handleAction: handleClose,
+		},
+		{
+			title: "Reset",
+			variant: "outlined",
+			color: "primary",
+			handleAction: handleClose,
+		},
+		{
+			title: "Cancel",
+			variant: "outlined",
+			color: "dark",
+			handleAction: handleClose,
+		},
 	];
 
 	return (
@@ -71,26 +94,26 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 				visible={open}
 				handleModalState={handleClose}
 				actions={modalActions}
-				maxWidth={"lg"}
+				maxWidth={"md"}
 			>
 				<StyledTableContainer>
-					<Table sx={{ minWidth: 650 }} aria-label="simple table">
+					<Table aria-label="simple table">
 						<TableHead>
 							<TableRow>
-								<TableCell sx={{ minWidth: 200 }}>Consultant</TableCell>
-								<TableCell align="left" sx={{ minWidth: 200 }}>
+								<TableCell sx={{ minWidth: 180 }}>Consultant</TableCell>
+								<TableCell align="left" sx={{ minWidth: 180 }}>
 									Position
 								</TableCell>
-								<TableCell align="left" sx={{ width: 100, minWidth: 100 }}>
+								<TableCell align="left" sx={{ width: 80, minWidth: 80 }}>
 									Rate GST
 								</TableCell>
-								<TableCell align="left" sx={{ width: 120, minWidth: 120 }}>
+								<TableCell align="left" sx={{ width: 100, minWidth: 100 }}>
 									Rate EX-GST
 								</TableCell>
 								<TableCell align="left" sx={{ minWidth: 170 }}>
 									Rate Type
 								</TableCell>
-								<TableCell align="left" sx={{ minWidth: 250 }}>
+								<TableCell align="left" sx={{ minWidth: 150 }}>
 									Rate Description
 								</TableCell>
 								<TableCell align="left" sx={{ minWidth: 50 }}></TableCell>
@@ -98,9 +121,17 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 						</TableHead>
 						<TableBody>
 							{row?.map((row, index) => (
-								<TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+								<TableRow
+									key={row.id}
+									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+								>
 									<TableCell component="th" scope="row">
-										<StyledInput name="consultant" value={row.consultant} select onChange={(e) => handleTextChange(e, row.id)}>
+										<StyledInput
+											name="consultant"
+											value={row.consultant}
+											select
+											onChange={(e) => handleTextChange(e, row.id)}
+										>
 											<MenuItem value={"Select"}>Select Consultant</MenuItem>
 											<MenuItem value={"NATC"}>NATC</MenuItem>
 											<MenuItem value={"DAVC"}>DAVC</MenuItem>
@@ -109,7 +140,12 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 										</StyledInput>
 									</TableCell>
 									<TableCell align="left">
-										<StyledInput name="position" value={row.position} select onChange={(e) => handleTextChange(e, row.id)}>
+										<StyledInput
+											name="position"
+											value={row.position}
+											select
+											onChange={(e) => handleTextChange(e, row.id)}
+										>
 											<MenuItem value="Select" disabled>
 												Select Position
 											</MenuItem>
@@ -119,20 +155,37 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 										</StyledInput>
 									</TableCell>
 									<TableCell align="center">
-										<StyledInput name={"rateGST"} value={row.rateGST} onChange={(e) => handleTextChange(e, row.id)} />
+										<StyledInput
+											name={"rateGST"}
+											value={row.rateGST}
+											onChange={(e) => handleTextChange(e, row.id)}
+										/>
 									</TableCell>
 									<TableCell align="center">
-										<StyledInput name={"rateExGST"} value={row.rateExGST} onChange={(e) => handleTextChange(e, row.id)} />
+										<StyledInput
+											name={"rateExGST"}
+											value={row.rateExGST}
+											onChange={(e) => handleTextChange(e, row.id)}
+										/>
 									</TableCell>
 									<TableCell align="left">
-										<StyledInput name="rateType" value={row.rateType} select onChange={(e) => handleTextChange(e, row.id)}>
+										<StyledInput
+											name="rateType"
+											value={row.rateType}
+											select
+											onChange={(e) => handleTextChange(e, row.id)}
+										>
 											<MenuItem value="Select">Select Type</MenuItem>
 											<MenuItem value={"GO"}>GO</MenuItem>
 											<MenuItem value={"NGO"}>NGO</MenuItem>
 										</StyledInput>
 									</TableCell>
 									<TableCell align="left">
-										<StyledInput name="rateDesc" value={row.rateDesc} onChange={(e) => handleTextChange(e, row.id)} />
+										<StyledInput
+											name="rateDesc"
+											value={row.rateDesc}
+											onChange={(e) => handleTextChange(e, row.id)}
+										/>
 									</TableCell>
 									<TableCell align="left" className="sticky-cell">
 										<IconButton aria-label="delete" onClick={() => handleDeleteRow(row.id)}>

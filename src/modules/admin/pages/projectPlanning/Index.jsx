@@ -1,4 +1,11 @@
-import { Stack, Typography, Checkbox, FormControlLabel, Grid, TableContainer } from "@mui/material";
+import {
+	Stack,
+	Typography,
+	Checkbox,
+	FormControlLabel,
+	Grid,
+	TableContainer,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
 import palette from "../../../../theme/palette";
@@ -51,26 +58,49 @@ const Dashboard = () => {
 						Back
 					</StyledBtn>
 
-					<ProjectInfo direction={"row"} alignItems="center" justifyContent={"flex-start"}>
+					<ProjectInfo
+						direction={"row"}
+						alignItems="center"
+						justifyContent={"flex-start"}
+					>
 						<Typography variant={"body1"} color="dark">
 							Project
 						</Typography>
-						<StyledInput value="23443" variant="outlined" />
+						<StyledInput disabled value="23443" variant="outlined" />
 					</ProjectInfo>
-					<StyledInput value="The Big Project" variant="outlined" />
+					<StyledInput disabled value="The Big Project" variant="outlined" />
 				</StyledPageHeader>
 				<StyledBox>
 					<ScrollTableContainer>
-						<TableHeader direction={"row"} alignItems="center" justifyContent={"space-between"}>
+						<TableHeader
+							direction={"row"}
+							alignItems="center"
+							justifyContent={"space-between"}
+						>
 							<StyledCheckBoxWrapper>
 								<FormControlLabel control={<Checkbox />} label="Automatic numbering ?" />
 							</StyledCheckBoxWrapper>
 
-							<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"} btnwidth={100}>
-								<StyledBtn variant="outlined" color={"primary"} size="small" onClick={handleDescModal}>
+							<ButtonStack
+								direction={"row"}
+								alignItems="center"
+								justifyContent={"center"}
+								btnwidth={100}
+							>
+								<StyledBtn
+									variant="outlined"
+									color={"primary"}
+									size="small"
+									onClick={handleDescModal}
+								>
 									Description
 								</StyledBtn>
-								<StyledBtn variant="outlined" color={"primary"} size="small" onClick={handleOutputModal}>
+								<StyledBtn
+									variant="outlined"
+									color={"primary"}
+									size="small"
+									onClick={handleOutputModal}
+								>
 									outputs
 								</StyledBtn>
 								<StyledBtn variant="outlined" color={"primary"} size="small">
@@ -80,15 +110,30 @@ const Dashboard = () => {
 						</TableHeader>
 						<StickyColTable data={data} />
 					</ScrollTableContainer>
-					<Stack direction={"row"} alignItems="center" justifyContent={"space-between"} my={2}>
+					<Stack
+						direction={"row"}
+						alignItems="center"
+						justifyContent={"space-between"}
+						my={2}
+					>
 						<Typography variant="h6" color="primary" fontWeight={"600"}>
 							Deliverables
 						</Typography>
 						<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"}>
-							<StyledBtn variant="contained" color={"primary"} size="small" onClick={handleSummaryModal}>
+							<StyledBtn
+								variant="contained"
+								color={"primary"}
+								size="small"
+								onClick={handleSummaryModal}
+							>
 								Project Time Summary
 							</StyledBtn>
-							<StyledBtn variant="contained" color={"primary"} size="small" onClick={handleExpenseModal}>
+							<StyledBtn
+								variant="contained"
+								color={"primary"}
+								size="small"
+								onClick={handleExpenseModal}
+							>
 								Project Expenses
 							</StyledBtn>
 						</ButtonStack>
@@ -102,7 +147,12 @@ const Dashboard = () => {
 						</Grid>
 					</Grid>
 					<Stack direction={"row"} alignItems="center" justifyContent={"flex-end"} my={3}>
-						<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"} btnwidth={120}>
+						<ButtonStack
+							direction={"row"}
+							alignItems="center"
+							justifyContent={"center"}
+							btnwidth={120}
+						>
 							<StyledBtn variant="contained" color={"primary"}>
 								Save
 							</StyledBtn>
@@ -117,9 +167,15 @@ const Dashboard = () => {
 				</StyledBox>
 			</Stack>
 			{/* -----------------------  MODAL COMPONENTS  ------------------------ */}
-			<SummaryModal summaryModal={summaryModal} handleSummaryModal={handleSummaryModal} />
+			<SummaryModal
+				summaryModal={summaryModal}
+				handleSummaryModal={handleSummaryModal}
+			/>
 			<DescriptionModal descModal={descModal} handleDescModal={handleDescModal} />
-			<ExpenseModal expenseModal={expenseModal} handleExpenseModal={handleExpenseModal} />
+			<ExpenseModal
+				expenseModal={expenseModal}
+				handleExpenseModal={handleExpenseModal}
+			/>
 			<OutputModal outputModal={outputModal} handleOutputModal={handleOutputModal} />
 		</>
 	);

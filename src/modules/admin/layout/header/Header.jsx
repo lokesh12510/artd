@@ -9,7 +9,7 @@ const Header = () => {
 	return (
 		<Root>
 			{/* Page title */}
-			<PageTitle variant="h6" color="primary" fontWeight={"600"}>
+			<PageTitle variant="h5" color="primary" fontWeight={"600"}>
 				Project Planning
 			</PageTitle>
 			{/* SearchBar */}
@@ -26,7 +26,7 @@ const Header = () => {
 			/>
 
 			{/* Breadcrumb */}
-			<BreadcrumbWrapper direction={"row"} alignItems="center" justifyContent={"space-evenly"}>
+			{/* <BreadcrumbWrapper direction={"row"} alignItems="center" justifyContent={"space-evenly"}>
 				<BreadcrumbItem>
 					<HomeIcon bg={palette.grey[400]} />
 				</BreadcrumbItem>
@@ -42,7 +42,7 @@ const Header = () => {
 						Project Planning
 					</Typography>
 				</BreadcrumbItem>
-			</BreadcrumbWrapper>
+			</BreadcrumbWrapper> */}
 		</Root>
 	);
 };
@@ -62,7 +62,7 @@ const SearchBar = styled(StyledInput)(({ theme }) => ({
 		maxWidth: "300px",
 	},
 	[theme.breakpoints.up("md")]: {
-		maxWidth: "500px",
+		maxWidth: "600px",
 	},
 }));
 

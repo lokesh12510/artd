@@ -1,4 +1,9 @@
-import { createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from "@mui/material";
+import {
+	createTheme,
+	CssBaseline,
+	StyledEngineProvider,
+	ThemeProvider,
+} from "@mui/material";
 import React, { useMemo } from "react";
 
 import palette from "./palette";
@@ -19,7 +24,16 @@ const ThemeWrapper = ({ children }) => {
 					xl: 1536,
 				},
 			},
+
 			components: {
+				MuiCssBaseline: {
+					styleOverrides: {
+						body: {
+							color: palette.common.black,
+							backgroundColor: palette.background.default,
+						},
+					},
+				},
 				MuiOutlinedInput: {
 					styleOverrides: {
 						root: {
@@ -27,6 +41,7 @@ const ThemeWrapper = ({ children }) => {
 						},
 					},
 				},
+
 				MuiTableHead: {
 					styleOverrides: {
 						root: {
@@ -39,6 +54,13 @@ const ThemeWrapper = ({ children }) => {
 						},
 					},
 				},
+				MuiTableCell: {
+					styleOverrides: {
+						root: {
+							color: "#000000CC",
+						},
+					},
+				},
 
 				MuiButton: {
 					defaultProps: {
@@ -46,6 +68,9 @@ const ThemeWrapper = ({ children }) => {
 						disableRippled: true,
 					},
 					styleOverrides: {
+						root: {
+							fontWeight: "500",
+						},
 						sizeSmall: {
 							padding: "6px 16px",
 						},
@@ -63,6 +88,10 @@ const ThemeWrapper = ({ children }) => {
 						},
 						textSizeLarge: {
 							padding: "12px 16px",
+						},
+						outlinedPrimary: {
+							color: palette.primary.light,
+							border: `1px solid ${palette.primary.borderLight}`,
 						},
 					},
 				},

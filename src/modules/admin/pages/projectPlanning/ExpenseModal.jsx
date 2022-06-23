@@ -27,9 +27,24 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 	};
 
 	const expenseModalActions = [
-		{ title: "Save", variant: "contained", color: "primary", handleAction: handleExpenseModal },
-		{ title: "Reset", variant: "outlined", color: "primary", handleAction: handleExpenseModal },
-		{ title: "Cancel", variant: "outlined", color: "dark", handleAction: handleExpenseModal },
+		{
+			title: "Save",
+			variant: "contained",
+			color: "primary",
+			handleAction: handleExpenseModal,
+		},
+		{
+			title: "Reset",
+			variant: "outlined",
+			color: "primary",
+			handleAction: handleExpenseModal,
+		},
+		{
+			title: "Cancel",
+			variant: "outlined",
+			color: "dark",
+			handleAction: handleExpenseModal,
+		},
 	];
 	return (
 		<CustomDialog
@@ -47,17 +62,32 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 							<TableHead>
 								<TableRow>
 									<TableCell align="center">
-										<Button className={selected === 1 && "active"} variant="contained" color="primary" onClick={() => handleSelected(1)}>
+										<Button
+											className={selected === 1 && "active"}
+											variant="contained"
+											color="primary"
+											onClick={() => handleSelected(1)}
+										>
 											Summary
 										</Button>
 									</TableCell>
 									<TableCell align="center">
-										<Button className={selected === 2 && "active"} variant="contained" color="primary" onClick={() => handleSelected(2)}>
+										<Button
+											className={selected === 2 && "active"}
+											variant="contained"
+											color="primary"
+											onClick={() => handleSelected(2)}
+										>
 											Planning
 										</Button>
 									</TableCell>
 									<TableCell align="center">
-										<Button className={selected === 3 && "active"} variant="contained" color="primary" onClick={() => handleSelected(3)}>
+										<Button
+											className={selected === 3 && "active"}
+											variant="contained"
+											color="primary"
+											onClick={() => handleSelected(3)}
+										>
 											MyOb
 										</Button>
 									</TableCell>
@@ -100,7 +130,7 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 									return (
 										<TableRow key={item.id}>
 											<TableCell align="center" padding="checkbox" style={{ padding: 0 }}>
-												<Checkbox />
+												<Checkbox checked={true} readOnly disableRipple />
 											</TableCell>
 											<TableCell align="center">{item.phase}</TableCell>
 											<TableCell align="center">{item.task}</TableCell>
@@ -157,7 +187,7 @@ const CustomTable = styled(StyledTableContainer)(({ theme }) => ({
 	"& .MuiTableBody-root.custom-body": {
 		padding: theme.spacing(2),
 		"& .MuiTableCell-root": {
-			padding: theme.spacing(2),
+			padding: theme.spacing(1.25),
 		},
 	},
 	"& .MuiButton-root ": {
@@ -168,7 +198,7 @@ const CustomTable = styled(StyledTableContainer)(({ theme }) => ({
 const StyledGridItem = styled(Grid)(({ theme }) => ({
 	backgroundColor: palette.grey[200],
 	borderTopRightRadius: 10,
-	padding: theme.spacing(2),
+	padding: theme.spacing(1.5),
 }));
 
 const data = [
@@ -248,7 +278,7 @@ const rows = [
 		phase: 4,
 		task: 2,
 		expenses: "2,345",
-		desc: "Murry review guides survey toolkit on inception meeting 3",
+		desc: "Inception meeting 3",
 	},
 	{
 		id: 4,
