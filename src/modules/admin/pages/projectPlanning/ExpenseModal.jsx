@@ -178,6 +178,7 @@ const CustomTable = styled(StyledTableContainer)(({ theme }) => ({
 	boxShadow: "none",
 	border: `1px solid ${palette.border}`,
 	borderTopRightRadius: 0,
+
 	"& .MuiTableCell-head": {
 		backgroundColor: palette.highlight,
 		"& .active": {

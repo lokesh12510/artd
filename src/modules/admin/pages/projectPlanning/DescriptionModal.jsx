@@ -1,6 +1,9 @@
 import React from "react";
 import CustomDialog from "../../../../components/CustomDialog";
-import { StyledInput, StyledTableContainer } from "../../../../theme/GlobalStyles";
+import {
+	StyledInput,
+	StyledTableContainer,
+} from "../../../../theme/GlobalStyles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -47,7 +50,7 @@ const DescriptionModal = ({ descModal, handleDescModal }) => {
 			title="Description"
 			visible={descModal}
 			handleModalState={handleDescModal}
-			maxWidth={"lg"}
+			maxWidth={"md"}
 			fullWidth={true}
 		>
 			<StyledTableContainer>
@@ -63,7 +66,10 @@ const DescriptionModal = ({ descModal, handleDescModal }) => {
 					<TableBody>
 						{rows.map((item, index) => {
 							return (
-								<TableRow key={item.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+								<TableRow
+									key={item.id}
+									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+								>
 									<TableCell>
 										<Typography color={palette.grey[600]}>{item.phase}</Typography>
 									</TableCell>
@@ -72,7 +78,9 @@ const DescriptionModal = ({ descModal, handleDescModal }) => {
 									</TableCell>
 
 									<TableCell>
-										<Typography color={palette.grey[600]}>{moment(item.date).format("Do MMM YYYY")}</Typography>
+										<Typography color={palette.grey[600]}>
+											{moment(item.date).format("Do MMM YYYY")}
+										</Typography>
 									</TableCell>
 									<TableCell>
 										<Typography color={palette.grey[600]}>{item.desc}</Typography>

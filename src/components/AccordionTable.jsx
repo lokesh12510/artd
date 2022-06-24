@@ -19,7 +19,11 @@ export default function AccordionTable({ title, children }) {
 	console.log(expanded);
 	return (
 		<Root expanded={expanded} onChange={handleChange}>
-			<AccordionSummary expandIcon={<ArrowDropDownIcon sx={{ color: palette.common.white }} fontSize="large" />}>
+			<AccordionSummary
+				expandIcon={
+					<ArrowDropDownIcon sx={{ color: palette.common.white }} fontSize="large" />
+				}
+			>
 				<Typography>{title}</Typography>
 			</AccordionSummary>
 			<AccordionDetails>{children}</AccordionDetails>
@@ -44,7 +48,7 @@ const Root = styled(Accordion)(({ theme }) => ({
 			textTransform: "uppercase",
 		},
 		"& .MuiTableHead-root": {
-			border: `1px solid ${palette.secondary.main}`,
+			border: `1px solid ${palette.primary.borderLight}`,
 		},
 		"& .MuiTableCell-root": {
 			padding: 10,

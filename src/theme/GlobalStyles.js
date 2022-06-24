@@ -21,7 +21,7 @@ export const StyledBox = styled(Box)(({ theme }) => ({
 	// border: "1px solid rgba(0, 0, 0, 0.1)",
 }));
 
-export const StyledBtn = styled(Button)(({ theme }) => ({
+export const StyledBtn = styled(Button)(({ theme, radius }) => ({
 	padding: theme.spacing(0.9),
 	paddingInline: theme.spacing(2),
 	[theme.breakpoints.down("lg")]: {
@@ -56,7 +56,7 @@ export const StyledPageHeader = styled(StyledBox)(({ theme }) => ({
 export const StyledInput = styled(TextField)(({ theme, align = "left" }) => ({
 	flex: 1,
 	width: "100%",
-	borderRadius: 5,
+	borderRadius: 2,
 	backgroundColor: palette.common.white,
 
 	"& .MuiOutlinedInput-input": {
@@ -256,6 +256,8 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 		border: `1px solid ${palette.border}`,
 	},
 	"& .stripped": {
+		borderRadius: theme.spacing(1.25),
+		overflow: "hidden",
 		"& .MuiTableRow-root": {
 			"&:nth-of-type(even)": {
 				backgroundColor: palette.action.hover,

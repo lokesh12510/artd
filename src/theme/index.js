@@ -38,6 +38,16 @@ const ThemeWrapper = ({ children }) => {
 					styleOverrides: {
 						root: {
 							...typography.body2,
+							"&.Mui-disabled": {
+								"& input": {
+									color: palette.common.black,
+									[`-webkitTextFillColor`]: palette.common.black,
+								},
+								backgroundColor: palette.grey[100],
+								"& fieldset": {
+									borderColor: palette.grey[100],
+								},
+							},
 						},
 					},
 				},

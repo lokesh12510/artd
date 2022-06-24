@@ -66,9 +66,9 @@ const Dashboard = () => {
 						<Typography variant={"body1"} color="dark">
 							Project
 						</Typography>
-						<StyledInput disabled value="23443" variant="outlined" />
+						<StyledInput value="23443" variant="outlined" />
 					</ProjectInfo>
-					<StyledInput disabled value="The Big Project" variant="outlined" />
+					<StyledInput value="The Big Project" variant="outlined" />
 				</StyledPageHeader>
 				<StyledBox>
 					<ScrollTableContainer>

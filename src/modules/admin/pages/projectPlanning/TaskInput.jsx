@@ -1,5 +1,13 @@
 import styled from "@emotion/styled";
-import { Stack, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
+import {
+	Stack,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableRow,
+	Typography,
+} from "@mui/material";
 import React from "react";
 import { StyledInput } from "../../../../theme/GlobalStyles";
 import palette from "../../../../theme/palette";
@@ -8,7 +16,12 @@ const TaskInput = () => {
 	return (
 		<>
 			<Stack spacing={1}>
-				<Root justifyContent={"flex-start"} alignItems="start" direction={"column"} spacing={1}>
+				<Root
+					justifyContent={"flex-start"}
+					alignItems="start"
+					direction={"column"}
+					spacing={1}
+				>
 					<TableContainer>
 						<Table size="small">
 							<TableBody>
@@ -67,7 +80,12 @@ const TaskInput = () => {
 						</Table>
 					</TableContainer>
 				</Root>
-				<Root justifyContent={"flex-start"} alignItems="start" direction={"column"} spacing={1}>
+				<Root
+					justifyContent={"flex-start"}
+					alignItems="start"
+					direction={"column"}
+					spacing={1}
+				>
 					<TableContainer>
 						<Table size="small">
 							<TableBody>
@@ -129,6 +147,23 @@ const TaskInput = () => {
 									</TableCell>
 								</TableRow>
 								<TableRow>
+									<TableCell style={{ maxWidth: 130 }}>
+										<Typography align="center">
+											Consultancy
+											<br />
+											<Typography color={palette.grey[400]} mt={1} align="center">
+												(projected at <br /> discounted rate)
+											</Typography>
+										</Typography>
+									</TableCell>
+									<TableCell>
+										<StyledInput value="61" />
+									</TableCell>
+									<TableCell>
+										<StyledInput value="$ 2,546" />
+									</TableCell>
+								</TableRow>
+								<TableRow>
 									<TableCell style={{ minWidth: 130 }}>
 										<Typography align="center">
 											Expenses <br />
@@ -160,7 +195,12 @@ const TaskInput = () => {
 						</Table>
 					</TableContainer>
 				</Root>
-				<Root justifyContent={"flex-start"} alignItems="start" direction={"column"} spacing={1}>
+				<Root
+					justifyContent={"flex-start"}
+					alignItems="start"
+					direction={"column"}
+					spacing={1}
+				>
 					<TableContainer>
 						<Table size="small">
 							<TableBody>
@@ -168,9 +208,7 @@ const TaskInput = () => {
 									<TableCell style={{ minWidth: 130 }}>
 										<Typography align="center">
 											Consultancy <br />
-											<Typography color={palette.grey[400]} mt={1} align="center">
-												(Time Budget)
-											</Typography>
+											Time Budget
 										</Typography>
 									</TableCell>
 									<TableCell>

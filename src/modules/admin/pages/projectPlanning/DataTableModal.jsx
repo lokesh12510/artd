@@ -198,7 +198,11 @@ export default function DataTableModal({ open, handleClose, col: colData }) {
 					</Table>
 				</StyledTableContainer>
 				<Stack direction={"row"} alignItems={"center"} justifyContent={"flex-end"}>
-					<StyledBtn variant="contained" onClick={handleAddRow}>
+					<StyledBtn
+						variant="contained"
+						onClick={handleAddRow}
+						sx={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+					>
 						<AddCircleIcon />
 					</StyledBtn>
 				</Stack>

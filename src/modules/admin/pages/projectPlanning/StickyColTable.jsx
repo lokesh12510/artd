@@ -226,34 +226,25 @@ const StickyColTable = ({ data }) => {
 							</TableCell>
 						</TableRow>
 						{/* Accordion Row */}
-
-						{/* ----------------- Sticky Table row -------------- */}
-						{row.list.map((row, index) => {
-							const isItemSelected = isSelected(row.id);
-
-							const labelId = `enhanced-table-checkbox-${index}`;
-
-							return (
-								<TableRow
-									key={row.id}
-									sx={row.isCompleted && !open && visuallyHidden}
-									// onClick={(event) => handleClick(event, row.id)}
-									selected={row.isCompleted ? true : isItemSelected}
-									className={row.isCompleted && open ? "shown" : "hidden"}
-								>
-									<TableCell component="th" scope="row" align="center">
-										<Checkbox
-											color="primary"
-											style={{ color: palette.primary.light }}
-											checked={row.isCompleted ? true : isItemSelected}
-											inputProps={{
-												"aria-labelledby": labelId,
-											}}
-											onChange={(event) => handleClick(event, row.id)}
-										/>
-									</TableCell>
-									<TableCell align="center" style={{ width: 100 }}>
-										{isItemSelected || row.isCompleted ? (
+						{/* ----------------- Sticky Table Checked Row -------------- */}
+						{row.list
+							.filter((item) => item.isCompleted && item)
+							.map((row, index) => {
+								return (
+									<TableRow
+										key={row.id}
+										sx={row.isCompleted && !open && visuallyHidden}
+										// onClick={(event) => handleClick(event, row.id)}
+										selected={true}
+									>
+										<TableCell scope="row" align="center">
+											<Checkbox
+												color="primary"
+												style={{ color: palette.primary.light }}
+												checked={true}
+											/>
+										</TableCell>
+										<TableCell align="center" style={{ width: 100 }}>
 											<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
 												<IconButton color="primary" aria-label="upload picture" component="span">
 													<EyeIcon bg={palette.primary.main} />
@@ -262,75 +253,150 @@ const StickyColTable = ({ data }) => {
 													<DeleteIcon bg={palette.grey[400]} />
 												</IconButton>
 											</Stack>
-										) : (
-											<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
-												<IconButton
-													color="primary"
-													aria-label="copy"
-													component="span"
-													onClick={() => handleDuplicateRow(index)}
-												>
-													<CopyIcon bg={palette.primary.main} />
-												</IconButton>
-												<IconButton
-													color="primary"
-													aria-label="edit"
-													component="span"
-													onClick={() => handleEditModal()}
-												>
-													<EditIcon bg={palette.primary.main} />
-												</IconButton>
-												<IconButton
-													color="primary"
-													aria-label="delete"
-													component="span"
-													onClick={() => handleDeleteModal()}
-												>
-													<DeleteIcon bg={palette.primary.main} />
-												</IconButton>
-											</Stack>
-										)}
-									</TableCell>
-									{col.list
-										.slice(2)
-										.filter((item) => !item.includes("_"))
-										.map((col, index) => {
-											return (
-												<StyledTableCell align="center" key={index} className={col} label={col}>
-													{col === "date" ? (
-														<LocalizationProvider dateAdapter={AdapterMoment}>
-															<DatePicker
-																views={["year", "month"]}
+										</TableCell>
+										{col.list
+											.slice(2)
+											.filter((item) => !item.includes("_"))
+											.map((col, index) => {
+												return (
+													<StyledTableCell align="center" key={index} className={col} label={col}>
+														{col === "date" ? (
+															<LocalizationProvider dateAdapter={AdapterMoment}>
+																<DatePicker
+																	views={["year", "month"]}
+																	value={row[col]}
+																	// value={value}
+																	// onChange={(newValue) => {
+																	// 	handleDateChange(newValue._d, row.id);
+																	// }}
+																	components={{
+																		OpenPickerIcon: ArrowDropDownIcon,
+																	}}
+																	renderInput={(params) => <StyledInput variant="outlined" {...params} />}
+																/>
+															</LocalizationProvider>
+														) : (
+															<StyledInput
+																name={col}
 																value={row[col]}
-																onChange={(newValue) => {
-																	handleDateChange(newValue._d, row.id);
-																}}
-																// value={value}
-																// onChange={(newValue) => {
-																// 	handleDateChange(newValue._d, row.id);
-																// }}
-																components={{
-																	OpenPickerIcon: ArrowDropDownIcon,
-																}}
-																renderInput={(params) => <StyledInput variant="outlined" {...params} />}
+																align={col === "description" ? "left" : "center"}
 															/>
-														</LocalizationProvider>
-													) : (
-														<StyledInput
-															name={col}
-															value={row[col]}
-															align={col === "description" ? "left" : "center"}
-															// component={col === "expenses" && Link}
-															// onClick={col === "expenses" ? handleExpenseListModal : undefined}
-															onChange={(e) => handleChange(e, row.id)}
-														/>
-													)}
-												</StyledTableCell>
-											);
-										})}
-								</TableRow>
-							);
-						})}
+														)}
+													</StyledTableCell>
+												);
+											})}
+									</TableRow>
+								);
+							})}
+
+						{/* ----------------- Sticky Table Checked Row -------------- */}
+
+						{/* ----------------- Sticky Table row -------------- */}
+						{row.list
+							.filter((item) => item.isCompleted === false && item)
+							.map((row, index) => {
+								const isItemSelected = isSelected(row.id);
+
+								const labelId = `enhanced-table-checkbox-${index}`;
+
+								return (
+									<TableRow
+										key={row.id}
+										sx={row.isCompleted && !open && visuallyHidden}
+										// onClick={(event) => handleClick(event, row.id)}
+										selected={row.isCompleted ? true : isItemSelected}
+										className={row.isCompleted && open ? "shown" : "hidden"}
+									>
+										<TableCell scope="row" align="center">
+											<Checkbox
+												color="primary"
+												style={{ color: palette.primary.light }}
+												checked={row.isCompleted ? true : isItemSelected}
+												inputProps={{
+													"aria-labelledby": labelId,
+												}}
+												onChange={(event) => handleClick(event, row.id)}
+											/>
+										</TableCell>
+										<TableCell align="center" style={{ width: 100 }}>
+											{isItemSelected || row.isCompleted ? (
+												<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
+													<IconButton color="primary" aria-label="upload picture" component="span">
+														<EyeIcon bg={palette.primary.main} />
+													</IconButton>
+													<IconButton color="primary" aria-label="upload picture" component="span">
+														<DeleteIcon bg={palette.grey[400]} />
+													</IconButton>
+												</Stack>
+											) : (
+												<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
+													<IconButton
+														color="primary"
+														aria-label="copy"
+														component="span"
+														onClick={() => handleDuplicateRow(index)}
+													>
+														<CopyIcon bg={palette.primary.light} />
+													</IconButton>
+													<IconButton
+														color="primary"
+														aria-label="edit"
+														component="span"
+														onClick={() => handleEditModal()}
+													>
+														<EditIcon bg={palette.primary.main} />
+													</IconButton>
+													<IconButton
+														color="primary"
+														aria-label="delete"
+														component="span"
+														onClick={() => handleDeleteModal()}
+													>
+														<DeleteIcon bg={palette.primary.main} />
+													</IconButton>
+												</Stack>
+											)}
+										</TableCell>
+										{col.list
+											.slice(2)
+											.filter((item) => !item.includes("_"))
+											.map((col, index) => {
+												return (
+													<StyledTableCell align="center" key={index} className={col} label={col}>
+														{col === "date" ? (
+															<LocalizationProvider dateAdapter={AdapterMoment}>
+																<DatePicker
+																	views={["year", "month"]}
+																	value={row[col]}
+																	onChange={(newValue) => {
+																		handleDateChange(newValue._d, row.id);
+																	}}
+																	// value={value}
+																	// onChange={(newValue) => {
+																	// 	handleDateChange(newValue._d, row.id);
+																	// }}
+																	components={{
+																		OpenPickerIcon: ArrowDropDownIcon,
+																	}}
+																	renderInput={(params) => <StyledInput variant="outlined" {...params} />}
+																/>
+															</LocalizationProvider>
+														) : (
+															<StyledInput
+																name={col}
+																value={row[col]}
+																align={col === "description" ? "left" : "center"}
+																// component={col === "expenses" && Link}
+																// onClick={col === "expenses" ? handleExpenseListModal : undefined}
+																onChange={(e) => handleChange(e, row.id)}
+															/>
+														)}
+													</StyledTableCell>
+												);
+											})}
+									</TableRow>
+								);
+							})}
 
 						{/* ----------------- Sticky Table row -------------- */}
 					</TableBody>
@@ -388,31 +454,62 @@ const StickyColTable = ({ data }) => {
 						{/* Accordion Row */}
 
 						{/* ----------------- Scroll Table row -------------- */}
-						{row.list.map((row, index) => {
-							const isItemSelected = isSelected(row.id);
+						{row.list
+							.filter((item) => item.isCompleted && item)
+							.map((row, index) => {
+								// const labelId = `enhanced-table-checkbox-${index}`;
 
-							// const labelId = `enhanced-table-checkbox-${index}`;
+								return (
+									<TableRow
+										key={row.id}
+										sx={row.isCompleted && !open && visuallyHidden}
+										// onClick={(event) => handleClick(event, row.name)}
+										selected={true}
+										className={row.isCompleted && open ? "shown" : "hidden"}
+									>
+										{col.list
+											.filter((item) => item.includes("_"))
+											.map((col, index) => {
+												return (
+													<TableCell key={index}>
+														<StyledInput value={row[col]} align="center" />
+													</TableCell>
+												);
+											})}
+									</TableRow>
+								);
+							})}
 
-							return (
-								<TableRow
-									key={row.id}
-									sx={row.isCompleted && !open && visuallyHidden}
-									// onClick={(event) => handleClick(event, row.name)}
-									selected={row.isCompleted ? true : isItemSelected}
-									className={row.isCompleted && open ? "shown" : "hidden"}
-								>
-									{col.list
-										.filter((item) => item.includes("_"))
-										.map((col, index) => {
-											return (
-												<TableCell key={index}>
-													<StyledInput value={row[col]} />
-												</TableCell>
-											);
-										})}
-								</TableRow>
-							);
-						})}
+						{/* ----------------- Scroll Table row -------------- */}
+
+						{/* ----------------- Scroll Table row -------------- */}
+						{row.list
+							.filter((item) => item.isCompleted === false && item)
+							.map((row, index) => {
+								const isItemSelected = isSelected(row.id);
+
+								// const labelId = `enhanced-table-checkbox-${index}`;
+
+								return (
+									<TableRow
+										key={row.id}
+										sx={row.isCompleted && !open && visuallyHidden}
+										// onClick={(event) => handleClick(event, row.name)}
+										selected={row.isCompleted ? true : isItemSelected}
+										className={row.isCompleted && open ? "shown" : "hidden"}
+									>
+										{col.list
+											.filter((item) => item.includes("_"))
+											.map((col, index) => {
+												return (
+													<TableCell key={index}>
+														<StyledInput value={row[col]} align="center" />
+													</TableCell>
+												);
+											})}
+									</TableRow>
+								);
+							})}
 
 						{/* ----------------- Scroll Table row -------------- */}
 					</TableBody>
@@ -471,25 +568,16 @@ const StickyColTable = ({ data }) => {
 									</IconButton>
 								</TableCell>
 							</TableRow>
-							{row.list.map((row, index) => {
-								// const isItemSelected = isSelected(row.id);
-								return (
-									<TableRow
-										key={index}
-										sx={row.isCompleted && !open && visuallyHidden}
-										// style={{ backgroundColor: row.isCompleted ? true : isItemSelected ? "transparent" : palette.common.white }}
-									>
-										<TableCell align="center" className="hiddenCell">
-											<div style={{ height: 36, width: 23 }}></div>
-										</TableCell>
-									</TableRow>
-								);
-							})}
 						</React.Fragment>
 					</TableBody>
 				</Table>
 			</CustomStyledContainer>
-			<StyledBtn variant="contained" onClick={handleAddRow}>
+			<StyledBtn
+				variant="contained"
+				onClick={handleAddRow}
+				radius="top"
+				sx={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+			>
 				<AddCircleIcon />
 			</StyledBtn>
 
@@ -525,6 +613,7 @@ export default StickyColTable;
 const CustomStyledContainer = styled(StyledTableContainer)(({ theme }) => ({
 	overflow: "auto",
 	borderRadius: 0,
+	transition: "all 1s ease",
 	"& .MuiTableBody-root ": {
 		border: "none",
 		"& .MuiTableRow-root": {

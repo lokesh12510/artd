@@ -28,7 +28,7 @@ const typography = {
 	fontWeightMedium: 600,
 	fontWeightBold: 700,
 	root: {
-		color: "#000000B2",
+		color: "#000000e6",
 	},
 	h1: {
 		fontWeight: 700,
