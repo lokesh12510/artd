@@ -259,7 +259,13 @@ const StickyColTable = ({ data }) => {
 											.filter((item) => !item.includes("_"))
 											.map((col, index) => {
 												return (
-													<StyledTableCell align="center" key={index} className={col} label={col}>
+													<StyledTableCell
+														align="center"
+														key={index}
+														className={col}
+														label={col}
+														tabIndex={1}
+													>
 														{col === "date" ? (
 															<LocalizationProvider dateAdapter={AdapterMoment}>
 																<DatePicker
@@ -279,6 +285,9 @@ const StickyColTable = ({ data }) => {
 															<StyledInput
 																name={col}
 																value={row[col]}
+																onKeyDown={(e) => {
+																	if (e.keyCode === 9) e.preventDefault();
+																}}
 																align={col === "description" ? "left" : "center"}
 															/>
 														)}
@@ -389,6 +398,9 @@ const StickyColTable = ({ data }) => {
 																// component={col === "expenses" && Link}
 																// onClick={col === "expenses" ? handleExpenseListModal : undefined}
 																onChange={(e) => handleChange(e, row.id)}
+																onKeyDown={(e) => {
+																	if (e.keyCode === 9) e.preventDefault();
+																}}
 															/>
 														)}
 													</StyledTableCell>
@@ -472,7 +484,14 @@ const StickyColTable = ({ data }) => {
 											.map((col, index) => {
 												return (
 													<TableCell key={index}>
-														<StyledInput value={row[col]} align="center" />
+														<StyledInput
+															value={row[col]}
+															align="center"
+															tabIndex={2}
+															onKeyDown={(e) => {
+																if (e.keyCode === 9) e.preventDefault();
+															}}
+														/>
 													</TableCell>
 												);
 											})}
@@ -503,7 +522,13 @@ const StickyColTable = ({ data }) => {
 											.map((col, index) => {
 												return (
 													<TableCell key={index}>
-														<StyledInput value={row[col]} align="center" />
+														<StyledInput
+															value={row[col]}
+															align="center"
+															onKeyDown={(e) => {
+																if (e.keyCode === 9) e.preventDefault();
+															}}
+														/>
 													</TableCell>
 												);
 											})}

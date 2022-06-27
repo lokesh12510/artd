@@ -19,14 +19,13 @@ import {
 	StyledPageHeader,
 	ButtonStack,
 } from "../../../../theme/GlobalStyles";
-import StickyColTable from "./StickyColTable";
-import { data } from "../../../../mockup/stickytableData";
 import MiniGrid from "./MiniGrid";
 import TaskInput from "./TaskInput";
 import SummaryModal from "./SummaryModal";
 import DescriptionModal from "./DescriptionModal";
 import ExpenseModal from "./ExpenseModal";
 import OutputModal from "./OutputModal";
+import ProjectPlanning from "./ProjectTable/Index";
 
 const Dashboard = () => {
 	// Summary modal Toggle State
@@ -108,7 +107,9 @@ const Dashboard = () => {
 								</StyledBtn>
 							</ButtonStack>
 						</TableHeader>
-						<StickyColTable data={data} />
+						{/* <StickyColTable data={data} /> */}
+						<ProjectPlanning />
+						{/* <AgGrid /> */}
 					</ScrollTableContainer>
 					<Stack
 						direction={"row"}

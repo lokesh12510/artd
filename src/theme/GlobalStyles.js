@@ -4,9 +4,9 @@ import {
 	TextField,
 	FormGroup,
 	TableContainer,
-	Dialog,
 	IconButton,
 	Stack,
+	TableCell,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "./palette";
@@ -274,4 +274,16 @@ export const CloseBtn = styled(IconButton)(({ theme }) => ({
 	position: "absolute",
 	top: 10,
 	right: 10,
+}));
+
+export const StyledTableCell = styled(TableCell)(({ theme, label }) => ({
+	[theme.breakpoints.down("md")]: {
+		minWidth:
+			label === "description" ? "200px" : label === "date" ? "150px" : "70px",
+	},
+	[theme.breakpoints.up("md")]: {
+		width:
+			label === "description" ? "calc(40%)" : label === "date" ? "140px" : "calc(7%)",
+		minWidth: label === "date" && 150,
+	},
 }));
