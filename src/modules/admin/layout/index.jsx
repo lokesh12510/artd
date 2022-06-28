@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Outlet } from "react-router-dom";
 // components
@@ -6,15 +6,36 @@ import Sidebar from "./sidebar/Sidebar";
 import Header from "./header/Header";
 import palette from "../../../theme/palette";
 import Footer from "./footer/Footer";
+import { IconButton } from "@mui/material";
 
+import ToggleIcon from "@mui/icons-material/Menu";
+import useResponsive from "../../../hooks/useResponsive";
 const AdminLayout = () => {
+	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+	const isMd = useResponsive("up", "md");
+	console.log(isMd);
+
+	const handleToggle = () => {
+		setIsSidebarOpen((p) => !p);
+	};
+
 	return (
 		<RootLayout>
-			<Sidebar />
-			<BodyContainer>
+			<Sidebar open={isSidebarOpen} handleToggle={handleToggle} />
+			<BodyContainer open={isSidebarOpen}>
 				<Header />
 				<Outlet />
 				<Footer />
+				{/* ##############################################  */}
+				<MenuBtn
+					onClick={handleToggle}
+					breakpointWidth={isSidebarOpen ? drawerWidth : isMd ? drawerMinWidth : 0}
+					sx={{ zIndex: isMd ? 1 : 1201 }}
+				>
+					<ToggleIcon color="light" />
+				</MenuBtn>
+				{/* ##############################################  */}
 			</BodyContainer>
 		</RootLayout>
 	);
@@ -24,16 +45,50 @@ export default AdminLayout;
 
 // styles
 
-const RootLayout = styled("div")({
+const RootLayout = styled("main")({
+	position: "relative",
 	display: "flex",
 	minHeight: "100%",
 	overflow: "hidden",
 });
 
-const BodyContainer = styled("div")(({ theme }) => ({
+const drawerWidth = 250;
+const drawerMinWidth = 120;
+const BodyContainer = styled("main", {
+	shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
 	flexGrow: 1,
 	overflow: "auto",
 	minHeight: "100%",
 	padding: theme.spacing(1.2),
 	backgroundColor: palette.body.main,
+	transition: theme.transitions.create("margin", {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
+	marginLeft: `-${open ? drawerWidth : 0}px`,
+	...(open && {
+		transition: theme.transitions.create("margin", {
+			easing: theme.transitions.easing.easeOut,
+			duration: theme.transitions.duration.leavingScreen,
+		}),
+		marginLeft: 0,
+	}),
+}));
+
+const MenuBtn = styled(IconButton)(({ theme, breakpointWidth }) => ({
+	position: "absolute",
+	left: breakpointWidth,
+	top: 10,
+	background: theme.palette.primary.main,
+	borderRadius: 3,
+	borderTopLeftRadius: 0,
+	borderBottomLeftRadius: 0,
+	transition: theme.transitions.create("left", {
+		easing: theme.transitions.easing.easeOut,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
+	"&:hover": {
+		background: theme.palette.primary.dark,
+	},
 }));
