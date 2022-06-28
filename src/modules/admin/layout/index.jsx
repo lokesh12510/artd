@@ -9,6 +9,7 @@ import Footer from "./footer/Footer";
 import { IconButton } from "@mui/material";
 
 import ToggleIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import useResponsive from "../../../hooks/useResponsive";
 const AdminLayout = () => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -33,7 +34,7 @@ const AdminLayout = () => {
 					breakpointWidth={isSidebarOpen ? drawerWidth : isMd ? drawerMinWidth : 0}
 					sx={{ zIndex: isMd ? 1 : 1201 }}
 				>
-					<ToggleIcon color="light" />
+					{isSidebarOpen ? <CloseIcon color="light" /> : <ToggleIcon color="light" />}
 				</MenuBtn>
 				{/* ##############################################  */}
 			</BodyContainer>
