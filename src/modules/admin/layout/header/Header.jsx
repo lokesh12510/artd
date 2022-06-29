@@ -50,7 +50,7 @@ const PageTitle = styled(Typography)(({ theme }) => ({
 	marginLeft: 50,
 	marginRight: 15,
 	[theme.breakpoints.down("md")]: {
-		marginLeft: 30,
+		marginLeft: 50,
 		marginRight: 10,
 	},
 }));

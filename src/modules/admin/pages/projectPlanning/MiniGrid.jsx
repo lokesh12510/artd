@@ -12,7 +12,7 @@ import {
 import { IconButton, MenuItem } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { AddIcon, CalenderIcon, DeleteIcon } from "../../../../constants/icons";
+import { AddIcon, DeleteIcon } from "../../../../constants/icons";
 import palette from "../../../../theme/palette";
 
 const MiniGrid = () => {
@@ -119,9 +119,6 @@ const MiniGrid = () => {
 											value={item.when}
 											onChange={(newValue) => {
 												handleDateChange(newValue._d, item.id);
-											}}
-											components={{
-												OpenPickerIcon: CalenderIcon,
 											}}
 											renderInput={(params) => <StyledInput {...params} />}
 										/>

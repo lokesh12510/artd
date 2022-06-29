@@ -12,7 +12,7 @@ import ToggleIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import useResponsive from "../../../hooks/useResponsive";
 const AdminLayout = () => {
-	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 	const isMd = useResponsive("up", "md");
 	console.log(isMd);
@@ -31,7 +31,7 @@ const AdminLayout = () => {
 				{/* ##############################################  */}
 				<MenuBtn
 					onClick={handleToggle}
-					breakpointWidth={isSidebarOpen ? drawerWidth : isMd ? drawerMinWidth : 0}
+					breakpointwidth={isSidebarOpen ? drawerWidth : isMd ? drawerMinWidth : 0}
 					sx={{ zIndex: isMd ? 1 : 1201 }}
 				>
 					{isSidebarOpen ? <CloseIcon color="light" /> : <ToggleIcon color="light" />}
@@ -77,9 +77,9 @@ const BodyContainer = styled("main", {
 	}),
 }));
 
-const MenuBtn = styled(IconButton)(({ theme, breakpointWidth }) => ({
+const MenuBtn = styled(IconButton)(({ theme, breakpointwidth }) => ({
 	position: "absolute",
-	left: breakpointWidth,
+	left: breakpointwidth,
 	top: 10,
 	background: theme.palette.primary.main,
 	borderRadius: 3,

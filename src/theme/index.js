@@ -41,7 +41,7 @@ const ThemeWrapper = ({ children }) => {
 							"&.Mui-disabled": {
 								"& input": {
 									color: palette.common.black,
-									[`-webkitTextFillColor`]: palette.common.black,
+									WebkitTextFillColor: palette.common.black,
 								},
 								backgroundColor: palette.grey[100],
 								"& fieldset": {
@@ -75,7 +75,6 @@ const ThemeWrapper = ({ children }) => {
 				MuiButton: {
 					defaultProps: {
 						disableElevation: true,
-						disableRippled: true,
 					},
 					styleOverrides: {
 						root: {

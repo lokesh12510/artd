@@ -4,14 +4,11 @@ import {
 	Checkbox,
 	Grid,
 	Link,
-	Stack,
 	Table,
 	TableBody,
 	TableCell,
-	TableContainer,
 	TableHead,
 	TableRow,
-	Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import AccordionTable from "../../../../components/AccordionTable";
@@ -63,7 +60,7 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 								<TableRow>
 									<TableCell align="center">
 										<Button
-											className={selected === 1 && "active"}
+											className={selected === 1 ? "active" : ""}
 											variant="contained"
 											color="primary"
 											onClick={() => handleSelected(1)}
@@ -73,7 +70,7 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 									</TableCell>
 									<TableCell align="center">
 										<Button
-											className={selected === 2 && "active"}
+											className={selected === 2 ? "active" : ""}
 											variant="contained"
 											color="primary"
 											onClick={() => handleSelected(2)}
@@ -83,7 +80,7 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 									</TableCell>
 									<TableCell align="center">
 										<Button
-											className={selected === 3 && "active"}
+											className={selected === 3 ? "active" : ""}
 											variant="contained"
 											color="primary"
 											onClick={() => handleSelected(3)}

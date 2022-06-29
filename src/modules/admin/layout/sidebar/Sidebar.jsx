@@ -3,27 +3,74 @@ import { styled } from "@mui/material/styles";
 import palette from "../../../../theme/palette";
 import AppImage from "../../../../constants/images";
 import {
+	Collapse,
 	Drawer,
 	List,
 	ListItem,
 	ListItemButton,
 	ListItemIcon,
 	ListItemText,
+	MenuItem,
 	Stack,
 	Typography,
 } from "@mui/material";
-import AppIcons from "../../../../constants/icons";
+import { AppIcon } from "../../../../constants/icons";
 import { useTheme } from "@emotion/react";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useLocation } from "react-router-dom";
 
-const SidebarListItem = ({ active, title, icon }) => {
-	console.log(title);
+const SidebarListWrapper = ({ open }) => {
+	const [isOpen, setIsOpen] = useState("");
+
+	const handleOpen = (title) => {
+		setIsOpen((t) => (t === title ? "" : title));
+	};
+
+	const location = useLocation();
+
 	return (
-		<StyledListItem active={active} disablePadding>
-			<ListItemButton>
-				<ListItemIcon>{icon}</ListItemIcon>
-				<ListItemText secondary={title} />
-			</ListItemButton>
-		</StyledListItem>
+		<>
+			<StyledListWrapper open={open}>
+				{MenuList.map((item, i) => {
+					const isSubMenu = Boolean(item.subMenu?.length > 0);
+					const isActive = Boolean(item.pathName === location.pathname);
+					const isVisible = Boolean(isOpen === item.title);
+					return (
+						<React.Fragment key={item.id}>
+							<StyledListItem
+								selected={isActive}
+								disablePadding
+								onClick={() => (open && isSubMenu ? handleOpen(item.title) : undefined)}
+							>
+								<ListItemButton>
+									<ListItemIcon>
+										<AppIcon icon={item.icon} color={isActive ? "light" : "primary"} />
+									</ListItemIcon>
+									<ListItemText secondary={item.title} />
+									{open &&
+										isSubMenu &&
+										(isVisible ? (
+											<ExpandLessIcon color={isActive ? "light" : "primary"} />
+										) : (
+											<ExpandMoreIcon color={isActive ? "light" : "primary"} />
+										))}
+								</ListItemButton>
+							</StyledListItem>
+							{open && isSubMenu && (
+								<Collapse in={isVisible} timeout={"auto"}>
+									<List component="div" disablePadding>
+										{item?.subMenu?.map((item, i) => {
+											return <MenuItem key={item.id}>{item.title}</MenuItem>;
+										})}
+									</List>
+								</Collapse>
+							)}
+						</React.Fragment>
+					);
+				})}
+			</StyledListWrapper>
+		</>
 	);
 };
 
@@ -66,47 +113,16 @@ const Sidebar = ({ open, handleToggle }) => {
 					Alexis
 				</Typography>
 			</ProfileContainer>
-
-			<StyledListWrapper open={open}>
-				<SidebarListItem
-					active={true}
-					title={"Home"}
-					icon={<MenuIcon src={AppIcons.HomeLight} alt="" />}
-				/>
-				<SidebarListItem
-					active={false}
-					title={"Project"}
-					icon={<MenuIcon src={AppIcons.WorkDark} alt="" />}
-				/>
-				<SidebarListItem
-					active={false}
-					title={"Calender"}
-					icon={<MenuIcon src={AppIcons.CalenderDark} alt="" />}
-				/>
-				<SidebarListItem
-					active={false}
-					title={"Report"}
-					icon={<MenuIcon src={AppIcons.ReportDark} alt="" />}
-				/>
-				<SidebarListItem
-					active={false}
-					title={"Search"}
-					icon={<MenuIcon src={AppIcons.ReportSearchDark} alt="" />}
-				/>
-				<SidebarListItem
-					active={false}
-					title={"Help desk"}
-					icon={<MenuIcon src={AppIcons.HelpDark} alt="" />}
-				/>
-			</StyledListWrapper>
+			{/* Sidebar List component */}
+			<SidebarListWrapper open={open} />
 		</Root>
 	);
 
-	// ##################################################################
+	// Function to trigger when window width is changing
 	function handleWindowWidthChange() {
 		var windowWidth = window.innerWidth;
-		var breakpointWidth = theme.breakpoints.values.md;
-		var isSmallScreen = windowWidth < breakpointWidth;
+		var breakpointwidth = theme.breakpoints.values.md;
+		var isSmallScreen = windowWidth < breakpointwidth;
 
 		if (isSmallScreen && isPermanent) {
 			setPermanent(false);
@@ -117,6 +133,74 @@ const Sidebar = ({ open, handleToggle }) => {
 };
 
 export default Sidebar;
+
+// Sidebar menu list
+const MenuList = [
+	{
+		id: 1,
+		title: "Home",
+		icon: "Home",
+		pathName: "/",
+	},
+	{
+		id: 2,
+		title: "Maintenance",
+		icon: "Work",
+		pathName: "/projects",
+		subMenu: [
+			{
+				id: 1,
+				title: "Project",
+			},
+			{
+				id: 2,
+				title: "Client",
+			},
+			{
+				id: 3,
+				title: "Invoice Contact",
+			},
+		],
+	},
+	{
+		id: 3,
+		title: "Calender",
+		icon: "Calender",
+		pathName: "/time-sheet",
+		subMenu: [
+			{
+				id: 1,
+				title: "Project",
+			},
+			{
+				id: 2,
+				title: "Client",
+			},
+			{
+				id: 3,
+				title: "Invoice Contact",
+			},
+		],
+	},
+	{
+		id: 4,
+		title: "Report",
+		icon: "Report",
+		pathName: "/report",
+	},
+	{
+		id: 5,
+		title: "Search",
+		icon: "Search",
+		pathName: "/report-search",
+	},
+	{
+		id: 6,
+		title: "Help desk",
+		icon: "Help",
+		pathName: "/help-desk",
+	},
+];
 
 const MAX_WIDTH = "250px";
 const MIN_WIDTH = "120px";
@@ -176,6 +260,7 @@ const StyledListWrapper = styled(List)(({ theme, open }) => ({
 		flexDirection: open ? "row" : "column",
 	},
 	"& .MuiListItemIcon-root": {
+		minWidth: 38,
 		justifyContent: open ? "flex-start" : "center",
 	},
 	"& .MuiListItemText-root": {
@@ -184,39 +269,47 @@ const StyledListWrapper = styled(List)(({ theme, open }) => ({
 	"& .MuiListItemButton-root": {
 		paddingInline: theme.spacing(open ? 3.5 : 2),
 	},
+	"& .MuiList-root": {
+		backgroundColor: palette.secondary.light,
+		"& .MuiMenuItem-root": {
+			paddingLeft: theme.spacing(8),
+			paddingBlock: theme.spacing(1.3),
+			color: palette.primary.main,
+		},
+	},
 }));
 
-const StyledListItem = styled(ListItem)(({ theme, active }) => ({
+const StyledListItem = styled(ListItem)(({ theme, selected }) => ({
 	width: "100%",
 	flex: 1,
 	borderRadius: 0,
-	// padding: theme.spacing(1),
-	// [theme.breakpoints.down("md")]: {
-	// 	paddingBlock: theme.spacing(0.5),
-	// },
-	backgroundColor: active ? palette.primary.main : palette.common.white,
-	display: "flex",
-	justifyContent: "center",
-	alignItems: "center",
 	"& .MuiListItemText-root": {
 		"& .MuiTypography-root": {
-			color: active ? palette.common.white : palette.primary.main,
+			color: palette.primary.main,
 			fontWeight: "500",
 		},
 	},
+
 	"& .MuiListItemButton-root": {
 		width: "100%",
 		justifyContent: "center",
 		minHeight: 65,
 		paddingInline: theme.spacing(3),
+		"&:hover": {
+			backgroundColor: palette.primary.dark,
+		},
 	},
-	"&:hover": {
-		backgroundColor: active ? palette.primary.main : palette.common.white,
+	"&.Mui-selected": {
+		backgroundColor: palette.primary.main,
+		"& .MuiListItemText-root": {
+			"& .MuiTypography-root": {
+				color: palette.common.white,
+			},
+		},
+		"& .MuiListItemButton-root": {
+			"&:hover": {
+				backgroundColor: palette.primary.main,
+			},
+		},
 	},
-}));
-
-const MenuIcon = styled("img")(({ theme }) => ({
-	width: 24,
-	height: 24,
-	objectFit: "contain",
 }));
