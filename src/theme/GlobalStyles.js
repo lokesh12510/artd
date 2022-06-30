@@ -8,6 +8,7 @@ import {
 	Stack,
 	TableCell,
 	Typography,
+	InputLabel,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "./palette";
@@ -17,9 +18,20 @@ export const StyledBox = styled(Box)(({ theme }) => ({
 	backgroundColor: palette.common.white,
 	padding: theme.spacing(2),
 	borderRadius: 5,
-	boxShadow: "0px 0px 4px rgba(166, 166, 166, 0.25)",
+	boxShadow: "none",
+	// boxShadow: "0px 0px 4px rgba(166, 166, 166, 0.25)",
 	gap: theme.spacing(3),
 	// border: "1px solid rgba(0, 0, 0, 0.1)",
+}));
+
+export const CustomBox = styled(StyledBox)(({ theme }) => ({
+	backgroundColor: theme.palette.secondary.light,
+	boxShadow: "none",
+	height: "100%",
+	"& .MuiTypography-root": {
+		fontWeight: "500",
+	},
+	overflow: "auto",
 }));
 
 export const StyledBtn = styled(Button)(({ theme, radius }) => ({
@@ -37,10 +49,18 @@ export const StyledBtn = styled(Button)(({ theme, radius }) => ({
 	whiteSpace: "nowrap",
 }));
 
+export const StyledLabel = styled(InputLabel)(({ theme }) => ({
+	fontSize: "16px !important",
+	fontWeight: "600",
+	textTransform: "capitalize",
+}));
+
 export const FormBtn = styled(Button)(({ theme, radius }) => ({
 	whiteSpace: "nowrap",
 	padding: theme.spacing(0.9),
 	paddingInline: theme.spacing(2),
+	fontWeight: "600",
+	border: `1px solid ${palette.primary.main}`,
 }));
 
 export const StyledCheckBoxWrapper = styled(FormGroup)(({ theme }) => ({

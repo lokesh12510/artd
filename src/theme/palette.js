@@ -14,7 +14,7 @@ const GREY = {
 	300: "#DFE3E8",
 	400: "#979696CC",
 	500: "#919EAB",
-	600: "#000000e6",
+	600: "#4D4D4DB2",
 	700: "#454F5B",
 	800: "#212B36",
 	900: "#161C24",
@@ -43,15 +43,19 @@ const SECONDARY = {
 };
 
 const INFO = {
-	main: "#1890FF",
+	main: "#48A9C5CC",
 };
 
 const SUCCESS = {
+	dark: "#1B6D1F",
 	main: "#54D62C",
+	light: "#D0FED2",
 };
 
 const WARNING = {
 	main: "#FFC107",
+	light: "#FFDB94",
+	dark: "#886808",
 };
 
 const ERROR = {
@@ -91,11 +95,12 @@ const palette = {
 	gradients: GRADIENTS,
 	disabled: "#F5F5F9",
 	border: "#EFEFEF",
+	inputBorder: "#6d6a6a3b",
 	divider: GREY[500_24],
 	copyright: "#F18448",
 	highlight: "#e0eff480",
 	body: { ...BODY },
-	label: "#000000c4",
+	label: "#000000B2",
 	text: { primary: "#000000ad", secondary: GREY[600], disabled: GREY[500] },
 	background: { paper: "#fff", default: GREY[100], neutral: GREY[200] },
 	action: {

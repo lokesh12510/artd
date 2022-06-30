@@ -3,20 +3,17 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "@emotion/styled";
 import palette from "../theme/palette";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
-export default function AccordionTable({ title, children }) {
+export default function AccordionWrapper({ title, children }) {
 	const [expanded, setExpanded] = React.useState(true);
 
 	const handleChange = () => {
-		console.log(expanded);
 		setExpanded((e) => !e);
 	};
 
-	console.log(expanded);
 	return (
 		<Root expanded={expanded} onChange={handleChange}>
 			<AccordionSummary
@@ -24,7 +21,7 @@ export default function AccordionTable({ title, children }) {
 					<ArrowDropDownIcon sx={{ color: palette.common.white }} fontSize="large" />
 				}
 			>
-				<Typography>{title}</Typography>
+				<Typography variant="subtitle1">{title}</Typography>
 			</AccordionSummary>
 			<AccordionDetails>{children}</AccordionDetails>
 		</Root>
@@ -32,9 +29,11 @@ export default function AccordionTable({ title, children }) {
 }
 
 const Root = styled(Accordion)(({ theme }) => ({
-	borderTopRightRadius: 4,
-	borderTopLeftRadius: 4,
+	// borderTopRightRadius: 4,
+	// borderTopLeftRadius: 4,
+	borderRadius: 10,
 	overflow: "hidden",
+	boxShadow: "none",
 
 	"& .MuiAccordionSummary-root": {
 		backgroundColor: palette.secondary.main,
@@ -53,15 +52,20 @@ const Root = styled(Accordion)(({ theme }) => ({
 		"& .MuiTableCell-root": {
 			padding: 10,
 		},
+		// hide last border
+		"&:last-child td, &:last-child th": {
+			border: 0,
+		},
+	},
+	"& .stripped": {
 		"& .MuiTableRow-root": {
 			"&:nth-of-type(even)": {
 				backgroundColor: palette.grey[100],
 			},
-			// hide last border
-			"&:last-child td, &:last-child th": {
-				border: 0,
-			},
 		},
+	},
+	"&.Mui-expanded": {
+		marginBottom: 0,
 	},
 	"& .MuiAccordionSummary-content": {
 		"& .MuiTypography-root": {

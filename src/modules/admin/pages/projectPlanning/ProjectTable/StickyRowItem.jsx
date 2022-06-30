@@ -80,15 +80,15 @@ const StickyRowItem = ({ row, cols, isItemSelected, rowIndex }) => {
 							component="span"
 							// onClick={() => handleEditModal()}
 						>
-							<EditIcon bg={palette.primary.main} />
+							<EditIcon bg={palette.primary.light} />
 						</IconButton>
 						<IconButton
-							color="primary"
+							sx={{ color: palette.primary.light }}
 							aria-label="delete"
 							component="span"
 							// onClick={() => handleDeleteModal()}
 						>
-							<DeleteIcon bg={palette.primary.main} />
+							<DeleteIcon fontSize="small" />
 						</IconButton>
 					</Stack>
 				)}

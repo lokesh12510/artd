@@ -71,6 +71,14 @@ const ThemeWrapper = ({ children }) => {
 						},
 					},
 				},
+				MuiFormLabel: {
+					styleOverrides: {
+						root: {
+							color: "#000000B2",
+							fontWeight: 600,
+						},
+					},
+				},
 
 				MuiButton: {
 					defaultProps: {

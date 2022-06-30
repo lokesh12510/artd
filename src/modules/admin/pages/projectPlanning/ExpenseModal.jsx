@@ -11,7 +11,7 @@ import {
 	TableRow,
 } from "@mui/material";
 import React, { useState } from "react";
-import AccordionTable from "../../../../components/AccordionTable";
+import AccordionWrapper from "../../../../components/AccordionWrapper";
 import CustomDialog from "../../../../components/CustomDialog";
 import { StyledTableContainer } from "../../../../theme/GlobalStyles";
 import palette from "../../../../theme/palette";
@@ -111,7 +111,7 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 					</CustomTable>
 				</Grid>
 				<StyledGridItem item md={7}>
-					<AccordionTable title={"Planning - Summary"}>
+					<AccordionWrapper title={"Planning - Summary"}>
 						<Table>
 							<TableHead>
 								<TableRow>
@@ -138,8 +138,8 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 								})}
 							</TableBody>
 						</Table>
-					</AccordionTable>
-					<AccordionTable title={"MYOB Detail - Summary"}>
+					</AccordionWrapper>
+					<AccordionWrapper title={"MYOB Detail - Summary"}>
 						<Table>
 							<TableHead>
 								<TableRow>
@@ -162,7 +162,7 @@ const ExpenseModal = ({ expenseModal, handleExpenseModal }) => {
 								})}
 							</TableBody>
 						</Table>
-					</AccordionTable>
+					</AccordionWrapper>
 				</StyledGridItem>
 			</Grid>
 		</CustomDialog>

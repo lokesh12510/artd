@@ -13,7 +13,6 @@ import { IconButton, MenuItem } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { AddIcon, DeleteIcon } from "../../../../constants/icons";
-import palette from "../../../../theme/palette";
 
 const MiniGrid = () => {
 	const initialValue = [
@@ -127,7 +126,7 @@ const MiniGrid = () => {
 								<TableCell component="th" scope="row" align="left">
 									{rows.length > 1 && (
 										<IconButton onClick={() => handleDeleteRow(item.id)}>
-											<DeleteIcon bg={palette.primary.main} />
+											<DeleteIcon color="primary" fontSize="small" />
 										</IconButton>
 									)}
 									<IconButton onClick={() => handleAddRow(item.id)}>
