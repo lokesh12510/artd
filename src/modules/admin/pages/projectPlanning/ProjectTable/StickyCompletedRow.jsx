@@ -58,8 +58,12 @@ const RowItem = memo(({ cols, row }) => {
 					<IconButton color="primary" aria-label="upload picture" component="span">
 						<EyeIcon bg={palette.primary.main} />
 					</IconButton>
-					<IconButton color="primary" aria-label="upload picture" component="span">
-						<DeleteIcon bg={palette.grey[400]} />
+					<IconButton
+						sx={{ color: palette.primary.light }}
+						aria-label="delete"
+						component="span"
+					>
+						<DeleteIcon fontSize="small" />
 					</IconButton>
 				</Stack>
 			</TableCell>

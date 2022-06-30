@@ -1,5 +1,5 @@
 import React from "react";
-import AddProject from "../pages/AddProject/AddProject";
+import AddProject from "../pages/AddProject/Index";
 import Dashboard from "../pages/projectPlanning/Index";
 import StaffMaintenance from "../pages/staffMaintenance";
 

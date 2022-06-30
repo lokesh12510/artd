@@ -1,8 +1,12 @@
-import { styled } from "@mui/material/styles";
 import React from "react";
+// Mui
 import { Box, InputAdornment, Typography } from "@mui/material";
-import AppIcons from "../../../../constants/icons";
+import styled from "@emotion/styled";
+// Custom Styles
 import { StyledInput } from "../../../../theme/GlobalStyles";
+import palette from "../../../../theme/palette";
+// Custom Icon
+import { AppIcon } from "../../../../constants/icons";
 
 const Header = () => {
 	return (
@@ -18,7 +22,7 @@ const Header = () => {
 				InputProps={{
 					endAdornment: (
 						<InputAdornment position="end">
-							<img src={AppIcons.Search} alt="Search" />
+							<AppIcon icon="Search" sx={{ fontSize: "16px", color: palette.grey[400] }} />
 						</InputAdornment>
 					),
 				}}
@@ -29,6 +33,7 @@ const Header = () => {
 
 export default Header;
 
+// Styles
 const Root = styled(Box)(({ theme }) => ({
 	backgroundColor: "transparent",
 	display: "flex",

@@ -1,11 +1,15 @@
-import { Grid } from "@mui/material";
 import React from "react";
+// Mui
+import { Grid } from "@mui/material";
+// Components
 import AccordionWrapper from "../../../../components/AccordionWrapper";
 import CheckboxField from "../../../../components/CheckboxField";
 import MultiSelect from "../../../../components/MultiSelect";
-import { AddIcon } from "../../../../constants/icons";
-import { CustomBox, FormBtn, StyledBox } from "../../../../theme/GlobalStyles";
 import ContactFormTable from "./ContactFormTable";
+// Custom Icons
+import { AddIcon } from "../../../../constants/icons";
+// Custom Styles
+import { CustomBox, FormBtn, StyledBox } from "../../../../theme/GlobalStyles";
 
 const ContactForm = () => {
 	return (
@@ -36,6 +40,7 @@ const ContactForm = () => {
 
 export default ContactForm;
 
+// Dummy Data
 const data = [
 	{
 		id: 1,

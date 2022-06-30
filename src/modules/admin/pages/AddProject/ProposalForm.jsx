@@ -1,12 +1,16 @@
+import React from "react";
+// Mui
 import styled from "@emotion/styled";
 import { FormGroup, Grid, Stack, Typography } from "@mui/material";
-import React from "react";
+// Components
 import AccordionWrapper from "../../../../components/AccordionWrapper";
 import CheckboxField from "../../../../components/CheckboxField";
 import DateField from "../../../../components/DateField";
 import InputField from "../../../../components/InputField";
 import RadioField from "../../../../components/RadioField";
+// Custom Icons
 import { AddIcon } from "../../../../constants/icons";
+// Custom Styles
 import { CustomBox, FormBtn, StyledBox } from "../../../../theme/GlobalStyles";
 
 const ProposalForm = () => {

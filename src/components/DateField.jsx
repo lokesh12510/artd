@@ -7,6 +7,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { CalenderIcon } from "../constants/icons";
 
+// DateField is wrapper with localization provider with moment adapter
+// @params
+// `helperText` for error message
+// `error` for error status
+// `name` for label
+// With Custom styles
+
 const DateField = ({ helperText, error, name, label, ...props }) => {
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState(null);
@@ -15,6 +22,7 @@ const DateField = ({ helperText, error, name, label, ...props }) => {
 		setValue(val);
 	};
 
+	// Close when clicking outside date modal
 	const handleClickAway = () => {
 		setOpen(false);
 	};

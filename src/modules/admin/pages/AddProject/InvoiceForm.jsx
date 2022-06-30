@@ -1,9 +1,12 @@
-import { Grid } from "@mui/material";
 import React from "react";
+// Mui
+import { Grid } from "@mui/material";
+// Components
 import AccordionWrapper from "../../../../components/AccordionWrapper";
 import InputField from "../../../../components/InputField";
-import { CustomBox, StyledBox } from "../../../../theme/GlobalStyles";
 import InvoiceFormTable from "./InvoiceFormTable";
+// Custom styles
+import { CustomBox, StyledBox } from "../../../../theme/GlobalStyles";
 
 const InvoiceForm = () => {
 	return (
@@ -35,6 +38,7 @@ const InvoiceForm = () => {
 
 export default InvoiceForm;
 
+// Dummy Data
 const data = [
 	{
 		id: 1,

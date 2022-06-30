@@ -1,22 +1,30 @@
 import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
+// Mui
+import { IconButton } from "@mui/material";
+import styled from "@emotion/styled";
+// Router
 import { Outlet } from "react-router-dom";
-// components
+// Components
 import Sidebar from "./sidebar/Sidebar";
 import Header from "./header/Header";
-import palette from "../../../theme/palette";
 import Footer from "./footer/Footer";
-import { IconButton } from "@mui/material";
-
+// Custom Styles
+import palette from "../../../theme/palette";
+// Icons
 import ToggleIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+// Hooks
 import useResponsive from "../../../hooks/useResponsive";
+
 const AdminLayout = () => {
+	// Sidebar open state
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+	// Responsive check for above `md`
 	const isMd = useResponsive("up", "md");
 	console.log(isMd);
 
+	// Sidebar Open state handler
 	const handleToggle = () => {
 		setIsSidebarOpen((p) => !p);
 	};
@@ -28,7 +36,7 @@ const AdminLayout = () => {
 				<Header />
 				<Outlet />
 				<Footer />
-				{/* ##############################################  */}
+				{/* Menu Toggle Btn  */}
 				<MenuBtn
 					onClick={handleToggle}
 					breakpointwidth={isSidebarOpen ? drawerWidth : isMd ? drawerMinWidth : 0}
@@ -36,7 +44,7 @@ const AdminLayout = () => {
 				>
 					{isSidebarOpen ? <CloseIcon color="light" /> : <ToggleIcon color="light" />}
 				</MenuBtn>
-				{/* ##############################################  */}
+				{/* Menu Toggle Btn  */}
 			</BodyContainer>
 		</RootLayout>
 	);

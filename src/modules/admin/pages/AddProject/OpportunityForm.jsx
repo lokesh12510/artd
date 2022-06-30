@@ -1,12 +1,16 @@
-import { Grid, MenuItem } from "@mui/material";
 import React from "react";
+// Mui
+import { Grid, MenuItem } from "@mui/material";
+// Components
 import AccordionWrapper from "../../../../components/AccordionWrapper";
 import DateField from "../../../../components/DateField";
 import InputField from "../../../../components/InputField";
+// Custom Styles
 import { StyledBox } from "../../../../theme/GlobalStyles";
 
 const OpportunityForm = () => {
 	return (
+		// Wrapped with inside `AccordionWrapper` component
 		<AccordionWrapper title={"Opportunity"}>
 			<StyledBox>
 				<Grid container spacing={2}>

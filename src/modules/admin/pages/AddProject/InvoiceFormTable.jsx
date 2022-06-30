@@ -1,3 +1,5 @@
+import React from "react";
+// Mui
 import styled from "@emotion/styled";
 import {
 	Card,
@@ -9,12 +11,14 @@ import {
 	TableRow,
 	Typography,
 } from "@mui/material";
-import React from "react";
+// Components
 import DateField from "../../../../components/DateField";
 import InputField from "../../../../components/InputField";
+// Custom Icons
 import { AddIcon, DeleteIcon } from "../../../../constants/icons";
 
 const InvoiceFormTable = ({ data }) => {
+	// func to set status based color
 	function findStatus(status) {
 		switch (status) {
 			case "paid":
@@ -87,6 +91,7 @@ const InvoiceFormTable = ({ data }) => {
 
 export default InvoiceFormTable;
 
+// Styles
 const StyledTableHead = styled(TableHead)(({ theme }) => ({
 	border: "none !important",
 	"& .MuiTableCell-head": {

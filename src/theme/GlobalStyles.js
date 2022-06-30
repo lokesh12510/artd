@@ -50,8 +50,8 @@ export const StyledBtn = styled(Button)(({ theme, radius }) => ({
 }));
 
 export const StyledLabel = styled(InputLabel)(({ theme }) => ({
-	fontSize: "16px !important",
-	fontWeight: "600",
+	fontSize: "18px !important",
+	fontWeight: "500",
 	textTransform: "capitalize",
 }));
 

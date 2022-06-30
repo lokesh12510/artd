@@ -38,5 +38,5 @@ const RadioField = ({ label, dir, radioList }) => {
 export default RadioField;
 
 const StyledFormLabel = styled(FormLabel)({
-	fontSize: "12px !important",
+	fontSize: "13px !important",
 });

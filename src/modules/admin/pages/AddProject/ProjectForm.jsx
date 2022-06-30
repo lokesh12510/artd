@@ -1,9 +1,13 @@
-import styled from "@emotion/styled";
-import { Box, Grid, MenuItem, Stack, Typography } from "@mui/material";
 import React from "react";
+// Mui
+import { Box, Grid, MenuItem, Stack, Typography } from "@mui/material";
+import styled from "@emotion/styled";
+// Components
 import InputField from "../../../../components/InputField";
 import MultiSelect from "../../../../components/MultiSelect";
+// Custom Icons
 import { AddIcon } from "../../../../constants/icons";
+// Custom Styles
 import {
 	FormBtn,
 	StyledBox,
@@ -17,6 +21,7 @@ const ProjectForm = () => {
 			<StyledPageTitle variant="h5" mb={2}>
 				Add Project
 			</StyledPageTitle>
+			{/* Project form Grid */}
 			<Grid container spacing={2} mb={2}>
 				<Grid item xs={12} sm={3}>
 					<InputField name="Project" placeholder="Project" />
@@ -122,6 +127,7 @@ const ProjectForm = () => {
 					<Typography color={"primary"} variant="subtitle1" gutterBottom>
 						Keywords
 					</Typography>
+					{/* Multi Select Wrapper */}
 					<KeywordWrapper>
 						<Grid container spacing={2}>
 							<Grid item xs={12} sm={6}>
@@ -146,6 +152,7 @@ const ProjectForm = () => {
 
 export default ProjectForm;
 
+// Styles
 const KeywordWrapper = styled(Box)(({ theme }) => ({
 	backgroundColor: theme.palette.secondary.light,
 	padding: theme.spacing(2),

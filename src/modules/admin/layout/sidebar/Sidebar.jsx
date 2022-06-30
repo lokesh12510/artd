@@ -216,7 +216,7 @@ const MenuList = [
 	{
 		id: 5,
 		title: "Search",
-		icon: "Search",
+		icon: "ReportSearch",
 		pathName: "/report-search",
 	},
 	{

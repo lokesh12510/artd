@@ -1,3 +1,5 @@
+import React from "react";
+// MUI
 import styled from "@emotion/styled";
 import {
 	Table,
@@ -6,7 +8,7 @@ import {
 	TableHead,
 	TableRow,
 } from "@mui/material";
-import React from "react";
+// Component
 import InputField from "../../../../components/InputField";
 
 const ContactFormTable = ({ data }) => {
@@ -54,6 +56,7 @@ const ContactFormTable = ({ data }) => {
 
 export default ContactFormTable;
 
+// Styles
 const StyledTableHead = styled(TableHead)(({ theme }) => ({
 	border: "none !important",
 	"& .MuiTableCell-head": {

@@ -1,11 +1,30 @@
-import HomeLight from "../assets/Img/home.svg";
-import WorkDark from "../assets/Img/work.svg";
-import CalenderDark from "../assets/Img/calender.svg";
-import ReportDark from "../assets/Img/report.svg";
-import ReportSearchDark from "../assets/Img/report-search.png";
-import HelpDark from "../assets/Img/help.svg";
-import Search from "../assets/Img/search.svg";
 import { createSvgIcon } from "@mui/material";
+
+export const AppIcon = ({ icon, ...props }) => {
+	switch (icon) {
+		case "Home":
+			return <HomeIcon {...props} />;
+		case "Work":
+			return <WorkIcon {...props} />;
+		case "Calender":
+			return <CalenderIcon {...props} />;
+		case "Report":
+			return <ReportIcon {...props} />;
+		case "ReportSearch":
+			return <ReportSearchIcon {...props} />;
+		case "Help":
+			return <HelpIcon {...props} />;
+		case "Search":
+			return <SearchIcon {...props} />;
+		case "Add":
+			return <AddIcon {...props} />;
+		case "Delete":
+			return <DeleteIcon {...props} />;
+
+		default:
+			return HomeIcon;
+	}
+};
 
 export const HomeIcon = createSvgIcon(
 	<path d="M23.9917 11.4795C23.9917 12.2178 23.3667 12.7961 22.6583 12.7961H21.325L21.3542 19.3627C21.3542 19.4775 21.3458 19.5842 21.3333 19.6949V20.3594C21.3333 21.2658 20.5875 22 19.6667 22H19C18.9542 22 18.9083 21.9631 18.8625 21.9959C18.8042 21.9631 18.7458 22 18.6875 22H16.3333C15.4125 22 14.6667 21.2658 14.6667 20.3594V16.75C14.6667 16.024 14.0708 15.4375 13.3333 15.4375H10.6667C9.92917 15.4375 9.33333 16.024 9.33333 16.75V20.3594C9.33333 21.2658 8.5875 22 7.66667 22H5.3375C5.275 22 5.2125 21.9959 5.15 21.9918C5.1 21.9959 5.05 22 5 22H4.33333C3.41292 22 2.66667 21.2658 2.66667 20.3594V15.7656C2.66667 15.7287 2.66792 15.6877 2.67042 15.6508V12.7961H1.33542C0.584167 12.7961 0 12.2178 0 11.4795C0 11.1104 0.125167 10.7822 0.417083 10.4951L11.1 1.32878C11.3917 1.0411 11.725 1 12.0167 1C12.3083 1 12.6417 1.0822 12.8958 1.28768L23.5333 10.4951C23.8667 10.7822 24.0375 11.1104 23.9917 11.4795Z" />,
@@ -41,7 +60,7 @@ export const ReportIcon = createSvgIcon(
 	"Report"
 );
 
-export const SearchIcon = createSvgIcon(
+export const ReportSearchIcon = createSvgIcon(
 	<>
 		<g clipPath="url(#clip0_3439_17470)">
 			<path
@@ -115,6 +134,20 @@ export const AddIcon = createSvgIcon(
 export const DeleteIcon = createSvgIcon(
 	<path d="M16.1377 0.824283C15.8861 0.319089 15.3689 0 14.8051 0H9.19492C8.63111 0 8.1139 0.319089 7.86228 0.824283L7.52679 1.49107H3.05357C2.22882 1.49107 1.5625 2.15879 1.5625 2.98214C1.5625 3.80549 2.22882 4.47321 3.05357 4.47321H20.9464C21.7698 4.47321 22.4375 3.80549 22.4375 2.98214C22.4375 2.15879 21.7698 1.49107 20.9464 1.49107H16.4732L16.1377 0.824283ZM20.9884 5.96429H3.05357V20.875C3.05357 22.5198 4.39088 23.8571 6.03571 23.8571H18.0062C19.6115 23.8571 20.9884 22.5198 20.9884 20.875V5.96429ZM17.2607 9.69196V20.1295C17.2607 20.5395 16.8833 20.875 16.5152 20.875C16.0632 20.875 15.7696 20.5395 15.7696 20.1295V9.69196C15.7696 9.28192 16.0632 8.94643 16.5152 8.94643C16.8833 8.94643 17.2607 9.28192 17.2607 9.69196ZM12.7875 9.69196V20.1295C12.7875 20.5395 12.41 20.875 12.0419 20.875C11.59 20.875 11.2545 20.5395 11.2545 20.1295V9.69196C11.2545 9.28192 11.59 8.94643 12.0419 8.94643C12.41 8.94643 12.7875 9.28192 12.7875 9.69196ZM8.27232 9.69196V20.1295C8.27232 20.5395 7.93683 20.875 7.52679 20.875C7.11674 20.875 6.78125 20.5395 6.78125 20.1295V9.69196C6.78125 9.28192 7.11674 8.94643 7.52679 8.94643C7.93683 8.94643 8.27232 9.28192 8.27232 9.69196Z" />,
 	"delete"
+);
+
+export const SearchIcon = createSvgIcon(
+	<>
+		<g clip-path="url(#clip0_3483_1413)">
+			<path d="M23.4516 20.7972L17.8406 15.1865C19.1166 13.2923 19.7461 10.9257 19.4091 8.40395C18.8344 4.1146 15.3188 0.623966 11.025 0.0803799C4.64106 -0.727383 -0.727088 4.64051 0.0807586 11.0242C0.624511 15.3196 4.11577 18.8379 8.40579 19.4097C10.9277 19.7467 13.2949 19.1174 15.1886 17.8414L20.7996 23.4521C21.5318 24.1842 22.7191 24.1842 23.4513 23.4521C24.1828 22.719 24.1828 21.5284 23.4516 20.7972ZM3.70777 9.74921C3.70777 6.44091 6.39934 3.74946 9.70779 3.74946C13.0162 3.74946 15.7078 6.44091 15.7078 9.74921C15.7078 13.0575 13.0162 15.749 9.70779 15.749C6.39934 15.749 3.70777 13.0584 3.70777 9.74921Z" />
+		</g>
+		<defs>
+			<clipPath id="clip0_3483_1413">
+				<rect width="24" height="24" fill="white" />
+			</clipPath>
+		</defs>
+	</>,
+	"search"
 );
 
 export const CopyIcon = ({ bg = "white" }) => {
@@ -215,39 +248,3 @@ export const ArrowCheckIcon = ({ bg = "#105776" }) => {
 		</svg>
 	);
 };
-
-const AppIcons = {
-	HomeLight,
-	WorkDark,
-	CalenderDark,
-	ReportDark,
-	ReportSearchDark,
-	HelpDark,
-	Search,
-};
-
-export const AppIcon = ({ icon, ...props }) => {
-	switch (icon) {
-		case "Home":
-			return <HomeIcon {...props} />;
-		case "Work":
-			return <WorkIcon {...props} />;
-		case "Calender":
-			return <CalenderIcon {...props} />;
-		case "Report":
-			return <ReportIcon {...props} />;
-		case "Search":
-			return <SearchIcon {...props} />;
-		case "Help":
-			return <HelpIcon {...props} />;
-		case "Add":
-			return <AddIcon {...props} />;
-		case "Delete":
-			return <DeleteIcon {...props} />;
-
-		default:
-			return HomeIcon;
-	}
-};
-
-export default AppIcons;
