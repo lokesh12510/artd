@@ -61,7 +61,7 @@ const typography = {
 		...responsiveFontSizes({ sm: 18, md: 18, lg: 20 }),
 	},
 	h6: {
-		fontWeight: 700,
+		fontWeight: 600,
 		lineHeight: 28 / 18,
 		...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
 	},

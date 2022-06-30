@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { styled } from "@mui/material/styles";
 import palette from "../../../../theme/palette";
 import AppImage from "../../../../constants/images";
@@ -18,61 +18,80 @@ import { AppIcon } from "../../../../constants/icons";
 import { useTheme } from "@emotion/react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { urls } from "../../urls";
 
-const SidebarListWrapper = ({ open }) => {
+const SidebarListItem = ({ open, item, handleOpen, isOpen }) => {
+	const location = useLocation();
+	const isSubMenu = Boolean(item.subMenu?.length > 0);
+	const isVisible = Boolean(isOpen === item.title);
+	const isActive = Boolean(item.pathName === location.pathname);
+
+	const navigate = useNavigate();
+
+	return (
+		<React.Fragment key={item.id}>
+			<StyledListItem selected={isActive} disablePadding>
+				<ListItemButton
+					onClick={() =>
+						open && isSubMenu ? handleOpen(item.title) : navigate(item.pathName)
+					}
+				>
+					<ListItemIcon>
+						<AppIcon icon={item.icon} color={isActive ? "light" : "primary"} />
+					</ListItemIcon>
+					<ListItemText secondary={item.title} />
+					{open &&
+						isSubMenu &&
+						(isVisible ? (
+							<ExpandLessIcon color={isActive ? "light" : "primary"} />
+						) : (
+							<ExpandMoreIcon color={isActive ? "light" : "primary"} />
+						))}
+				</ListItemButton>
+			</StyledListItem>
+			{open && isSubMenu && (
+				<Collapse in={isVisible} timeout={"auto"}>
+					<List component={"div"} disablePadding>
+						{item?.subMenu?.map((item, i) => {
+							return (
+								<MenuItem key={item.id} component={Link} to={item.pathName}>
+									{item.title}
+								</MenuItem>
+							);
+						})}
+					</List>
+				</Collapse>
+			)}
+		</React.Fragment>
+	);
+};
+
+const SidebarListWrapper = memo(({ open }) => {
 	const [isOpen, setIsOpen] = useState("");
 
 	const handleOpen = (title) => {
 		setIsOpen((t) => (t === title ? "" : title));
 	};
 
-	const location = useLocation();
-
 	return (
 		<>
 			<StyledListWrapper open={open}>
 				{MenuList.map((item, i) => {
-					const isSubMenu = Boolean(item.subMenu?.length > 0);
-					const isActive = Boolean(item.pathName === location.pathname);
-					const isVisible = Boolean(isOpen === item.title);
 					return (
-						<React.Fragment key={item.id}>
-							<StyledListItem
-								selected={isActive}
-								disablePadding
-								onClick={() => (open && isSubMenu ? handleOpen(item.title) : undefined)}
-							>
-								<ListItemButton>
-									<ListItemIcon>
-										<AppIcon icon={item.icon} color={isActive ? "light" : "primary"} />
-									</ListItemIcon>
-									<ListItemText secondary={item.title} />
-									{open &&
-										isSubMenu &&
-										(isVisible ? (
-											<ExpandLessIcon color={isActive ? "light" : "primary"} />
-										) : (
-											<ExpandMoreIcon color={isActive ? "light" : "primary"} />
-										))}
-								</ListItemButton>
-							</StyledListItem>
-							{open && isSubMenu && (
-								<Collapse in={isVisible} timeout={"auto"}>
-									<List component="div" disablePadding>
-										{item?.subMenu?.map((item, i) => {
-											return <MenuItem key={item.id}>{item.title}</MenuItem>;
-										})}
-									</List>
-								</Collapse>
-							)}
-						</React.Fragment>
+						<SidebarListItem
+							key={item.id}
+							open={open}
+							isOpen={isOpen}
+							item={item}
+							handleOpen={handleOpen}
+						/>
 					);
 				})}
 			</StyledListWrapper>
 		</>
 	);
-};
+});
 
 const Sidebar = ({ open, handleToggle }) => {
 	let theme = useTheme();
@@ -92,7 +111,7 @@ const Sidebar = ({ open, handleToggle }) => {
 			variant={isPermanent ? "permanent" : "temporary"}
 			open={open}
 			ModalProps={{
-				keepMounted: true,
+				keepMounted: false,
 			}}
 			onClose={handleToggle}
 		>
@@ -150,15 +169,18 @@ const MenuList = [
 		subMenu: [
 			{
 				id: 1,
-				title: "Project",
+				title: "Add Project",
+				pathName: urls.addProject,
 			},
 			{
 				id: 2,
-				title: "Client",
+				title: "Staff Maintenance",
+				pathName: urls.staffMaintenance,
 			},
 			{
 				id: 3,
-				title: "Invoice Contact",
+				title: "Project Management",
+				pathName: "/",
 			},
 		],
 	},
@@ -170,15 +192,18 @@ const MenuList = [
 		subMenu: [
 			{
 				id: 1,
-				title: "Project",
+				title: "Add Project",
+				pathName: urls.addProject,
 			},
 			{
 				id: 2,
-				title: "Client",
+				title: "Staff Maintenance",
+				pathName: urls.staffMaintenance,
 			},
 			{
 				id: 3,
-				title: "Invoice Contact",
+				title: "Project Management",
+				pathName: "/",
 			},
 		],
 	},

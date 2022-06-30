@@ -131,7 +131,7 @@ const MiniGrid = () => {
 										</IconButton>
 									)}
 									<IconButton onClick={() => handleAddRow(item.id)}>
-										<AddIcon bg={palette.primary.main} />
+										<AddIcon color="primary" fontSize="small" />
 									</IconButton>
 								</TableCell>
 							</TableRow>

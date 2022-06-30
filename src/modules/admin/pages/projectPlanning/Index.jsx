@@ -26,6 +26,8 @@ import DescriptionModal from "./DescriptionModal";
 import ExpenseModal from "./ExpenseModal";
 import OutputModal from "./OutputModal";
 import ProjectPlanning from "./ProjectTable/Index";
+import { Link } from "react-router-dom";
+import { urls } from "../../urls";
 
 const Dashboard = () => {
 	// Summary modal Toggle State
@@ -53,7 +55,13 @@ const Dashboard = () => {
 		<>
 			<Stack spacing={2}>
 				<StyledPageHeader>
-					<StyledBtn variant="outlined" color="primary" startIcon={<ArrowBackIosIcon />}>
+					<StyledBtn
+						variant="outlined"
+						color="primary"
+						component={Link}
+						to={urls.addProject}
+						startIcon={<ArrowBackIosIcon />}
+					>
 						Back
 					</StyledBtn>
 

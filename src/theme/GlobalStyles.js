@@ -7,6 +7,7 @@ import {
 	IconButton,
 	Stack,
 	TableCell,
+	Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "./palette";
@@ -28,11 +29,20 @@ export const StyledBtn = styled(Button)(({ theme, radius }) => ({
 		padding: theme.spacing(0.6),
 		paddingInline: theme.spacing(1.8),
 	},
+	border: `1px solid ${palette.primary.borderLight}`,
 	"& .MuiButton-startIcon": {
 		marginLeft: 0,
 		marginRight: 4,
 	},
+	whiteSpace: "nowrap",
 }));
+
+export const FormBtn = styled(Button)(({ theme, radius }) => ({
+	whiteSpace: "nowrap",
+	padding: theme.spacing(0.9),
+	paddingInline: theme.spacing(2),
+}));
+
 export const StyledCheckBoxWrapper = styled(FormGroup)(({ theme }) => ({
 	"& .MuiFormControlLabel-root ": {
 		marginLeft: 0,
@@ -51,6 +61,11 @@ export const StyledPageHeader = styled(StyledBox)(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "flex-start",
+}));
+export const StyledPageTitle = styled(Typography)(({ theme }) => ({
+	color: palette.primary.main,
+	fontWeight: "600",
+	fontSize: 20,
 }));
 
 export const StyledInput = styled(TextField)(({ theme, align = "left" }) => ({

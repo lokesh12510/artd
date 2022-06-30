@@ -100,7 +100,6 @@ const ThemeWrapper = ({ children }) => {
 						},
 						outlinedPrimary: {
 							color: palette.primary.light,
-							border: `1px solid ${palette.primary.borderLight}`,
 						},
 					},
 				},

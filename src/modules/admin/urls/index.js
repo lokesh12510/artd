@@ -1,10 +1,12 @@
 import React from "react";
+import AddProject from "../pages/AddProject/AddProject";
 import Dashboard from "../pages/projectPlanning/Index";
 import StaffMaintenance from "../pages/staffMaintenance";
 
-const urls = {
+export const urls = {
 	Dashboard: "/",
 	staffMaintenance: "/staffMaintenance",
+	addProject: "/add-project",
 };
 
 // routes
@@ -18,6 +20,12 @@ const adminRoutes = [
 	{
 		path: urls.staffMaintenance,
 		element: <StaffMaintenance />,
+		auth: true,
+		roles: [],
+	},
+	{
+		path: urls.addProject,
+		element: <AddProject />,
 		auth: true,
 		roles: [],
 	},

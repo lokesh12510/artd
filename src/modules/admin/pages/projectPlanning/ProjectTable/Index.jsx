@@ -49,7 +49,7 @@ const ProjectPlanning = () => {
 					style={{
 						maxWidth: 50,
 						minWidth: 50,
-						paddingBlock: 6,
+						paddingBlock: 5,
 						paddingInline: 7,
 						backgroundColor: palette.primary.main,
 						display: "flex",
