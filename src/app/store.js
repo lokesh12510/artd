@@ -1,11 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import pageSlice from "./slices/pageSlice";
 
 import projectPlanningSlice from "./slices/projectPlanningSlice";
+import staffSlice from "./slices/staffSlice";
 // import { persistReducer, persistStore } from "redux-persist";
 
 const reducers = combineReducers({
 	projectPlanning: projectPlanningSlice,
+	pageInfo: pageSlice,
+	staff: staffSlice,
 });
 
 // store user details in localStorage
@@ -18,7 +22,7 @@ const reducers = combineReducers({
 
 export const store = configureStore({
 	reducer: reducers,
-	devTools: process.env.NODE_ENV !== "production",
+	// devTools: process.env.NODE_ENV !== "production",
 });
 
 // export const persistor = persistStore(store);

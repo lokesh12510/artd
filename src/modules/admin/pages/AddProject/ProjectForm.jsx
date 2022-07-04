@@ -18,9 +18,7 @@ import {
 const ProjectForm = () => {
 	return (
 		<StyledBox>
-			<StyledPageTitle variant="h5" mb={2}>
-				Add Project
-			</StyledPageTitle>
+			<StyledPageTitle mb={2}>Add Project</StyledPageTitle>
 			{/* Project form Grid */}
 			<Grid container spacing={2} mb={2}>
 				<Grid item xs={12} sm={3}>

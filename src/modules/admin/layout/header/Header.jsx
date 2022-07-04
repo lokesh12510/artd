@@ -7,14 +7,21 @@ import { StyledInput } from "../../../../theme/GlobalStyles";
 import palette from "../../../../theme/palette";
 // Custom Icon
 import { AppIcon } from "../../../../constants/icons";
+// Redux
+import { useSelector } from "react-redux";
+import { pageTitle } from "../../../../app/slices/pageSlice";
 
 const Header = () => {
+	const title = useSelector(pageTitle);
+
 	return (
 		<Root>
 			{/* Page title */}
+
 			<PageTitle variant="h5" color="primary" fontWeight={"600"}>
-				Project Planning
+				{title}
 			</PageTitle>
+
 			{/* SearchBar */}
 			<SearchBar
 				placeholder="Search"

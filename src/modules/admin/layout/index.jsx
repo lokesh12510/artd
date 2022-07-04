@@ -22,7 +22,6 @@ const AdminLayout = () => {
 
 	// Responsive check for above `md`
 	const isMd = useResponsive("up", "md");
-	console.log(isMd);
 
 	// Sidebar Open state handler
 	const handleToggle = () => {

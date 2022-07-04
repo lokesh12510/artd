@@ -1,10 +1,20 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useLayoutEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import AdminLayout from "../modules/admin/layout";
 import Error from "../modules/admin/pages/Error";
 import adminRoutes from "../modules/admin/urls";
+// Redux
+import { useDispatch } from "react-redux";
+import { resetPage } from "../app/slices/pageSlice";
 
 const AppRoutes = () => {
+	const location = useLocation();
+	const dispatch = useDispatch();
+
+	useLayoutEffect(() => {
+		dispatch(resetPage());
+	}, [dispatch, location.pathname]);
+
 	return (
 		<Routes>
 			{/* Admin module route */}

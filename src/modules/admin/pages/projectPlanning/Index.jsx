@@ -7,7 +7,7 @@ import {
 	TableContainer,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import palette from "../../../../theme/palette";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -16,7 +16,7 @@ import {
 	StyledBox,
 	StyledInput,
 	StyledCheckBoxWrapper,
-	StyledPageHeader,
+	StyledHeaderBox,
 	ButtonStack,
 } from "../../../../theme/GlobalStyles";
 import MiniGrid from "./MiniGrid";
@@ -28,6 +28,9 @@ import OutputModal from "./OutputModal";
 import ProjectPlanning from "./ProjectTable/Index";
 import { Link } from "react-router-dom";
 import { urls } from "../../urls";
+
+import { useDispatch } from "react-redux";
+import { setTitle } from "../../../../app/slices/pageSlice";
 
 const Dashboard = () => {
 	// Summary modal Toggle State
@@ -51,10 +54,17 @@ const Dashboard = () => {
 		setOutputModal((o) => !o);
 	};
 
+	// Set page title
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(setTitle({ title: "Project Planning" }));
+	}, [dispatch]);
+
 	return (
 		<>
 			<Stack spacing={2}>
-				<StyledPageHeader>
+				<StyledHeaderBox>
 					<StyledBtn
 						variant="outlined"
 						color="primary"
@@ -76,7 +86,7 @@ const Dashboard = () => {
 						<StyledInput value="23443" variant="outlined" />
 					</ProjectInfo>
 					<StyledInput value="The Big Project" variant="outlined" />
-				</StyledPageHeader>
+				</StyledHeaderBox>
 				<StyledBox>
 					<ScrollTableContainer>
 						<TableHeader

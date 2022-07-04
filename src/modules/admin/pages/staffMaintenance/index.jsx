@@ -1,42 +1,74 @@
-import { Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { AddIcon } from "../../../../constants/icons";
-import { ButtonStack, StyledBox, StyledBtn } from "../../../../theme/GlobalStyles";
-import StaffForm from "./StaffForm";
-import StaffList from "./StaffList";
+// Mui
+import { Grid, Stack } from "@mui/material";
+import styled from "@emotion/styled";
+// Custom Styles
+import {
+	ButtonStack,
+	StyledBox,
+	StyledBtn,
+	StyledPageTitle,
+} from "../../../../theme/GlobalStyles";
+// Custom Icons
+import { AppIcon } from "../../../../constants/icons";
+// Components
+import StaffList from "./StaffList/Index";
 import StatusStack from "./StatusStack";
+import StaffForm from "./StaffForm/Index";
 
 const StaffMaintenance = () => {
 	const [selectedStaff, setSelectedStaff] = useState(null);
 
+	// Func to select staff
 	const handleSelectStaff = (staff) => {
-		console.log(staff);
 		setSelectedStaff(staff);
 	};
 
 	return (
 		<StyledBox>
-			<Stack direction={"row"} justifyContent="space-between" alignItems={"center"} mb={3}>
-				<Typography variant="h5" color={"primary"}>
-					Staff Maintenance
-				</Typography>
-				<StyledBtn variant="contained" startIcon={<AddIcon />}>
+			{/* Page header */}
+			<Stack
+				direction={"row"}
+				justifyContent="space-between"
+				alignItems={"center"}
+				mb={1}
+			>
+				<StyledPageTitle mb={2}>Staff Maintenance</StyledPageTitle>
+				<StyledBtn variant="contained" startIcon={<AppIcon icon="Add" />}>
 					Add Staff
 				</StyledBtn>
 			</Stack>
+			{/* Page header */}
+
 			<Grid container spacing={2}>
+				{/* Staff List  */}
 				<Grid item sm={12} md={4} lg={3}>
-					<StaffList handleSelectStaff={handleSelectStaff} selectedStaff={selectedStaff} data={data} />
+					<StaffList
+						handleSelectStaff={handleSelectStaff}
+						selectedStaff={selectedStaff}
+					/>
 				</Grid>
+				{/* Staff List  */}
+
 				<Grid item sm={12} md={8} lg={9}>
-					<Stack direction={"column"} rowGap={2}>
+					<StyledStack direction={"column"} rowGap={2}>
+						{/* Staff Status Cards */}
 						<StatusStack />
-						<StaffForm selectedStaff={selectedStaff} />
-					</Stack>
+						{/* Staff Status Cards */}
+						{/* Staff Form  */}
+						<StaffForm />
+						{/* Staff Form  */}
+					</StyledStack>
 				</Grid>
 			</Grid>
+			{/* Form Action Buttons */}
 			<Stack direction={"row"} alignItems="center" justifyContent={"flex-end"} my={3}>
-				<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"} btnwidth={120}>
+				<ButtonStack
+					direction={"row"}
+					alignItems="center"
+					justifyContent={"center"}
+					btnwidth={120}
+				>
 					<StyledBtn variant="contained" color={"primary"}>
 						Save
 					</StyledBtn>
@@ -48,61 +80,16 @@ const StaffMaintenance = () => {
 					</StyledBtn>
 				</ButtonStack>
 			</Stack>
+			{/* Form Action Buttons */}
 		</StyledBox>
 	);
 };
 
 export default StaffMaintenance;
 
-const data = [
-	{
-		id: 1,
-		name: "david crotty",
-		code: "AL",
-		email: "david.crotty@gmail.com",
-		userType: "Marketing",
-		date: new Date(),
-		role: "Analyst",
-		rate: "$940",
-		status: "active",
-		parameters: [
-			{
-				id: 1,
-				param1: 1023,
-				param2: 2342,
-				desc: "Nama Jalu",
-			},
-			{
-				id: 2,
-				param1: 1023,
-				param2: 2342,
-				desc: "Jalu Nama",
-			},
-		],
+// Styles
+const StyledStack = styled(Stack)(({ theme }) => ({
+	"& .MuiBox-root": {
+		border: `1px solid ${theme.palette.border}`,
 	},
-	{
-		id: 2,
-		name: "Brad Astbury",
-		code: "NM2",
-		email: "brad.astbury@gmail.com",
-		userType: "Developer",
-		date: new Date(),
-		role: "FrontEnd",
-		rate: "$840",
-		status: "available",
-		parameters: [
-			{
-				id: 1,
-				param1: 823,
-				param2: 2342,
-				desc: "Desc 1",
-			},
-			{
-				id: 2,
-				param1: 823,
-				param2: 2342,
-				desc: "Desc 2",
-			},
-		],
-	},
-];
+}));
