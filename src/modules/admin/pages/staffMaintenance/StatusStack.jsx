@@ -97,7 +97,8 @@ const StatusCard = styled(Stack)(({ theme }) => ({
 	backgroundColor: palette.highlight,
 	height: "100%",
 	minHeight: 200,
-	padding: theme.spacing(1),
+	paddingInline: theme.spacing(0.6),
+	paddingBlock: theme.spacing(1.5),
 	borderRadius: 5,
 	border: `1px solid ${palette.border}`,
 }));
