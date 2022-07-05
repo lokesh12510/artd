@@ -12,25 +12,39 @@ import { EditIcon } from "../../../../../constants/icons";
 import { useState } from "react";
 
 const Parameters = () => {
-	const [field, setField] = useState(false);
+	const [field, setField] = useState({
+		value: "",
+		node: null,
+	});
 
-	const handleField = (item) => {
-		setField(item);
+	const handleField = (value, node) => {
+		setField({ value, node });
 	};
 
+	function findNode(node) {
+		if (field.node && node === field.node + 1) return "bottomNode";
+		else if (field.node && node === field.node - 1) return "topNode";
+		else if (field.node && node === field.node) return "merge";
+		else return "normal";
+	}
+
 	return (
-		<StyledBox>
-			<Stack direction={"column"} justifyContent="flex-start" spacing={2}>
-				<StyledPageTitle>Parameters</StyledPageTitle>
-				<InputField name="As of Week" value={0} select>
-					<MenuItem value={0}>Select</MenuItem>
-					<MenuItem value={1}>News</MenuItem>
-				</InputField>
-				<div>
-					<DateIndicator>07 Apr 2022</DateIndicator>
-				</div>
-				<Divider />
-				<MergeStack className={`field  ${field === "role" && "merge"}`}>
+		<>
+			<Stack direction={"column"} justifyContent="flex-start">
+				<StyledBox className={`field ${findNode(0)}`}>
+					<StyledPageTitle>Parameters</StyledPageTitle>
+					<InputField name="As of Week" value={0} select>
+						<MenuItem value={0}>Select</MenuItem>
+						<MenuItem value={1}>News</MenuItem>
+					</InputField>
+					<div>
+						<DateIndicator>07 Apr 2022</DateIndicator>
+					</div>
+				</StyledBox>
+
+				{/* Select Fields  */}
+
+				<MergeStack className={`field ${findNode(1)}`}>
 					<InputField name="Role" value={""} select>
 						<MenuItem value={"Analyst"}>Analyst</MenuItem>
 						<MenuItem value={"FrontEnd"}>Developer</MenuItem>
@@ -38,18 +52,13 @@ const Parameters = () => {
 
 					<IconButton
 						style={{ marginBottom: "10px" }}
-						onClick={() => handleField("role")}
+						onClick={() => handleField("role", 1)}
 					>
 						<EditIcon bg={palette.primary.main} />
 					</IconButton>
-					{field === "role" && (
-						<>
-							{" "}
-							<MergeEle />{" "}
-						</>
-					)}
+					{field.node === 1 && <MergeEle />}
 				</MergeStack>
-				<MergeStack className={`field  ${field === "rate" && "merge"}`}>
+				<MergeStack className={`field ${findNode(2)}`}>
 					<InputField name="Rate" value={""} select>
 						<MenuItem value={"$940"}>$940</MenuItem>
 						<MenuItem value={"$840"}>$840</MenuItem>
@@ -57,79 +66,98 @@ const Parameters = () => {
 
 					<IconButton
 						style={{ marginBottom: "10px" }}
-						onClick={() => handleField("rate")}
+						onClick={() => handleField("rate", 2)}
 					>
 						<EditIcon bg={palette.primary.main} />
 					</IconButton>
-					{field === "rate" && (
-						<>
-							{" "}
-							<MergeEle />{" "}
-						</>
-					)}
+					{field.node === 2 && <MergeEle />}
 				</MergeStack>
-				<MergeStack>
+				<MergeStack className={`field ${findNode(3)}`}>
 					<InputField name="Portfolio" value={0} select>
 						<MenuItem value={0}>KoE</MenuItem>
 						<MenuItem value={1}>KoE</MenuItem>
 					</InputField>
 
-					<IconButton style={{ marginBottom: "10px" }}>
+					<IconButton
+						style={{ marginBottom: "10px" }}
+						onClick={() => handleField("portfolio", 3)}
+					>
 						<EditIcon bg={palette.primary.main} />
 					</IconButton>
+					{field.node === 3 && <MergeEle />}
 				</MergeStack>
-				<MergeStack>
+				<MergeStack className={`field ${findNode(4)}`}>
 					<InputField name="Chargeable Ratio" value={0} select>
 						<MenuItem value={0}>8000</MenuItem>
 						<MenuItem value={1}>2000</MenuItem>
 					</InputField>
 
-					<IconButton style={{ marginBottom: "10px" }}>
+					<IconButton
+						style={{ marginBottom: "10px" }}
+						onClick={() => handleField("chargeable", 4)}
+					>
 						<EditIcon bg={palette.primary.main} />
 					</IconButton>
+					{field.node === 4 && <MergeEle />}
 				</MergeStack>
-				<MergeStack>
+				<MergeStack className={`field ${findNode(5)}`}>
 					<InputField name="Productivity Rate" value={0} select>
 						<MenuItem value={0}>6500</MenuItem>
 						<MenuItem value={1}>2000</MenuItem>
 					</InputField>
 
-					<IconButton style={{ marginBottom: "10px" }}>
+					<IconButton
+						style={{ marginBottom: "10px" }}
+						onClick={() => handleField("productivity", 5)}
+					>
 						<EditIcon bg={palette.primary.main} />
 					</IconButton>
+					{field.node === 5 && <MergeEle />}
 				</MergeStack>
-				<MergeStack>
+				<MergeStack className={`field ${findNode(6)}`}>
 					<InputField name="Agreement Days" value={0} select>
 						<MenuItem value={0}>5.0</MenuItem>
 						<MenuItem value={1}>2.0</MenuItem>
 					</InputField>
 
-					<IconButton style={{ marginBottom: "10px" }}>
+					<IconButton
+						style={{ marginBottom: "10px" }}
+						onClick={() => handleField("days", 6)}
+					>
 						<EditIcon bg={palette.primary.main} />
 					</IconButton>
+					{field.node === 6 && <MergeEle />}
 				</MergeStack>
-				<MergeStack>
+				<MergeStack className={`field ${findNode(7)}`}>
 					<InputField name="Salary" value={0} select>
 						<MenuItem value={0}>$62,000</MenuItem>
 						<MenuItem value={1}>$34,000</MenuItem>
 					</InputField>
 
-					<IconButton style={{ marginBottom: "10px" }}>
+					<IconButton
+						style={{ marginBottom: "10px" }}
+						onClick={() => handleField("salary", 7)}
+					>
 						<EditIcon bg={palette.primary.main} />
 					</IconButton>
+					{field.node === 7 && <MergeEle />}
 				</MergeStack>
-				<MergeStack>
+				<MergeStack className={`field ${findNode(8)}`}>
 					<InputField name="Windows Logon" value={0} select>
 						<MenuItem value={0}>david.watling</MenuItem>
 						<MenuItem value={1}>david.watling</MenuItem>
 					</InputField>
 
-					<IconButton style={{ marginBottom: "10px" }}>
+					<IconButton
+						style={{ marginBottom: "10px" }}
+						onClick={() => handleField("windows", 8)}
+					>
 						<EditIcon bg={palette.primary.main} />
 					</IconButton>
+					{field.node === 8 && <MergeEle />}
 				</MergeStack>
 			</Stack>
-		</StyledBox>
+		</>
 	);
 };
 
@@ -145,8 +173,25 @@ const MergeStack = styled((props) => (
 	/>
 ))(({ theme }) => ({
 	position: "relative",
+	padding: 15,
+	border: `1px solid ${palette.grey[300]}`,
+	borderBottom: "none",
+	borderTop: "none",
+	"&:last-of-type": {
+		borderBottom: `1px solid ${palette.grey[300]}`,
+	},
+	"&.topNode": {
+		borderBottom: `1px solid ${palette.grey[300]}`,
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
+	},
+	"&.bottomNode": {
+		borderTop: `1px solid ${palette.grey[300]}`,
+		borderTopLeftRadius: 10,
+		borderTopRightRadius: 10,
+	},
 	"&.merge": {
-		padding: "15px",
+		marginBlock: "21px",
 		border: `1px solid ${palette.grey[300]}`,
 		zIndex: 3,
 		background: "#fff",
@@ -183,10 +228,10 @@ const MergeStack = styled((props) => (
 
 const MergeEle = styled("div")(() => ({
 	width: "98px",
-	height: "39px",
+	height: "40px",
 	position: "absolute",
-	top: 29,
-	right: -66,
+	top: 28,
+	right: -48,
 	border: "1px solid  #DFE3E8",
 	borderColor: "transparent  #DFE3E8",
 	background: "#fff",
