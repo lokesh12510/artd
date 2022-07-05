@@ -1,6 +1,6 @@
 import React from "react";
 // Mui
-import { Divider, IconButton, MenuItem, Stack } from "@mui/material";
+import { IconButton, MenuItem, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 // Custom Components
 import InputField from "../../../../../components/InputField";
@@ -29,17 +29,17 @@ const Parameters = () => {
 	}
 
 	return (
-		<>
+		<Root>
 			<Stack direction={"column"} justifyContent="flex-start">
-				<StyledBox className={`field ${findNode(0)}`}>
+				<StyledBox className={`field ${findNode(0)}`} sx={{ borderRadius: 0 }}>
 					<StyledPageTitle>Parameters</StyledPageTitle>
 					<InputField name="As of Week" value={0} select>
 						<MenuItem value={0}>Select</MenuItem>
 						<MenuItem value={1}>News</MenuItem>
 					</InputField>
-					<div>
+					<Stack mt={1}>
 						<DateIndicator>07 Apr 2022</DateIndicator>
-					</div>
+					</Stack>
 				</StyledBox>
 
 				{/* Select Fields  */}
@@ -157,11 +157,24 @@ const Parameters = () => {
 					{field.node === 8 && <MergeEle />}
 				</MergeStack>
 			</Stack>
-		</>
+		</Root>
 	);
 };
 
 export default Parameters;
+
+const Root = styled("div")(() => ({
+	"& .topNode": {
+		borderBottom: `1px solid ${palette.grey[300]}`,
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
+	},
+	"& .bottomNode": {
+		borderTop: `1px solid ${palette.grey[300]}`,
+		borderTopLeftRadius: 10,
+		borderTopRightRadius: 10,
+	},
+}));
 
 const MergeStack = styled((props) => (
 	<Stack
@@ -174,22 +187,15 @@ const MergeStack = styled((props) => (
 ))(({ theme }) => ({
 	position: "relative",
 	padding: 15,
-	border: `1px solid ${palette.grey[300]}`,
-	borderBottom: "none",
-	borderTop: "none",
+	borderLeft: `1px solid ${palette.grey[300]}`,
+	borderRight: `1px solid ${palette.grey[300]}`,
+	borderBottom: `1px solid ${palette.common.white}`,
+	borderTop: `1px solid ${palette.common.white}`,
 	"&:last-of-type": {
 		borderBottom: `1px solid ${palette.grey[300]}`,
 	},
-	"&.topNode": {
-		borderBottom: `1px solid ${palette.grey[300]}`,
-		borderBottomLeftRadius: 10,
-		borderBottomRightRadius: 10,
-	},
-	"&.bottomNode": {
-		borderTop: `1px solid ${palette.grey[300]}`,
-		borderTopLeftRadius: 10,
-		borderTopRightRadius: 10,
-	},
+	transition: "all .2s ease-in",
+
 	"&.merge": {
 		marginBlock: "21px",
 		border: `1px solid ${palette.grey[300]}`,
@@ -227,11 +233,11 @@ const MergeStack = styled((props) => (
 }));
 
 const MergeEle = styled("div")(() => ({
-	width: "98px",
-	height: "40px",
+	width: "99px",
+	height: "22px",
 	position: "absolute",
-	top: 28,
-	right: -48,
+	top: 37,
+	right: -58,
 	border: "1px solid  #DFE3E8",
 	borderColor: "transparent  #DFE3E8",
 	background: "#fff",
