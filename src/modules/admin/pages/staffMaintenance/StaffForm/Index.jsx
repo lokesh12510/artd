@@ -1,5 +1,7 @@
-import { Grid } from "@mui/material";
 import React from "react";
+// Mui
+import { Grid } from "@mui/material";
+// Components
 import Form from "./Form";
 import Parameters from "./Parameters";
 import EditParameters from "./EditParameters";

@@ -11,6 +11,7 @@ const AppRoutes = () => {
 	const location = useLocation();
 	const dispatch = useDispatch();
 
+	// * Effect to reset page config like `page title` when navigating to another page
 	useLayoutEffect(() => {
 		dispatch(resetPage());
 	}, [dispatch, location.pathname]);

@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+// Mui
 import {
 	Checkbox,
 	IconButton,
@@ -6,46 +7,46 @@ import {
 	TableCell,
 	TableRow,
 } from "@mui/material";
+import styled from "@emotion/styled";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+// Custom Styles
+import { StyledInput } from "../../../../../theme/GlobalStyles";
 import palette from "../../../../../theme/palette";
+// Custom Icons
 import {
 	CopyIcon,
 	DeleteIcon,
 	EditIcon,
 	EyeIcon,
 } from "../../../../../constants/icons";
+// Icons
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import styled from "@emotion/styled";
-import { StyledInput } from "../../../../../theme/GlobalStyles";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { editProjectRow } from "../../../../../app/slices/projectPlanningSlice";
+// Redux
 import { useDispatch } from "react-redux";
+import { editProjectRow } from "../../../../../app/slices/projectPlanningSlice";
 
 const StickyRowItem = ({ row, cols, isItemSelected, rowIndex }) => {
-	console.log("rendered Sticky Row", row);
-
 	const dispatch = useDispatch();
 
+	// Func to handle Input field change event
 	const handleValueChange = (e, id) => {
 		dispatch(editProjectRow({ name: e.target.name, value: e.target.value, id }));
 	};
 
+	// Func to handle date field change event
 	const handleDateChange = (val, id) => {
 		dispatch(editProjectRow({ name: "date", value: val, id }));
 	};
 
+	// Func to change to completed status of pending rows
 	const handleCheckbox = (val, id) => {
 		dispatch(editProjectRow({ name: "isCompleted", value: !val, id }));
 	};
 
 	return (
-		<TableRow
-			key={row.id}
-			// sx={row.isCompleted && !open && visuallyHidden}
-			// // onClick={(event) => handleClick(event, row.id)}
-			// selected={true}
-			selected={row.isCompleted ? true : isItemSelected}
-		>
+		<TableRow key={row.id} selected={row.isCompleted ? true : isItemSelected}>
+			{/* Checkbox */}
 			<TableCell scope="row" align="center">
 				<Checkbox
 					color="primary"
@@ -54,6 +55,9 @@ const StickyRowItem = ({ row, cols, isItemSelected, rowIndex }) => {
 					checked={row.isCompleted}
 				/>
 			</TableCell>
+			{/* Checkbox */}
+
+			{/* Icons Cell to show different icons when status changes */}
 			<TableCell align="center" style={{ width: 100 }}>
 				{isItemSelected || row.isCompleted ? (
 					<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
@@ -93,6 +97,9 @@ const StickyRowItem = ({ row, cols, isItemSelected, rowIndex }) => {
 					</Stack>
 				)}
 			</TableCell>
+			{/* Icons Cell to show different icons when status changes */}
+
+			{/* Pending rows looping */}
 			{cols
 				.slice(2)
 				.filter((item) => !item.includes("_"))
@@ -142,6 +149,7 @@ const StickyRowItem = ({ row, cols, isItemSelected, rowIndex }) => {
 
 export default memo(StickyRowItem);
 
+// Styles
 const StyledTableCell = styled(TableCell)(({ theme, label }) => ({
 	[theme.breakpoints.down("md")]: {
 		minWidth:

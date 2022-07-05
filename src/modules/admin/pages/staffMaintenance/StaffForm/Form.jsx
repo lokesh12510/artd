@@ -33,6 +33,7 @@ const Form = () => {
 						</FormGroup>
 					</Stack>
 				</Grid>
+
 				<Grid item xs>
 					<Stack direction={"column"} spacing={2}>
 						{/* Type */}

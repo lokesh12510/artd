@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+// Mui
 import {
 	Checkbox,
 	IconButton,
@@ -6,45 +7,47 @@ import {
 	TableCell,
 	TableRow,
 } from "@mui/material";
-import palette from "../../../../../theme/palette";
-import { DeleteIcon, EyeIcon } from "../../../../../constants/icons";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { visuallyHidden } from "@mui/utils";
+// Mui Icons
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+// Custom Styles
+import palette from "../../../../../theme/palette";
+// Custom Icons
 import {
 	StyledInput,
 	StyledTableCell,
 } from "../../../../../theme/GlobalStyles";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { DeleteIcon, EyeIcon } from "../../../../../constants/icons";
+// Redux
+import { useSelector } from "react-redux";
 import {
 	isCompletedOpen,
 	projectColumnList,
 	selectCompletedRows,
 } from "../../../../../app/slices/projectPlanningSlice";
-import { useSelector } from "react-redux";
-import { visuallyHidden } from "@mui/utils";
 
 const StickyCompRowItem = () => {
 	const rows = useSelector(selectCompletedRows);
 	const cols = useSelector(projectColumnList);
 
 	return rows.map((row) => {
-		console.log("rendered Scroll Completed Row", row.id);
 		return <RowItem cols={cols} row={row} key={row.id} />;
 	});
 };
 export default memo(StickyCompRowItem);
 
 const RowItem = memo(({ cols, row }) => {
-	console.log("rendered Sticky Completed Row", row.id);
 	const open = useSelector(isCompletedOpen);
+
 	return (
 		<TableRow
 			key={row.id}
-			sx={row.isCompleted && !open && visuallyHidden}
-			// // onClick={(event) => handleClick(event, row.id)}
-			// selected={true}
+			sx={row.isCompleted && !open && visuallyHidden} // Styling to hide or show completed rows
 			selected={true}
 		>
+			{/* Checkbox */}
 			<TableCell scope="row" align="center">
 				<Checkbox
 					color="primary"
@@ -53,6 +56,9 @@ const RowItem = memo(({ cols, row }) => {
 					checked={true}
 				/>
 			</TableCell>
+			{/* Checkbox */}
+
+			{/* Icons Cell */}
 			<TableCell align="center" style={{ width: 100 }}>
 				<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
 					<IconButton color="primary" aria-label="upload picture" component="span">
@@ -67,6 +73,9 @@ const RowItem = memo(({ cols, row }) => {
 					</IconButton>
 				</Stack>
 			</TableCell>
+			{/* Icons Cell */}
+
+			{/* Completed rows loop */}
 			{cols
 				.slice(2)
 				.filter((item) => !item.includes("_"))

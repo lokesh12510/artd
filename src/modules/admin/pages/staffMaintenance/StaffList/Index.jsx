@@ -86,6 +86,6 @@ const StaffListContainer = styled(Stack)(({ theme }) => ({
 	width: "100%",
 	height: "100%",
 	border: `1px solid ${theme.palette.secondary.main}`,
-	borderRadius: 10,
+	borderRadius: 7,
 	overflow: "hidden",
 }));

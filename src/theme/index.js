@@ -1,11 +1,12 @@
+import React, { useMemo } from "react";
+// Mui
 import {
 	createTheme,
 	CssBaseline,
 	StyledEngineProvider,
 	ThemeProvider,
 } from "@mui/material";
-import React, { useMemo } from "react";
-
+// Addition override styles in JS
 import palette from "./palette";
 import typography from "./typography";
 

@@ -1,11 +1,11 @@
-import React from "react";
-
+import React, { useCallback } from "react";
+// Redux
 import { useSelector } from "react-redux";
 import {
 	projectColumnList,
 	selectPendingRows,
 } from "../../../../../app/slices/projectPlanningSlice";
-import { useCallback } from "react";
+// Components
 import StickyRowItem from "./StickyRowItem";
 
 const StickyRows = React.memo(({ selected = [] }) => {

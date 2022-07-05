@@ -38,7 +38,11 @@ const SidebarListItem = ({ open, item, handleOpen, isOpen }) => {
 					}
 				>
 					<ListItemIcon>
-						<AppIcon icon={item.icon} color={isActive ? "light" : "primary"} />
+						<AppIcon
+							icon={item.icon}
+							color={isActive ? "light" : "primary"}
+							fontSize={open ? "small" : "medium"}
+						/>
 					</ListItemIcon>
 					<ListItemText secondary={item.title} />
 					{open &&
@@ -67,10 +71,12 @@ const SidebarListItem = ({ open, item, handleOpen, isOpen }) => {
 	);
 };
 
-const SidebarListWrapper = memo(({ open }) => {
+const SidebarListWrapper = memo(({ open, handleToggle }) => {
 	const [isOpen, setIsOpen] = useState("");
 
 	const handleOpen = (title) => {
+		// console.log("clicked");
+		// handleToggle();
 		setIsOpen((t) => (t === title ? "" : title));
 	};
 
@@ -133,7 +139,7 @@ const Sidebar = ({ open, handleToggle }) => {
 				</Typography>
 			</ProfileContainer>
 			{/* Sidebar List component */}
-			<SidebarListWrapper open={open} />
+			<SidebarListWrapper open={open} handleToggle={handleToggle} />
 		</Root>
 	);
 

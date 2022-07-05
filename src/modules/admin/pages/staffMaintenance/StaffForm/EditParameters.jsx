@@ -26,6 +26,9 @@ const EditParameters = () => {
 					<Typography variant="body1">Roles</Typography>
 					<Divider />
 				</div>
+
+				{/* ---------- Selected Staff Parameters loop ---------- */}
+
 				{selectedStaff &&
 					selectedStaff.map((item, i) => {
 						return (
@@ -52,7 +55,7 @@ const EditParameters = () => {
 								</StyledSelect>
 
 								<IconButton>
-									<AppIcon icon="Delete" color="primary" fontSize="small" />
+									<AppIcon icon="Delete" color={"primary"} fontSize="small" />
 								</IconButton>
 								<IconButton>
 									<AppIcon icon="Add" color="primary" fontSize="small" />
@@ -60,6 +63,8 @@ const EditParameters = () => {
 							</EditStackItem>
 						);
 					})}
+
+				{/* ---------- Selected Staff Parameters loop ---------- */}
 			</Stack>
 		</StyledBox>
 	);
@@ -67,6 +72,7 @@ const EditParameters = () => {
 
 export default EditParameters;
 
+// Mock Data
 const selectedStaff = [
 	{
 		param1: "823",
@@ -80,6 +86,7 @@ const selectedStaff = [
 	},
 ];
 
+// Styles
 const EditStackItem = styled(Stack)(({ theme }) => ({
 	"& .MuiOutlinedInput-root": {
 		"& .MuiSelect-select": {

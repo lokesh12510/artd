@@ -1,9 +1,11 @@
 import React, { useCallback } from "react";
+// Redux
 import { useSelector } from "react-redux";
 import {
 	projectColumnList,
 	selectPendingRows,
 } from "../../../../../app/slices/projectPlanningSlice";
+// Components
 import ScrollRowItem from "./ScrollRowItem";
 
 const ScrollRows = React.memo(({ selected = [] }) => {
@@ -11,9 +13,9 @@ const ScrollRows = React.memo(({ selected = [] }) => {
 
 	const cols = useSelector(projectColumnList);
 
+	// All callback should wrapped with `useCallback` hook for better performance in table
 	const isSelected = useCallback((id) => selected.indexOf(id) !== -1, [selected]);
 
-	console.log("rendered Scroll Rows", rows);
 	return rows.map((row, index) => {
 		const isItemSelected = isSelected(row.id);
 

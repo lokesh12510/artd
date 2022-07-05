@@ -13,6 +13,12 @@ import {
 import { styled } from "@mui/material/styles";
 import palette from "./palette";
 
+/* 
+	* In this page we provided additional custom styling.
+	* To override specific styles of default Mui component and To create own styled components.
+
+*/
+
 export const StyledBox = styled(Box)(({ theme }) => ({
 	minHeight: "60px",
 	backgroundColor: palette.common.white,
@@ -96,8 +102,10 @@ export const StyledInput = styled(TextField)(({ theme, align = "left" }) => ({
 	width: "100%",
 	borderRadius: 2,
 
-	"& .MuiOutlinedInput-input": {
+	"& .MuiOutlinedInput-root": {
 		backgroundColor: palette.common.white,
+	},
+	"& .MuiOutlinedInput-input": {
 		// height: "100%",
 		padding: theme.spacing(1.25),
 		// fontSize: 14,

@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+// Mui
 import {
 	Stack,
 	Typography,
@@ -7,10 +9,8 @@ import {
 	TableContainer,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useEffect, useState } from "react";
+// Custom Styles
 import palette from "../../../../theme/palette";
-
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import {
 	StyledBtn,
 	StyledBox,
@@ -19,6 +19,9 @@ import {
 	StyledHeaderBox,
 	ButtonStack,
 } from "../../../../theme/GlobalStyles";
+// Icons
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+// Components
 import MiniGrid from "./MiniGrid";
 import TaskInput from "./TaskInput";
 import SummaryModal from "./SummaryModal";
@@ -26,9 +29,10 @@ import DescriptionModal from "./DescriptionModal";
 import ExpenseModal from "./ExpenseModal";
 import OutputModal from "./OutputModal";
 import ProjectPlanning from "./ProjectTable/Index";
+// Router
 import { Link } from "react-router-dom";
 import { urls } from "../../urls";
-
+// Redux
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../../app/slices/pageSlice";
 
@@ -64,6 +68,7 @@ const Dashboard = () => {
 	return (
 		<>
 			<Stack spacing={2}>
+				{/* Page Header Section */}
 				<StyledHeaderBox>
 					<StyledBtn
 						variant="outlined"
@@ -87,7 +92,10 @@ const Dashboard = () => {
 					</ProjectInfo>
 					<StyledInput value="The Big Project" variant="outlined" />
 				</StyledHeaderBox>
+				{/* Page Header Section */}
+
 				<StyledBox>
+					{/*------------- Scrollable Table Grid Section ------------  */}
 					<ScrollTableContainer>
 						<TableHeader
 							direction={"row"}
@@ -125,10 +133,12 @@ const Dashboard = () => {
 								</StyledBtn>
 							</ButtonStack>
 						</TableHeader>
-						{/* <StickyColTable data={data} /> */}
+						{/* Project Planning Table comp */}
 						<ProjectPlanning />
-						{/* <AgGrid /> */}
+						{/* Project Planning Table comp */}
 					</ScrollTableContainer>
+					{/*------------- Scrollable Table Grid Section ------------ */}
+
 					<Stack
 						direction={"row"}
 						alignItems="center"
@@ -138,6 +148,7 @@ const Dashboard = () => {
 						<Typography variant="h6" color="primary" fontWeight={"600"}>
 							Deliverables
 						</Typography>
+
 						<ButtonStack direction={"row"} alignItems="center" justifyContent={"center"}>
 							<StyledBtn
 								variant="contained"
@@ -157,14 +168,22 @@ const Dashboard = () => {
 							</StyledBtn>
 						</ButtonStack>
 					</Stack>
+
 					<Grid container spacing={2}>
+						{/* Deliverables Minimized Table Grid Section */}
 						<Grid item xs={12} md={5} lg={5}>
 							<MiniGrid />
 						</Grid>
+						{/* Deliverables Minimized Table Grid Section */}
+
+						{/* Task input Horizontal Scrollable Section  */}
 						<Grid item xs={12} md={7} lg={7}>
 							<TaskInput />
 						</Grid>
+						{/* Task input Horizontal Scrollable Section  */}
 					</Grid>
+
+					{/* Project Planning Action Button Section */}
 					<Stack direction={"row"} alignItems="center" justifyContent={"flex-end"} my={3}>
 						<ButtonStack
 							direction={"row"}
@@ -183,6 +202,7 @@ const Dashboard = () => {
 							</StyledBtn>
 						</ButtonStack>
 					</Stack>
+					{/* Project Planning Action Button Section */}
 				</StyledBox>
 			</Stack>
 			{/* -----------------------  MODAL COMPONENTS  ------------------------ */}
@@ -202,6 +222,7 @@ const Dashboard = () => {
 
 export default Dashboard;
 
+// Styles
 const ProjectInfo = styled(Stack)(({ theme }) => ({
 	gap: theme.spacing(1.5),
 }));

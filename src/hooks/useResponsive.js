@@ -2,6 +2,15 @@
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+/* 
+	This hook will return a boolean for media query value
+
+	const isMd = useResponsive("up", "md")
+
+	console.log(isMd)  // true if current screen above 'md' 
+
+*/
+
 const useResponsive = (query, key, start, end) => {
 	const theme = useTheme();
 

@@ -12,6 +12,7 @@ import { EditIcon } from "../../../../../constants/icons";
 import { useState } from "react";
 
 const Parameters = () => {
+	// Active field State
 	const [field, setField] = useState({
 		value: "",
 		node: null,
@@ -21,6 +22,7 @@ const Parameters = () => {
 		setField({ value, node });
 	};
 
+	// Func to find the active and near to active nodes
 	function findNode(node) {
 		if (field.node && node === field.node + 1) return "bottomNode";
 		else if (field.node && node === field.node - 1) return "topNode";
@@ -31,11 +33,12 @@ const Parameters = () => {
 	return (
 		<Root>
 			<Stack direction={"column"} justifyContent="flex-start">
+				{/* Section 1 */}
 				<StyledBox
 					className={`field ${findNode(0)}`}
 					sx={{ borderRadius: 0, borderTopRightRadius: 5, borderTopLeftRadius: 5 }}
 				>
-					<StyledPageTitle>Parameters</StyledPageTitle>
+					<StyledPageTitle mb={2}>Parameters</StyledPageTitle>
 					<InputField name="As of Week" value={0} select>
 						<MenuItem value={0}>Select</MenuItem>
 						<MenuItem value={1}>News</MenuItem>
@@ -44,9 +47,11 @@ const Parameters = () => {
 						<DateIndicator>07 Apr 2022</DateIndicator>
 					</Stack>
 				</StyledBox>
+				{/* Section 1 */}
 
-				{/* Select Fields  */}
+				{/* Section 2  */}
 
+				{/* Role */}
 				<MergeStack className={`field ${findNode(1)}`}>
 					<InputField name="Role" value={""} select>
 						<MenuItem value={"Analyst"}>Analyst</MenuItem>
@@ -61,6 +66,8 @@ const Parameters = () => {
 					</IconButton>
 					{field.node === 1 && <MergeEle />}
 				</MergeStack>
+
+				{/* Rate */}
 				<MergeStack className={`field ${findNode(2)}`}>
 					<InputField name="Rate" value={""} select>
 						<MenuItem value={"$940"}>$940</MenuItem>
@@ -75,6 +82,8 @@ const Parameters = () => {
 					</IconButton>
 					{field.node === 2 && <MergeEle />}
 				</MergeStack>
+
+				{/* Portfolio */}
 				<MergeStack className={`field ${findNode(3)}`}>
 					<InputField name="Portfolio" value={0} select>
 						<MenuItem value={0}>KoE</MenuItem>
@@ -89,6 +98,8 @@ const Parameters = () => {
 					</IconButton>
 					{field.node === 3 && <MergeEle />}
 				</MergeStack>
+
+				{/* Chargeable Ratio */}
 				<MergeStack className={`field ${findNode(4)}`}>
 					<InputField name="Chargeable Ratio" value={0} select>
 						<MenuItem value={0}>8000</MenuItem>
@@ -103,6 +114,8 @@ const Parameters = () => {
 					</IconButton>
 					{field.node === 4 && <MergeEle />}
 				</MergeStack>
+
+				{/* Productivity Rate */}
 				<MergeStack className={`field ${findNode(5)}`}>
 					<InputField name="Productivity Rate" value={0} select>
 						<MenuItem value={0}>6500</MenuItem>
@@ -117,6 +130,8 @@ const Parameters = () => {
 					</IconButton>
 					{field.node === 5 && <MergeEle />}
 				</MergeStack>
+
+				{/* Agreement Days */}
 				<MergeStack className={`field ${findNode(6)}`}>
 					<InputField name="Agreement Days" value={0} select>
 						<MenuItem value={0}>5.0</MenuItem>
@@ -131,6 +146,8 @@ const Parameters = () => {
 					</IconButton>
 					{field.node === 6 && <MergeEle />}
 				</MergeStack>
+
+				{/* Salary */}
 				<MergeStack className={`field ${findNode(7)}`}>
 					<InputField name="Salary" value={0} select>
 						<MenuItem value={0}>$62,000</MenuItem>
@@ -145,6 +162,8 @@ const Parameters = () => {
 					</IconButton>
 					{field.node === 7 && <MergeEle />}
 				</MergeStack>
+
+				{/* Windows Logon */}
 				<MergeStack className={`field ${findNode(8)}`}>
 					<InputField name="Windows Logon" value={0} select>
 						<MenuItem value={0}>david.watling</MenuItem>
@@ -159,6 +178,8 @@ const Parameters = () => {
 					</IconButton>
 					{field.node === 8 && <MergeEle />}
 				</MergeStack>
+
+				{/* Section 2  */}
 			</Stack>
 		</Root>
 	);
@@ -166,6 +187,7 @@ const Parameters = () => {
 
 export default Parameters;
 
+// Styles
 const Root = styled("div")(() => ({
 	"& .topNode": {
 		borderBottom: `1px solid ${palette.border}`,

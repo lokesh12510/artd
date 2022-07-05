@@ -1,18 +1,23 @@
 import React, { memo } from "react";
+// Mui
+import { TableRow } from "@mui/material";
+// Custom Styles
 import {
 	StyledInput,
 	StyledTableCell,
 } from "../../../../../theme/GlobalStyles";
-import { TableRow } from "@mui/material";
-import { editProjectRow } from "../../../../../app/slices/projectPlanningSlice";
+// Redux
 import { useDispatch } from "react-redux";
+import { editProjectRow } from "../../../../../app/slices/projectPlanningSlice";
 
 const ScrollRowItem = ({ cols, row, isItemSelected, rowIndex }) => {
 	const dispatch = useDispatch();
 
+	// Func to handle change event in table cell
 	const handleValueChange = (e, id) => {
 		dispatch(editProjectRow({ name: e.target.name, value: e.target.value, id }));
 	};
+
 	return (
 		<TableRow key={row.id} selected={row.isCompleted ? true : isItemSelected}>
 			{cols
@@ -45,3 +50,4 @@ const ScrollRowItem = ({ cols, row, isItemSelected, rowIndex }) => {
 };
 
 export default memo(ScrollRowItem);
+// IMPORTANT: Every row item should wrapped within `memo`, So it will re-render only when the props changes.

@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useCallback } from "react";
+// Mui
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { IconButton, Typography } from "@mui/material";
+import styled from "@emotion/styled";
+// Custom Styles
 import palette from "../../../../../theme/palette";
-
+// Icons
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-
-import ScrollRows from "./ScrollRows";
-import styled from "@emotion/styled";
+// Redux
 import { useDispatch, useSelector } from "react-redux";
 import {
 	isCompletedOpen,
@@ -19,16 +20,18 @@ import {
 	projectColumnTotal,
 	toggleCompletedList,
 } from "../../../../../app/slices/projectPlanningSlice";
-import { useCallback } from "react";
+// Components
+import ScrollRows from "./ScrollRows";
 import ScrollCompletedRow from "./ScrollCompletedRow";
 
 const ScrollTable = () => {
-	const cols = useSelector(projectColumnList);
-	const colTotal = useSelector(projectColumnTotal);
+	const cols = useSelector(projectColumnList); // Select Columns from redux
+	const colTotal = useSelector(projectColumnTotal); // Select Column count from redux
 
 	const dispatch = useDispatch();
-	const open = useSelector(isCompletedOpen);
+	const open = useSelector(isCompletedOpen); // Select Open Status of completed rows from redux
 
+	// Func to toggle (dispatch) open status of completed rows
 	const handleCompleteOpen = useCallback(() => {
 		dispatch(toggleCompletedList());
 	}, [dispatch]);
@@ -37,8 +40,8 @@ const ScrollTable = () => {
 		return (
 			<TableRow>
 				{cols
-					.slice(2)
-					.filter((item) => item.includes("_"))
+					.slice(2) // To remove id and isCompleted columns
+					.filter((item) => item.includes("_")) // To filter only the column values that includes '_' which indicates it need to be scrolled or not
 					.map((item, index) => {
 						return (
 							<StyledTableCell align="center" label={item} key={index}>
@@ -56,11 +59,14 @@ const ScrollTable = () => {
 			size={"small"}
 			className="scroll-table"
 		>
+			{/* Scroll Table Header Cells */}
 			<TableHead>
 				<HeaderCols />
 			</TableHead>
+			{/* Scroll Table Header Cells */}
+
 			<TableBody>
-				{/* Accordion Row */}
+				{/* This row acts as button to toggle the completed row to show or not in scroll table component */}
 				<TableRow
 					sx={{
 						backgroundColor: "#e3f9ff",
@@ -84,9 +90,15 @@ const ScrollTable = () => {
 						</IconButton>
 					</TableCell>
 				</TableRow>
-				{/* Accordion Row */}
+				{/* This row acts as button to toggle the completed row to show or not in scroll table component */}
+
+				{/* Completed Rows in Scroll Component */}
 				<ScrollCompletedRow />
+				{/* Completed Rows in Scroll Component */}
+
+				{/* Pending rows in Scroll Component */}
 				<ScrollRows />
+				{/* Pending rows in Scroll Component */}
 			</TableBody>
 		</StyledScrollTable>
 	);
@@ -94,6 +106,7 @@ const ScrollTable = () => {
 
 export default ScrollTable;
 
+// Styles
 const StyledScrollTable = styled(Table)(({ theme }) => ({
 	position: "relative",
 	"& .MuiTableHead-root": {
