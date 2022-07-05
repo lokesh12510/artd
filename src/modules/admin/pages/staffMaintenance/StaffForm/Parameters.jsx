@@ -31,7 +31,10 @@ const Parameters = () => {
 	return (
 		<Root>
 			<Stack direction={"column"} justifyContent="flex-start">
-				<StyledBox className={`field ${findNode(0)}`} sx={{ borderRadius: 0 }}>
+				<StyledBox
+					className={`field ${findNode(0)}`}
+					sx={{ borderRadius: 0, borderTopRightRadius: 5, borderTopLeftRadius: 5 }}
+				>
 					<StyledPageTitle>Parameters</StyledPageTitle>
 					<InputField name="As of Week" value={0} select>
 						<MenuItem value={0}>Select</MenuItem>
@@ -168,11 +171,13 @@ const Root = styled("div")(() => ({
 		borderBottom: `1px solid ${palette.border}`,
 		borderBottomLeftRadius: 10,
 		borderBottomRightRadius: 10,
+		paddingBottom: 15,
 	},
 	"& .bottomNode": {
 		borderTop: `1px solid ${palette.border}`,
 		borderTopLeftRadius: 10,
 		borderTopRightRadius: 10,
+		paddingTop: 15,
 	},
 }));
 
@@ -186,17 +191,22 @@ const MergeStack = styled((props) => (
 	/>
 ))(({ theme }) => ({
 	position: "relative",
-	padding: 15,
+	paddingInline: 15,
+	paddingBlock: 7,
 	borderLeft: `1px solid ${palette.border}`,
 	borderRight: `1px solid ${palette.border}`,
 	borderBottom: `1px solid ${palette.common.white}`,
 	borderTop: `1px solid ${palette.common.white}`,
 	"&:last-of-type": {
 		borderBottom: `1px solid ${palette.border}`,
+		borderBottomRightRadius: 5,
+		borderBottomLeftRadius: 5,
+		paddingBottom: 15,
 	},
 	transition: "all .2s ease-in",
 
 	"&.merge": {
+		paddingBlock: 15,
 		marginBlock: "21px",
 		border: `1px solid ${palette.border}`,
 		zIndex: 3,
@@ -204,6 +214,8 @@ const MergeStack = styled((props) => (
 		borderRadius: "10px",
 		borderTopRightRadius: 0,
 		borderBottomRightRadius: 0,
+		mozBorderRadiusTopLeft: 10,
+		mozBorderRadiusTopRight: 10,
 		// "&::after": {
 		// 	content: '""',
 		// 	zIndex: -1,
@@ -243,6 +255,8 @@ const MergeEle = styled("div")(() => ({
 	background: "#fff",
 	borderTopLeftRadius: 0,
 	borderTopRightRadius: 0,
+	mozBorderRadiusTopLeft: 0,
+	mozBorderRadiusTopRight: 0,
 	transform: "rotate(-90deg)",
 
 	"&::after": {
@@ -257,6 +271,7 @@ const MergeEle = styled("div")(() => ({
 		border: `1px solid ${palette.border}`,
 		borderColor: `transparent transparent ${palette.border} transparent`,
 		borderRadius: "0 0 0 10px",
+		mozBorderRadius: "0 0 0 10px",
 		boxShadow: " -9px 0 0 0 #fff",
 		borderRight: "none",
 	},
@@ -273,6 +288,7 @@ const MergeEle = styled("div")(() => ({
 		border: `1px solid ${palette.border}`,
 		borderColor: `transparent ${palette.border} transparent transparent`,
 		borderRadius: "0 0 10px 0",
+		mozBorderRadius: "0 0 10px 0",
 		boxShadow: " 11px 0 0 0 #fff",
 		borderLeft: "none",
 	},
