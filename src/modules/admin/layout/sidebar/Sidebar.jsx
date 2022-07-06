@@ -5,6 +5,7 @@ import AppImage from "../../../../constants/images";
 import {
 	Collapse,
 	Drawer,
+	IconButton,
 	List,
 	ListItem,
 	ListItemButton,
@@ -20,6 +21,9 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { urls } from "../../urls";
+// Icons
+import ToggleIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 const SidebarListItem = ({ open, item, handleOpen, isOpen }) => {
 	const location = useLocation();
@@ -121,9 +125,17 @@ const Sidebar = ({ open, handleToggle }) => {
 			}}
 			onClose={handleToggle}
 		>
-			<LogoImg>
+			<LogoImg open={open}>
 				<img className="image" src={AppImage.Logo} alt="" />
 			</LogoImg>
+			{/* Menu Toggle Btn  */}
+			<MenuBtn
+				onClick={handleToggle}
+				// sx={{ zIndex: isMd ? 1 : 1201 }}
+			>
+				{open ? <CloseIcon color="primary" /> : <ToggleIcon color="primary" />}
+			</MenuBtn>
+			{/* Menu Toggle Btn  */}
 			<ProfileContainer
 				direction={open ? "row" : "column"}
 				spacing={open ? 1 : 0}
@@ -188,6 +200,11 @@ const MenuList = [
 				title: "Project Management",
 				pathName: "/",
 			},
+			{
+				id: 4,
+				title: "Add Extra Weeks",
+				pathName: urls.addExtraWeeks,
+			},
 		],
 	},
 	{
@@ -237,32 +254,37 @@ const MAX_WIDTH = "250px";
 const MIN_WIDTH = "120px";
 
 const Root = styled(Drawer)(({ theme, open }) => ({
-	position: "relative",
+	position: "fixed",
 	width: open ? MAX_WIDTH : MIN_WIDTH,
 	minHeight: "100vh",
 	backgroundColor: palette.common.white,
 	boxShadow: "0px 0px 4px rgba(148, 148, 148, 0.25)",
-	transition: theme.transitions.create("all", {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
 	"& .MuiPaper-root": {
-		width: open ? MAX_WIDTH : MIN_WIDTH,
-		minWidth: MIN_WIDTH,
-		transition: theme.transitions.create("width", {
+		width: "inherit",
+		transition: theme.transitions.create("all", {
 			easing: theme.transitions.easing.sharp,
 			duration: theme.transitions.duration.leavingScreen,
 		}),
 	},
 }));
 
-const LogoImg = styled("div")(({ theme }) => ({
+const LogoImg = styled("div")(({ theme, open }) => ({
 	padding: theme.spacing(2),
 	marginInline: "auto",
+	paddingBlock: !open && theme.spacing(0.5),
+	transition: theme.transitions.create("all", {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
 	"& .image": {
 		width: "100%",
 		height: "100%",
 		maxWidth: "80px",
+		transform: !open && "scale(.7) translateX(-25px)",
+		transition: theme.transitions.create("all", {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.leavingScreen,
+		}),
 	},
 }));
 
@@ -272,10 +294,10 @@ const ProfileContainer = styled(Stack)(({ theme }) => ({
 	width: "100%",
 	paddingInline: theme.spacing(3),
 	color: palette.common.white,
-	transition: theme.transitions.create("all", {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
+	// transition: theme.transitions.create("all", {
+	// 	easing: theme.transitions.easing.sharp,
+	// 	duration: theme.transitions.duration.leavingScreen,
+	// }),
 	"& .profileImg": {
 		width: 45,
 		height: 45,
@@ -342,5 +364,23 @@ const StyledListItem = styled(ListItem)(({ theme, selected }) => ({
 				backgroundColor: palette.primary.main,
 			},
 		},
+	},
+}));
+
+const MenuBtn = styled(IconButton)(({ theme, breakpointwidth }) => ({
+	position: "absolute",
+	// left: breakpointwidth,
+	right: 0,
+	top: 10,
+	// background: theme.palette.primary.main,
+	borderRadius: 3,
+	borderTopRightRadius: 0,
+	borderBottomRightRadius: 0,
+	transition: theme.transitions.create("left", {
+		easing: theme.transitions.easing.easeOut,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
+	"&:hover": {
+		// background: theme.palette.primary.dark,
 	},
 }));

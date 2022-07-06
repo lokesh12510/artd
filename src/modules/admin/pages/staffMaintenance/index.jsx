@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // Mui
 import { Grid, Stack } from "@mui/material";
 import styled from "@emotion/styled";
@@ -17,13 +17,6 @@ import StatusStack from "./StatusStack";
 import StaffForm from "./StaffForm/Index";
 
 const StaffMaintenance = () => {
-	const [selectedStaff, setSelectedStaff] = useState(null);
-
-	// Func to select staff
-	const handleSelectStaff = (staff) => {
-		setSelectedStaff(staff);
-	};
-
 	return (
 		<StyledBox>
 			{/* Page header */}
@@ -43,10 +36,7 @@ const StaffMaintenance = () => {
 			<Grid container spacing={2}>
 				{/* Staff List  */}
 				<Grid item sm={12} md={4} lg={3}>
-					<StaffList
-						handleSelectStaff={handleSelectStaff}
-						selectedStaff={selectedStaff}
-					/>
+					<StaffList />
 				</Grid>
 				{/* Staff List  */}
 

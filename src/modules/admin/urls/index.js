@@ -1,5 +1,6 @@
 import React from "react";
 import AddProject from "../pages/AddProject/Index";
+import AddExtraWeeks from "../pages/ExtraWeeks/Index";
 import Dashboard from "../pages/projectPlanning/Index";
 import StaffMaintenance from "../pages/staffMaintenance";
 
@@ -14,6 +15,7 @@ export const urls = {
 	Dashboard: "/",
 	staffMaintenance: "/staffMaintenance",
 	addProject: "/add-project",
+	addExtraWeeks: "/add-weeks",
 };
 
 // routes
@@ -22,19 +24,25 @@ const adminRoutes = [
 		path: urls.Dashboard,
 		element: <Dashboard />,
 		auth: true,
-		roles: [],
+		module_id: 2,
 	},
 	{
 		path: urls.staffMaintenance,
 		element: <StaffMaintenance />,
 		auth: true,
-		roles: [],
+		module_id: 21,
 	},
 	{
 		path: urls.addProject,
 		element: <AddProject />,
 		auth: true,
-		roles: [],
+		module_id: 12,
+	},
+	{
+		path: urls.addExtraWeeks,
+		element: <AddExtraWeeks />,
+		auth: true,
+		module_id: 15,
 	},
 ];
 

@@ -14,6 +14,39 @@ import {
 	setStaffFilter,
 	StaffFilterType,
 } from "../../../../../app/slices/staffSlice";
+import { useCallback } from "react";
+import { memo } from "react";
+
+// Filter Item component
+const FilterItem = memo(({ item, filterType, handleChange, count }) => {
+	return (
+		<FormControl>
+			<RadioGroup
+				aria-labelledby="demo-radio-buttons-group-label"
+				name="radio-buttons-group"
+				value={filterType}
+				onChange={handleChange}
+			>
+				<FormControlLabel
+					value={item}
+					control={
+						<Radio
+							size="small"
+							sx={{
+								color: palette.common.white,
+								"&.Mui-checked": {
+									color: palette.common.white,
+								},
+							}}
+						/>
+					}
+					label={item}
+				/>
+			</RadioGroup>
+			{count && <FormHelperText>{count[item]}</FormHelperText>}
+		</FormControl>
+	);
+});
 
 const FilterHeader = ({ count }) => {
 	const filters = ["active", "all", "left"];
@@ -22,9 +55,12 @@ const FilterHeader = ({ count }) => {
 	const dispatch = useDispatch();
 	const filterType = useSelector(StaffFilterType);
 
-	const handleChange = (event) => {
-		dispatch(setStaffFilter({ filter: event.target.value }));
-	};
+	const handleChange = useCallback(
+		(event) => {
+			dispatch(setStaffFilter({ filter: event.target.value }));
+		},
+		[dispatch]
+	);
 
 	return (
 		<ListHeader
@@ -34,31 +70,13 @@ const FilterHeader = ({ count }) => {
 		>
 			{filters.map((item, index) => {
 				return (
-					<FormControl key={index}>
-						<RadioGroup
-							aria-labelledby="demo-radio-buttons-group-label"
-							name="radio-buttons-group"
-							value={filterType}
-							onChange={handleChange}
-						>
-							<FormControlLabel
-								value={item}
-								control={
-									<Radio
-										size="small"
-										sx={{
-											color: palette.common.white,
-											"&.Mui-checked": {
-												color: palette.common.white,
-											},
-										}}
-									/>
-								}
-								label={item}
-							/>
-						</RadioGroup>
-						{count && <FormHelperText>{count[item]}</FormHelperText>}
-					</FormControl>
+					<FilterItem
+						item={item}
+						key={index}
+						handleChange={handleChange}
+						filterType={filterType}
+						count={count}
+					/>
 				);
 			})}
 		</ListHeader>

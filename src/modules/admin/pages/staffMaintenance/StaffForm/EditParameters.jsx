@@ -20,7 +20,12 @@ import styled from "@emotion/styled";
 const EditParameters = () => {
 	return (
 		<StyledBox style={{ height: "100%" }}>
-			<Stack direction={"column"} justifyContent="flex-start" spacing={2}>
+			<Stack
+				direction={"column"}
+				justifyContent="flex-start"
+				spacing={2}
+				sx={{ position: "sticky", top: 10 }}
+			>
 				<StyledPageTitle>Edit Parameters</StyledPageTitle>
 				<div className="">
 					<Typography variant="body1">Roles</Typography>

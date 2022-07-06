@@ -3,13 +3,25 @@ import { styled } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Error = () => {
+const Error = ({
+	title = "404",
+	desc = "Something went wrong! Please Try to refresh!",
+}) => {
 	return (
 		<Root>
-			<Typography color={"primary"} variant="h5" fontWeight={"bold"} mb={2}>
-				Something went wrong!
+			<Typography color={"primary"} variant="h1" fontWeight={"bold"} mb={2}>
+				! {title}
 			</Typography>
-			<Button component={Link} to={"/"} color="primary" variant="outlined" size="large">
+			<Typography color={"primary"} variant="p" mb={2}>
+				{desc}
+			</Typography>
+			<Button
+				component={Link}
+				to={"/"}
+				color="primary"
+				variant="outlined"
+				size="large"
+			>
 				Go To Home
 			</Button>
 		</Root>

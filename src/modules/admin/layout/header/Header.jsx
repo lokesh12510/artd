@@ -1,6 +1,12 @@
 import React from "react";
 // Mui
-import { Box, InputAdornment, Typography } from "@mui/material";
+import {
+	Box,
+	IconButton,
+	InputAdornment,
+	Stack,
+	Typography,
+} from "@mui/material";
 import styled from "@emotion/styled";
 // Custom Styles
 import { StyledInput } from "../../../../theme/GlobalStyles";
@@ -10,17 +16,34 @@ import { AppIcon } from "../../../../constants/icons";
 // Redux
 import { useSelector } from "react-redux";
 import { pageTitle } from "../../../../app/slices/pageSlice";
+// Hook
+import useResponsive from "../../../../hooks/useResponsive";
+// Icons
+import ToggleIcon from "@mui/icons-material/Menu";
 
-const Header = () => {
+const Header = ({ handleToggle }) => {
 	const title = useSelector(pageTitle);
+
+	// Responsive check for above `md`
+	const isMd = useResponsive("up", "md");
 
 	return (
 		<Root>
 			{/* Page title */}
+			<Stack direction={"row"} alignItems="center">
+				{!isMd && (
+					<IconButton
+						onClick={handleToggle}
+						// sx={{ zIndex: isMd ? 1 : 1201 }}
+					>
+						<ToggleIcon color="primary" />
+					</IconButton>
+				)}
 
-			<PageTitle variant="h5" color="primary" fontWeight={"600"}>
-				{title}
-			</PageTitle>
+				<PageTitle variant="h5" color="primary" fontWeight={"600"}>
+					{title}
+				</PageTitle>
+			</Stack>
 
 			{/* SearchBar */}
 			<SearchBar
@@ -59,10 +82,10 @@ const SearchBar = styled(StyledInput)(({ theme }) => ({
 }));
 
 const PageTitle = styled(Typography)(({ theme }) => ({
-	marginLeft: 50,
+	marginLeft: 20,
 	marginRight: 15,
 	[theme.breakpoints.down("md")]: {
-		marginLeft: 50,
+		marginLeft: 20,
 		marginRight: 10,
 	},
 }));

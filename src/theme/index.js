@@ -9,9 +9,13 @@ import {
 // Addition override styles in JS
 import palette from "./palette";
 import typography from "./typography";
+import { useTheme } from "@emotion/react";
 
 const ThemeWrapper = ({ children }) => {
 	// Option to override default Mui Theme
+
+	const muiTheme = useTheme();
+
 	const themeOptions = useMemo(
 		() => ({
 			palette,
@@ -41,8 +45,8 @@ const ThemeWrapper = ({ children }) => {
 							...typography.body2,
 							"&.Mui-disabled": {
 								"& input": {
-									color: palette.common.black,
-									WebkitTextFillColor: palette.common.black,
+									color: palette.grey[500],
+									WebkitTextFillColor: palette.grey[500],
 								},
 								backgroundColor: palette.grey[100],
 								"& fieldset": {

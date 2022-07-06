@@ -1,8 +1,13 @@
 import React, { useLayoutEffect } from "react";
+// Router
 import { Route, Routes, useLocation } from "react-router-dom";
-import AdminLayout from "../modules/admin/layout";
-import Error from "../modules/admin/pages/Error";
 import adminRoutes from "../modules/admin/urls";
+// Components
+import AdminLayout from "../modules/admin/layout";
+import authRoutes from "../modules/auth/urls/Index";
+import SecureRoute from "../modules/auth/helpers/SecureRoute";
+import GuestRoute from "../modules/auth/helpers/GuestRoute";
+import Error from "../modules/auth/pages/Error";
 // Redux
 import { useDispatch } from "react-redux";
 import { resetPage } from "../app/slices/pageSlice";
@@ -18,13 +23,33 @@ const AppRoutes = () => {
 
 	return (
 		<Routes>
+			{/* Auth module route */}
+			{authRoutes.map((auth) => {
+				return (
+					<Route
+						key={auth.path}
+						path={auth.path}
+						element={<GuestRoute>{auth.element}</GuestRoute>}
+					/>
+				);
+			})}
+
 			{/* Admin module route */}
-			<Route element={<AdminLayout />}>
-				{adminRoutes?.map((route, i) => {
-					return <Route key={i} path={route.path} element={route.element} />;
-				})}
-			</Route>
-			{/* Admin module route */}
+			{adminRoutes.map((admin) => (
+				<Route
+					key={admin.path}
+					path={admin.path}
+					element={
+						admin.auth ? (
+							<SecureRoute module_id={admin.module_id}>
+								<AdminLayout>{admin.element}</AdminLayout>
+							</SecureRoute>
+						) : (
+							<GuestRoute>{admin.element}</GuestRoute>
+						)
+					}
+				/>
+			))}
 
 			{/* 404 route */}
 			<Route path="*" element={<Error />} />
