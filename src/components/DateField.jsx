@@ -46,6 +46,11 @@ const DateField = ({ helperText, error, name, label, ...props }) => {
 				closeOnSelect
 				onClose={handleClickAway}
 				inputFormat="DD MMM YYYY"
+				components={{
+					OpenPickerIcon: () => {
+						return <CalenderIcon fontSize="small" />;
+					},
+				}}
 				{...props}
 				renderInput={(params) => (
 					<InputField
@@ -56,13 +61,6 @@ const DateField = ({ helperText, error, name, label, ...props }) => {
 						helperText={helperText}
 						autoComplete={"off"}
 						onClick={() => setOpen(true)}
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									<CalenderIcon fontSize="small" />
-								</InputAdornment>
-							),
-						}}
 					/>
 				)}
 			/>

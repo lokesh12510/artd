@@ -205,11 +205,21 @@ const MenuList = [
 			},
 			{
 				id: 3,
+				title: "Client Maintenance",
+				pathName: urls.clients,
+			},
+			{
+				id: 4,
+				title: "Invoice Maintenance",
+				pathName: urls.invoice,
+			},
+			{
+				id: 5,
 				title: "Project Management",
 				pathName: urls.projectPlanning,
 			},
 			{
-				id: 4,
+				id: 6,
 				title: "Add Extra Weeks",
 				pathName: urls.addExtraWeeks,
 			},

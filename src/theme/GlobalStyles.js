@@ -9,9 +9,9 @@ import {
 	TableCell,
 	Typography,
 	InputLabel,
-	Card,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import DataTable from "../components/DataTable";
 import palette from "./palette";
 
 /* 
@@ -46,13 +46,13 @@ export const StyledBtn = styled(Button)(({ theme, radius }) => ({
 	paddingBlock: theme.spacing(0.9),
 	paddingInline: theme.spacing(2),
 	[theme.breakpoints.down("lg")]: {
-		paddingBlock: theme.spacing(0.6),
+		// paddingBlock: theme.spacing(0.6),
 		paddingInline: theme.spacing(1.8),
 	},
 	border: `1px solid ${palette.primary.borderLight}`,
 	"& .MuiButton-startIcon": {
 		marginLeft: 0,
-		marginRight: 4,
+		marginRight: 8,
 	},
 	whiteSpace: "nowrap",
 }));
@@ -94,7 +94,7 @@ export const StyledPageTitle = styled((props) => (
 	<Typography variant="h5" {...props} />
 ))(({ theme }) => ({
 	color: palette.primary.main,
-	fontWeight: "500",
+	fontWeight: "600",
 	fontSize: 20,
 }));
 
@@ -337,4 +337,26 @@ export const StyledTableCell = styled(TableCell)(({ theme, label }) => ({
 export const CustomToolBar = styled(Box)(({ theme }) => ({
 	backgroundColor: theme.palette.common.white,
 	padding: theme.spacing(1),
+}));
+
+export const StyledDataGrid = styled(DataTable)(({ theme }) => ({
+	"& .MuiDataGrid-columnHeaders": {
+		backgroundColor: theme.palette.secondary.main,
+		color: theme.palette.common.white,
+		textTransform: "uppercase",
+		borderTopLeftRadius: 10,
+		borderTopRightRadius: 10,
+	},
+	"& .MuiDataGrid-cellContent": {
+		color: theme.palette.grey[900],
+	},
+	"& .MuiDataGrid-row": {
+		"&:nth-of-type(even)": {
+			backgroundColor: palette.action.hover,
+		},
+		"&:last-of-type": {
+			borderBottomLeftRadius: 10,
+			borderBottomRightRadius: 10,
+		},
+	},
 }));

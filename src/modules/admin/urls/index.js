@@ -1,7 +1,9 @@
 import React from "react";
 import AddProject from "../pages/AddProject/Index";
+import ClientMaintenance from "../pages/clientMaintenance/Index";
 import AddExtraWeeks from "../pages/ExtraWeeks/Index";
 import Home from "../pages/home/Index";
+import InvoiceMaintenance from "../pages/invoiceMaintenace/Index";
 import ProjectPlanning from "../pages/projectPlanning/Index";
 import StaffMaintenance from "../pages/staffMaintenance";
 
@@ -18,6 +20,8 @@ export const urls = {
 	staffMaintenance: "/staffMaintenance",
 	addProject: "/add-project",
 	addExtraWeeks: "/add-weeks",
+	clients: "/clients",
+	invoice: "/invoice",
 };
 
 // routes
@@ -51,6 +55,18 @@ const adminRoutes = [
 		element: <AddExtraWeeks />,
 		auth: true,
 		module_id: 15,
+	},
+	{
+		path: urls.clients,
+		element: <ClientMaintenance />,
+		auth: true,
+		module_id: 11,
+	},
+	{
+		path: urls.invoice,
+		element: <InvoiceMaintenance />,
+		auth: true,
+		module_id: 13,
 	},
 ];
 

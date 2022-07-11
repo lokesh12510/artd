@@ -22,7 +22,7 @@ const RadioField = ({ label, dir, radioList }) => {
 				{radioList?.map((item, index) => {
 					return (
 						<FormControlLabel
-							sx={{ marginRight: 10 }}
+							sx={{ fontWeight: "normal" }}
 							key={index}
 							value={item.value}
 							control={<Radio />}
