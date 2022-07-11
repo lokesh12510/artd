@@ -35,6 +35,7 @@ const Footer = () => {
 export default Footer;
 
 const StyledFooter = styled("footer")(() => ({
+	width: "100%",
 	position: "absolute",
 	bottom: 10,
 	paddingInline: 20,

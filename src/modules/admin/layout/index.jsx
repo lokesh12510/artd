@@ -27,9 +27,9 @@ const AdminLayout = ({ children }) => {
 	return (
 		<RootLayout>
 			<Sidebar open={isSidebarOpen} handleToggle={handleToggle} />
-			<BodyContainer open={isSidebarOpen} isMd={isMd}>
-				<Header handleToggle={handleToggle} />
-				{children}
+			<BodyContainer open={isSidebarOpen} ismd={isMd.toString()}>
+				<Header handleToggle={handleToggle} open={isSidebarOpen} />
+				<Wrapper>{children}</Wrapper>
 				<Footer />
 			</BodyContainer>
 		</RootLayout>
@@ -43,27 +43,34 @@ export default AdminLayout;
 const RootLayout = styled("main")({
 	position: "relative",
 	// display: "flex",
-	minHeight: "100%",
+	height: "100%",
+	minHeight: "100vh",
 });
 
 const drawerWidth = 250;
 const drawerMinWidth = 120;
+
+const Wrapper = styled("div")(({ theme }) => ({
+	padding: theme.spacing(1.2),
+	paddingTop: 0,
+}));
+
 const BodyContainer = styled("main", {
 	shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open, isMd }) => ({
+})(({ theme, open, ismd }) => ({
 	position: "relative",
 	flexGrow: 1,
 	minHeight: "100%",
-	padding: theme.spacing(1.2),
+	padding: 0,
 	backgroundColor: palette.body.main,
 	transition: theme.transitions.create("margin", {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.leavingScreen,
 	}),
-	...(isMd && {
+	...(ismd === "true" && {
 		marginLeft: `${open ? drawerWidth : drawerMinWidth}px`,
 	}),
-	...(!isMd && {
+	...(!ismd === "true" && {
 		marginLeft: 0,
 	}),
 

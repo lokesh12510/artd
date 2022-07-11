@@ -43,7 +43,7 @@ const Login = () => {
 
 				dispatch(authLogin({ token, user }));
 
-				navigate(urls.Dashboard); // On Success navigate to home route
+				navigate(urls.Home); // On Success navigate to home route
 			})
 			.catch((e) => {
 				console.log(e);

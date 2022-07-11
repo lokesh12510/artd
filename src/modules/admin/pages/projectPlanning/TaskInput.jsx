@@ -29,9 +29,9 @@ const TaskInput = () => {
 									<TableCell style={{ minWidth: 130 }}>
 										<Typography align="center">
 											Project Plan <br />
-											<Typography color={palette.grey[400]} mt={1} align="center">
-												(Total)
-											</Typography>
+										</Typography>
+										<Typography color={palette.grey[400]} mt={1} align="center">
+											(Total)
 										</Typography>
 									</TableCell>
 									<TableCell>
@@ -91,12 +91,9 @@ const TaskInput = () => {
 							<TableBody>
 								<TableRow>
 									<TableCell style={{ minWidth: 130 }}>
-										<Typography align="center">
-											Project Budget
-											<br />
-											<Typography color={palette.grey[400]} mt={1} align="center">
-												(Used)
-											</Typography>
+										<Typography align="center">Project Budget</Typography>
+										<Typography color={palette.grey[400]} mt={1} align="center">
+											(Used)
 										</Typography>
 									</TableCell>
 									<TableCell>
@@ -120,11 +117,9 @@ const TaskInput = () => {
 								</TableRow>
 								<TableRow>
 									<TableCell style={{ minWidth: 130 }}>
-										<Typography align="center">
-											Consultancy <br />
-											<Typography color={palette.grey[400]} mt={1} align="center">
-												(Projected)
-											</Typography>
+										<Typography align="center">Consultancy</Typography>
+										<Typography color={palette.grey[400]} mt={1} align="center">
+											(Projected)
 										</Typography>
 									</TableCell>
 									<TableCell>
@@ -148,12 +143,10 @@ const TaskInput = () => {
 								</TableRow>
 								<TableRow>
 									<TableCell style={{ maxWidth: 130 }}>
-										<Typography align="center">
-											Consultancy
-											<br />
-											<Typography color={palette.grey[400]} mt={1} align="center">
-												(projected at <br /> discounted rate)
-											</Typography>
+										<Typography align="center">Consultancy</Typography>
+
+										<Typography color={palette.grey[400]} mt={1} align="center">
+											(projected at <br /> discounted rate)
 										</Typography>
 									</TableCell>
 									<TableCell>
@@ -164,12 +157,10 @@ const TaskInput = () => {
 									</TableCell>
 								</TableRow>
 								<TableRow>
-									<TableCell style={{ minWidth: 130 }}>
-										<Typography align="center">
-											Expenses <br />
-											<Typography color={palette.grey[400]} mt={1} align="center">
-												(Project)
-											</Typography>
+									<TableCell style={{ minWidth: 130 }} align="center">
+										<Typography align="center">Expenses</Typography>
+										<Typography color={palette.grey[400]} mt={1} align="center">
+											(Project)
 										</Typography>
 									</TableCell>
 									<TableCell>

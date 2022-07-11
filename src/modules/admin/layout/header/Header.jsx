@@ -1,11 +1,12 @@
 import React from "react";
 // Mui
 import {
-	Box,
+	AppBar,
 	IconButton,
 	InputAdornment,
 	Stack,
 	Typography,
+	useScrollTrigger,
 } from "@mui/material";
 import styled from "@emotion/styled";
 // Custom Styles
@@ -16,29 +17,33 @@ import { AppIcon } from "../../../../constants/icons";
 // Redux
 import { useSelector } from "react-redux";
 import { pageTitle } from "../../../../app/slices/pageSlice";
-// Hook
-import useResponsive from "../../../../hooks/useResponsive";
 // Icons
+import CloseIcon from "@mui/icons-material/Close";
 import ToggleIcon from "@mui/icons-material/Menu";
 
-const Header = ({ handleToggle }) => {
+const Header = ({ handleToggle, open }) => {
 	const title = useSelector(pageTitle);
 
-	// Responsive check for above `md`
-	const isMd = useResponsive("up", "md");
+	// MUi Scroll event hook
+	const trigger = useScrollTrigger({
+		threshold: 10,
+		disableHysteresis: true,
+	});
+
+	console.log(process.env.REACT_APP_PROJECT_NAME);
 
 	return (
-		<Root>
+		<Root
+			position="sticky"
+			color={trigger ? "primary" : "secondary"}
+			elevation={trigger ? 1 : 0}
+			sx={{ backgroundColor: trigger ? "#fff" : "transparent" }}
+		>
 			{/* Page title */}
 			<Stack direction={"row"} alignItems="center">
-				{!isMd && (
-					<IconButton
-						onClick={handleToggle}
-						// sx={{ zIndex: isMd ? 1 : 1201 }}
-					>
-						<ToggleIcon color="primary" />
-					</IconButton>
-				)}
+				<MenuBtn onClick={handleToggle}>
+					{open ? <CloseIcon color="light" /> : <ToggleIcon color="light" />}
+				</MenuBtn>
 
 				<PageTitle variant="h5" color="primary" fontWeight={"600"}>
 					{title}
@@ -64,12 +69,15 @@ const Header = ({ handleToggle }) => {
 export default Header;
 
 // Styles
-const Root = styled(Box)(({ theme }) => ({
-	backgroundColor: "transparent",
+const Root = styled(AppBar)(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "space-between",
-	marginBottom: theme.spacing(1.5),
+	padding: theme.spacing(1.3),
+	position: "sticky",
+	top: 0,
+	zIndex: 1200,
+	flexDirection: "row",
 }));
 
 const SearchBar = styled(StyledInput)(({ theme }) => ({
@@ -87,5 +95,16 @@ const PageTitle = styled(Typography)(({ theme }) => ({
 	[theme.breakpoints.down("md")]: {
 		marginLeft: 20,
 		marginRight: 10,
+	},
+}));
+
+const MenuBtn = styled(IconButton)(({ theme }) => ({
+	background: theme.palette.primary.main,
+	// left: -10,
+	borderRadius: 3,
+	// borderTopLeftRadius: 0,
+	// borderBottomLeftRadius: 0,
+	"&:hover": {
+		background: theme.palette.primary.dark,
 	},
 }));

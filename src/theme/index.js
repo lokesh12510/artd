@@ -2,24 +2,23 @@ import React, { useMemo } from "react";
 // Mui
 import {
 	createTheme,
-	CssBaseline,
 	StyledEngineProvider,
 	ThemeProvider,
 } from "@mui/material";
 // Addition override styles in JS
 import palette from "./palette";
 import typography from "./typography";
-import { useTheme } from "@emotion/react";
+import shadows, { customShadows } from "./shadows";
 
 const ThemeWrapper = ({ children }) => {
 	// Option to override default Mui Theme
-
-	const muiTheme = useTheme();
 
 	const themeOptions = useMemo(
 		() => ({
 			palette,
 			typography,
+			shadows,
+			customShadows,
 			breakpoints: {
 				values: {
 					xs: 0,
@@ -33,9 +32,42 @@ const ThemeWrapper = ({ children }) => {
 			components: {
 				MuiCssBaseline: {
 					styleOverrides: {
+						"*": {
+							margin: 0,
+							padding: 0,
+							boxSizing: "border-box",
+						},
+						html: {
+							width: "100%",
+							height: "100%",
+							WebkitOverflowScrolling: "touch",
+						},
 						body: {
+							width: "100%",
+							height: "100%",
 							color: palette.common.black,
 							backgroundColor: palette.background.default,
+						},
+						"#root": {
+							width: "100%",
+							height: "100%",
+						},
+						input: {
+							"&[type=number]": {
+								MozAppearance: "textfield",
+								"&::-webkit-outer-spin-button": {
+									margin: 0,
+									WebkitAppearance: "none",
+								},
+								"&::-webkit-inner-spin-button": {
+									margin: 0,
+									WebkitAppearance: "none",
+								},
+							},
+						},
+						img: {
+							display: "block",
+							maxWidth: "100%",
 						},
 					},
 				},
@@ -57,18 +89,18 @@ const ThemeWrapper = ({ children }) => {
 					},
 				},
 
-				MuiTableHead: {
-					styleOverrides: {
-						root: {
-							".MuiTableCell-head": {
-								backgroundColor: palette.secondary.main,
-							},
-							".MuiTableCell-root": {
-								...typography.subtitle2,
-							},
-						},
-					},
-				},
+				// MuiTableHead: {
+				// 	styleOverrides: {
+				// 		root: {
+				// 			".MuiTableCell-head": {
+				// 				backgroundColor: palette.secondary.main,
+				// 			},
+				// 			".MuiTableCell-root": {
+				// 				...typography.subtitle2,
+				// 			},
+				// 		},
+				// 	},
+				// },
 				MuiTableCell: {
 					styleOverrides: {
 						root: {
@@ -126,7 +158,6 @@ const ThemeWrapper = ({ children }) => {
 
 	return (
 		<StyledEngineProvider injectFirst>
-			<CssBaseline />
 			<ThemeProvider theme={theme}>{children}</ThemeProvider>
 		</StyledEngineProvider>
 	);

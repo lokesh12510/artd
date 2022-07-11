@@ -1,7 +1,8 @@
 import React from "react";
 import AddProject from "../pages/AddProject/Index";
 import AddExtraWeeks from "../pages/ExtraWeeks/Index";
-import Dashboard from "../pages/projectPlanning/Index";
+import Home from "../pages/home/Index";
+import ProjectPlanning from "../pages/projectPlanning/Index";
 import StaffMaintenance from "../pages/staffMaintenance";
 
 /* 
@@ -12,7 +13,8 @@ import StaffMaintenance from "../pages/staffMaintenance";
 */
 
 export const urls = {
-	Dashboard: "/",
+	Home: "/",
+	projectPlanning: "/project-planning",
 	staffMaintenance: "/staffMaintenance",
 	addProject: "/add-project",
 	addExtraWeeks: "/add-weeks",
@@ -21,8 +23,14 @@ export const urls = {
 // routes
 const adminRoutes = [
 	{
-		path: urls.Dashboard,
-		element: <Dashboard />,
+		path: urls.Home,
+		element: <Home />,
+		auth: true,
+		module_id: 2,
+	},
+	{
+		path: urls.projectPlanning,
+		element: <ProjectPlanning />,
 		auth: true,
 		module_id: 2,
 	},

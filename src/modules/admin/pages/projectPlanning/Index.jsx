@@ -28,7 +28,7 @@ import SummaryModal from "./SummaryModal";
 import DescriptionModal from "./DescriptionModal";
 import ExpenseModal from "./ExpenseModal";
 import OutputModal from "./OutputModal";
-import ProjectPlanning from "./ProjectTable/Index";
+import PlanningTable from "./ProjectTable/Index";
 // Router
 import { Link } from "react-router-dom";
 import { urls } from "../../urls";
@@ -36,7 +36,7 @@ import { urls } from "../../urls";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../../app/slices/pageSlice";
 
-const Dashboard = () => {
+const ProjectPlanning = () => {
 	// Summary modal Toggle State
 	const [summaryModal, setSummaryModal] = useState(false);
 	const handleSummaryModal = () => {
@@ -134,7 +134,7 @@ const Dashboard = () => {
 							</ButtonStack>
 						</TableHeader>
 						{/* Project Planning Table comp */}
-						<ProjectPlanning />
+						<PlanningTable />
 						{/* Project Planning Table comp */}
 					</ScrollTableContainer>
 					{/*------------- Scrollable Table Grid Section ------------ */}
@@ -220,7 +220,7 @@ const Dashboard = () => {
 	);
 };
 
-export default Dashboard;
+export default ProjectPlanning;
 
 // Styles
 const ProjectInfo = styled(Stack)(({ theme }) => ({

@@ -19,7 +19,7 @@ const GuestRoute = ({ children, ...rest }) => {
 
 	// if logged in
 	if (isLoggedIn && token !== null) {
-		return <Navigate to={urls.Dashboard} />;
+		return <Navigate to={urls.Home} />;
 	}
 
 	return children;

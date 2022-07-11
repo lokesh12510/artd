@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import ThemeWrapper from "./theme";
 import AppRoutes from "./routes";
+import { CssBaseline } from "@mui/material";
 
 const App = () => {
 	return (
@@ -10,6 +11,7 @@ const App = () => {
 			<BrowserRouter>
 				{/* Mui Theme wrapper */}
 				<ThemeWrapper>
+					<CssBaseline />
 					{/* App Navigation routes */}
 					<AppRoutes />
 				</ThemeWrapper>

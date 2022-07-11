@@ -11,7 +11,7 @@ export default function AccordionWrapper({ title, children }) {
 	const [expanded, setExpanded] = React.useState(true);
 
 	const handleChange = () => {
-		setExpanded((e) => !e);
+		setExpanded((i) => !i);
 	};
 
 	return (
@@ -21,7 +21,9 @@ export default function AccordionWrapper({ title, children }) {
 					<ArrowDropDownIcon sx={{ color: palette.common.white }} fontSize="large" />
 				}
 			>
-				<Typography variant="subtitle1">{title}</Typography>
+				<Typography variant="subtitle1" textTransform={"uppercase"}>
+					{title}
+				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>{children}</AccordionDetails>
 		</Root>
@@ -29,11 +31,17 @@ export default function AccordionWrapper({ title, children }) {
 }
 
 const Root = styled(Accordion)(({ theme }) => ({
-	// borderTopRightRadius: 4,
-	// borderTopLeftRadius: 4,
+	boxShadow: "none",
 	borderRadius: 10,
 	overflow: "hidden",
-	boxShadow: "none",
+	"&:last-of-type": {
+		borderBottomRightRadius: 10,
+		borderBottomLeftRadius: 10,
+	},
+	"&:first-of-type": {
+		borderTopRightRadius: 10,
+		borderTopLeftRadius: 10,
+	},
 
 	"& .MuiAccordionSummary-root": {
 		backgroundColor: palette.secondary.main,
@@ -78,5 +86,23 @@ const Root = styled(Accordion)(({ theme }) => ({
 	},
 	"& .MuiAccordionSummary-content.Mui-expanded": {
 		margin: 0,
+	},
+
+	// Data Grid
+	"& .MuiDataGrid-columnHeaders": {
+		backgroundColor: palette.secondary.light,
+		border: `1px solid ${palette.secondary.borderLight}`,
+		"& .MuiDataGrid-columnHeaderTitle": {
+			color: palette.primary.main,
+			textTransform: "uppercase",
+		},
+	},
+	"& .MuiDataGrid-row": {
+		"&:nth-of-type(even)": {
+			backgroundColor: palette.grey[50],
+		},
+	},
+	"& .MuiDataGrid-cell": {
+		color: palette.dark.dark,
 	},
 }));

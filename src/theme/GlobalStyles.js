@@ -9,6 +9,7 @@ import {
 	TableCell,
 	Typography,
 	InputLabel,
+	Card,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "./palette";
@@ -331,4 +332,9 @@ export const StyledTableCell = styled(TableCell)(({ theme, label }) => ({
 			label === "description" ? "calc(40%)" : label === "date" ? "140px" : "calc(7%)",
 		minWidth: label === "date" && 150,
 	},
+}));
+
+export const CustomToolBar = styled(Box)(({ theme }) => ({
+	backgroundColor: theme.palette.common.white,
+	padding: theme.spacing(1),
 }));

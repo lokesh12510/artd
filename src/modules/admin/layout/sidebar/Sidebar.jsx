@@ -1,8 +1,9 @@
 import React, { useEffect, useState, memo } from "react";
-import { styled } from "@mui/material/styles";
-import palette from "../../../../theme/palette";
+// Images
 import AppImage from "../../../../constants/images";
+// Mui
 import {
+	Avatar,
 	Collapse,
 	Drawer,
 	IconButton,
@@ -15,21 +16,29 @@ import {
 	Stack,
 	Typography,
 } from "@mui/material";
-import { AppIcon } from "../../../../constants/icons";
-import { useTheme } from "@emotion/react";
+// Custom Styles
+import styled from "@emotion/styled";
+import palette from "../../../../theme/palette";
+// Icons
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CloseIcon from "@mui/icons-material/Close";
+// Router
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { urls } from "../../urls";
 // Icons
-import ToggleIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
+import { AppIcon } from "../../../../constants/icons";
+// Hook
+import useResponsive from "../../../../hooks/useResponsive";
+// redux
+import { useSelector } from "react-redux";
+import { currentUser } from "../../../../app/slices/authSlice";
 
 const SidebarListItem = ({ open, item, handleOpen, isOpen }) => {
 	const location = useLocation();
 	const isSubMenu = Boolean(item.subMenu?.length > 0);
 	const isVisible = Boolean(isOpen === item.title);
-	const isActive = Boolean(item.pathName === location.pathname);
+	const isActive = Boolean(item.pathName === location.pathname || isVisible);
 
 	const navigate = useNavigate();
 
@@ -104,9 +113,20 @@ const SidebarListWrapper = memo(({ open, handleToggle }) => {
 });
 
 const Sidebar = ({ open, handleToggle }) => {
-	let theme = useTheme();
-	// local
+	// State to sidebar position
 	const [isPermanent, setPermanent] = useState(true);
+
+	// Responsive check for above `md`
+	const isMd = useResponsive("up", "md");
+
+	// Function to trigger when window width is changing
+	function handleWindowWidthChange() {
+		if (!isMd && isPermanent) {
+			setPermanent(false);
+		} else if (isMd && !isPermanent) {
+			setPermanent(true);
+		}
+	}
 
 	useEffect(function () {
 		window.addEventListener("resize", handleWindowWidthChange);
@@ -115,6 +135,8 @@ const Sidebar = ({ open, handleToggle }) => {
 			window.removeEventListener("resize", handleWindowWidthChange);
 		};
 	});
+
+	const user = useSelector(currentUser);
 
 	return (
 		<Root
@@ -129,12 +151,11 @@ const Sidebar = ({ open, handleToggle }) => {
 				<img className="image" src={AppImage.Logo} alt="" />
 			</LogoImg>
 			{/* Menu Toggle Btn  */}
-			<MenuBtn
-				onClick={handleToggle}
-				// sx={{ zIndex: isMd ? 1 : 1201 }}
-			>
-				{open ? <CloseIcon color="primary" /> : <ToggleIcon color="primary" />}
-			</MenuBtn>
+			{!isMd && (
+				<MenuBtn onClick={handleToggle}>
+					<CloseIcon color="light" />
+				</MenuBtn>
+			)}
 			{/* Menu Toggle Btn  */}
 			<ProfileContainer
 				direction={open ? "row" : "column"}
@@ -142,31 +163,18 @@ const Sidebar = ({ open, handleToggle }) => {
 				alignItems="center"
 				justifyContent={open ? "flex-start" : "center"}
 			>
-				<img src={AppImage.Avatar} className="profileImg" alt="" />
+				<Avatar src={AppImage.Avatar} alt="profile" />
 				<Typography variant="body2" gutterBottom={false} lineHeight={1}>
 					Welcome
 				</Typography>
 				<Typography variant="body2" fontWeight={"600"}>
-					Alexis
+					{user?.StaffName}
 				</Typography>
 			</ProfileContainer>
 			{/* Sidebar List component */}
 			<SidebarListWrapper open={open} handleToggle={handleToggle} />
 		</Root>
 	);
-
-	// Function to trigger when window width is changing
-	function handleWindowWidthChange() {
-		var windowWidth = window.innerWidth;
-		var breakpointwidth = theme.breakpoints.values.md;
-		var isSmallScreen = windowWidth < breakpointwidth;
-
-		if (isSmallScreen && isPermanent) {
-			setPermanent(false);
-		} else if (!isSmallScreen && !isPermanent) {
-			setPermanent(true);
-		}
-	}
 };
 
 export default Sidebar;
@@ -183,7 +191,7 @@ const MenuList = [
 		id: 2,
 		title: "Maintenance",
 		icon: "Work",
-		pathName: "/projects",
+		pathName: urls.projectPlanning,
 		subMenu: [
 			{
 				id: 1,
@@ -198,7 +206,7 @@ const MenuList = [
 			{
 				id: 3,
 				title: "Project Management",
-				pathName: "/",
+				pathName: urls.projectPlanning,
 			},
 			{
 				id: 4,
@@ -257,34 +265,25 @@ const Root = styled(Drawer)(({ theme, open }) => ({
 	position: "fixed",
 	width: open ? MAX_WIDTH : MIN_WIDTH,
 	minHeight: "100vh",
-	backgroundColor: palette.common.white,
-	boxShadow: "0px 0px 4px rgba(148, 148, 148, 0.25)",
 	"& .MuiPaper-root": {
 		width: "inherit",
-		transition: theme.transitions.create("all", {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
+		borderRight: "none",
+		overflow: "visible",
 	},
+	zIndex: 1201,
+	transition: theme.transitions.create("all", {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.enteringScreen,
+	}),
 }));
 
 const LogoImg = styled("div")(({ theme, open }) => ({
 	padding: theme.spacing(2),
 	marginInline: "auto",
-	paddingBlock: !open && theme.spacing(0.5),
-	transition: theme.transitions.create("all", {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
 	"& .image": {
 		width: "100%",
 		height: "100%",
 		maxWidth: "80px",
-		transform: !open && "scale(.7) translateX(-25px)",
-		transition: theme.transitions.create("all", {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
 	},
 }));
 
@@ -294,16 +293,14 @@ const ProfileContainer = styled(Stack)(({ theme }) => ({
 	width: "100%",
 	paddingInline: theme.spacing(3),
 	color: palette.common.white,
-	// transition: theme.transitions.create("all", {
-	// 	easing: theme.transitions.easing.sharp,
-	// 	duration: theme.transitions.duration.leavingScreen,
-	// }),
-	"& .profileImg": {
-		width: 45,
-		height: 45,
-		objectFit: "cover",
-		borderRadius: "50%",
+	"& .MuiAvatar-root": {
 		marginBlock: theme.spacing(1),
+		"& img": {
+			width: 45,
+			height: 45,
+			objectFit: "cover",
+			borderRadius: "50%",
+		},
 	},
 }));
 
@@ -367,20 +364,15 @@ const StyledListItem = styled(ListItem)(({ theme, selected }) => ({
 	},
 }));
 
-const MenuBtn = styled(IconButton)(({ theme, breakpointwidth }) => ({
+const MenuBtn = styled(IconButton)(({ theme }) => ({
 	position: "absolute",
-	// left: breakpointwidth,
-	right: 0,
+	right: -40,
 	top: 10,
-	// background: theme.palette.primary.main,
+	background: theme.palette.primary.main,
 	borderRadius: 3,
-	borderTopRightRadius: 0,
-	borderBottomRightRadius: 0,
-	transition: theme.transitions.create("left", {
-		easing: theme.transitions.easing.easeOut,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
+	borderTopLeftRadius: 0,
+	borderBottomLeftRadius: 0,
 	"&:hover": {
-		// background: theme.palette.primary.dark,
+		background: theme.palette.primary.dark,
 	},
 }));
