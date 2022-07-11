@@ -1,17 +1,22 @@
-import styled from "@emotion/styled";
-import { Box, MenuItem, Stack } from "@mui/material";
-import { GridActionsCellItem } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
+// Mui
+import styled from "@emotion/styled";
+import { MenuItem, Stack } from "@mui/material";
+import { GridActionsCellItem } from "@mui/x-data-grid";
+// Components
 import AccordionWrapper from "../../../../../components/AccordionWrapper";
 import DataTable from "../../../../../components/DataTable";
 import InputField from "../../../../../components/InputField";
+// Custom Icons
 import { AppIcon, EditIcon } from "../../../../../constants/icons";
-import { projectList } from "../../../../../mockup/HomeApi";
+// Custom Styles
 import {
 	CustomBox,
 	CustomToolBar,
 	StyledBtn,
 } from "../../../../../theme/GlobalStyles";
+// Mock Api
+import { projectList } from "../../../../../mockup/HomeApi";
 
 const initialTableValues = {
 	loading: false,

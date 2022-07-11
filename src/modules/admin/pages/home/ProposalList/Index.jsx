@@ -1,18 +1,23 @@
+import React, { useEffect, useState } from "react";
+// Mui
 import styled from "@emotion/styled";
 import { FormGroup, MenuItem, Stack } from "@mui/material";
 import { GridActionsCellItem } from "@mui/x-data-grid";
-import React, { useEffect, useState } from "react";
+// Components
 import AccordionWrapper from "../../../../../components/AccordionWrapper";
 import CheckboxField from "../../../../../components/CheckboxField";
 import DataTable from "../../../../../components/DataTable";
 import InputField from "../../../../../components/InputField";
-import { AppIcon, EyeIcon } from "../../../../../constants/icons";
-import { proposalApi } from "../../../../../mockup/HomeApi";
+// Custom Icons
+import { AppIcon } from "../../../../../constants/icons";
+// Custom Styles
 import {
 	CustomBox,
 	CustomToolBar,
 	StyledBtn,
 } from "../../../../../theme/GlobalStyles";
+// Mock Api
+import { proposalApi } from "../../../../../mockup/HomeApi";
 
 const initialTableValues = {
 	loading: false,
@@ -113,15 +118,19 @@ const columns = [
 	{ field: "pd", headerName: "PD", minWidth: 140 },
 	{ field: "pm", headerName: "PM", minWidth: 140 },
 	{ field: "pr", headerName: "PR", minWidth: 140 },
-	{ field: "title", headerName: "Project title", minWidth: 400, flex: 1 },
+	{ field: "title", headerName: "Project title", minWidth: 200 },
 	{
 		field: "action",
 		headerName: "Action",
 		minWidth: 140,
 		align: "center",
 		headerAlign: "center",
+		sortable: false,
 		renderCell: (params) => [
-			<GridActionsCellItem icon={<EyeIcon />} label="view" />,
+			<GridActionsCellItem
+				icon={<AppIcon icon="Eye" color="primary" />}
+				label="view"
+			/>,
 		],
 	},
 ];

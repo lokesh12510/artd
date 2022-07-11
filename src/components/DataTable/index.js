@@ -51,6 +51,12 @@ const DataTable = (props) => {
 					"& .MuiPaginationItem-page.Mui-selected": {
 						color: "#fff",
 					},
+					"& .MuiDataGrid-row.Mui-disabled": {
+						backgroundColor: palette.grey[200],
+						position: "fixed",
+						bottom: "-50px",
+						left: 0,
+					},
 
 					"& .MuiPaginationItem-page": {
 						color: "#000",

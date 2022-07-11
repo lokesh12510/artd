@@ -21,8 +21,15 @@ export const taskData = {
 			booked: 1,
 			task: "Planning for data collection",
 		},
+		{
+			id: 4,
+			project: 3900,
+			title: "TIMS Upgrade 3",
+			booked: 1,
+			task: "Planning for data collection",
+		},
 	],
-	rowCount: 3,
+	rowCount: 4,
 };
 
 export const projectList = {

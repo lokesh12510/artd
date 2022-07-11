@@ -1,5 +1,7 @@
-import { Stack } from "@mui/material";
 import React from "react";
+// Mui
+import { Stack } from "@mui/material";
+// Components
 import ActionList from "./ActionList/Index";
 import ProjectList from "./ProjectList/Index";
 import ProposalList from "./ProposalList/Index";

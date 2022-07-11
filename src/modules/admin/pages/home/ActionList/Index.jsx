@@ -1,12 +1,16 @@
-import styled from "@emotion/styled";
-import { Box, MenuItem, Stack, Typography, Link } from "@mui/material";
 import React, { useEffect, useState } from "react";
+// Mui
+import { Typography } from "@mui/material";
+import { GridActionsCellItem } from "@mui/x-data-grid";
+// Components
 import AccordionWrapper from "../../../../../components/AccordionWrapper";
 import DataTable from "../../../../../components/DataTable";
-import InputField from "../../../../../components/InputField";
-import { ActionApi } from "../../../../../mockup/HomeApi";
-import { CustomToolBar } from "../../../../../theme/GlobalStyles";
+// Custom Icon
+import { AppIcon } from "../../../../../constants/icons";
+// Custom Styles
 import palette from "../../../../../theme/palette";
+// Mock Api
+import { ActionApi } from "../../../../../mockup/HomeApi";
 
 const initialTableValues = {
 	loading: false,
@@ -62,9 +66,23 @@ const columns = [
 	{ field: "title", headerName: "Project title", minWidth: 400, flex: 1 },
 	{
 		field: "toDo",
-		headerName: "To Do (Error/ Warning)",
 		minWidth: 200,
 		flex: 1,
+		renderHeader: () => {
+			return (
+				<Typography color={"primary"} fontWeight="600">
+					To Do (
+					<Typography sx={{ color: palette.error.main }} component="span">
+						Error
+					</Typography>
+					/{" "}
+					<Typography sx={{ color: palette.warning.main }} component="span">
+						Warning
+					</Typography>
+					)
+				</Typography>
+			);
+		},
 		renderCell: ({ value }) => {
 			return (
 				<Typography sx={{ color: palette[value.status].main }}>
@@ -72,5 +90,19 @@ const columns = [
 				</Typography>
 			);
 		},
+	},
+	{
+		field: "action",
+		headerName: "Action",
+		minWidth: 140,
+		align: "center",
+		headerAlign: "center",
+		sortable: false,
+		renderCell: (params) => [
+			<GridActionsCellItem
+				icon={<AppIcon icon="Eye" color="primary" />}
+				label="view"
+			/>,
+		],
 	},
 ];
