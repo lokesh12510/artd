@@ -17,16 +17,16 @@ const OpportunityForm = () => {
 					<Grid item xs={12} sm={6}>
 						<Grid container spacing={2}>
 							<Grid item xs={12} sm={6}>
-								<DateField name={"Date Received"} />
+								<DateField label={"Date Received"} />
 							</Grid>
 							<Grid item xs={12} sm={6}>
-								<DateField name={"Due Date"} />
+								<DateField label={"Due Date"} />
 							</Grid>
 							<Grid item xs={12} sm={6}>
-								<DateField name={"EOI Due Date"} />
+								<DateField label={"EOI Due Date"} />
 							</Grid>
 							<Grid item xs={12} sm={6}>
-								<InputField select name="Person Responsible" defaultValue={0}>
+								<InputField select label="Person Responsible" defaultValue={0}>
 									<MenuItem value={0}>Select</MenuItem>
 									<MenuItem value={1}>Option 2</MenuItem>
 								</InputField>
@@ -35,7 +35,7 @@ const OpportunityForm = () => {
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<InputField
-							name="Notes"
+							label="Notes"
 							placeholder="Notes here..."
 							multiline
 							height={{ height: "100%" }}

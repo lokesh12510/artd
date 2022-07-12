@@ -80,29 +80,29 @@ const AddExtraWeeks = () => {
 						<Grid container spacing={5} justifyContent="flex-end">
 							<Grid item xs={4}>
 								<CustomInput
-									name="week code"
+									label="week code"
 									style={{ maxWidth: 150 }}
 									value={values.WeekCode}
 									disabled
 								/>
 							</Grid>
 							<Grid item xs={4}>
-								<CustomInput name="Month Code" value={values["Month Code"]} disabled />
+								<CustomInput label="Month Code" value={values["Month Code"]} disabled />
 							</Grid>
 							<Grid item xs={4}>
 								<CustomInput
-									name="Quarter"
+									label="Quarter"
 									style={{ maxWidth: 150 }}
 									value={values.Quarter}
 									disabled
 								/>
 							</Grid>
 							<Grid item xs={4}>
-								<CustomInput name="Date From" value={values.DateFrom} disabled />
+								<CustomInput label="Date From" value={values.DateFrom} disabled />
 							</Grid>
 							<Grid item xs={4}>
 								<CustomInput
-									name="Month Sort"
+									label="Month Sort"
 									style={{ maxWidth: 150 }}
 									value={values.MonthSort}
 									disabled

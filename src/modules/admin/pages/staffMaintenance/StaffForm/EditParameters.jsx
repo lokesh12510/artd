@@ -44,15 +44,15 @@ const EditParameters = () => {
 								justifyContent={"space-between"}
 								spacing={1}
 							>
-								<StyledSelect name="param 1" select value={item.param1}>
+								<StyledSelect label="param 1" select value={item.param1}>
 									<MenuItem value={823}>823</MenuItem>
 									<MenuItem value={1023}>1023</MenuItem>
 								</StyledSelect>
-								<StyledSelect name="param 2" select value={item.param2}>
+								<StyledSelect label="param 2" select value={item.param2}>
 									<MenuItem value={823}>823</MenuItem>
 									<MenuItem value={2342}>2342</MenuItem>
 								</StyledSelect>
-								<StyledSelect name="Desc" select value={item.desc}>
+								<StyledSelect label="Desc" select value={item.desc}>
 									<MenuItem value={"Desc 1"}>Desc 1</MenuItem>
 									<MenuItem value={"Desc 2"}>Desc 2</MenuItem>
 									<MenuItem value={"Nama Jalu"}>Nama Jalu</MenuItem>

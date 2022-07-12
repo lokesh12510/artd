@@ -6,6 +6,7 @@ import authSlice from "./slices/authSlice";
 import projectPlanningSlice from "./slices/projectPlanningSlice";
 import pageSlice from "./slices/pageSlice";
 import staffSlice from "./slices/staffSlice";
+import listSlice from "./slices/listSlice";
 // redux-persist
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -15,6 +16,7 @@ const reducers = combineReducers({
 	projectPlanning: projectPlanningSlice,
 	pageInfo: pageSlice,
 	staff: staffSlice,
+	list: listSlice,
 });
 
 // store user details in localStorage

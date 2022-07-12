@@ -50,16 +50,16 @@ export default function AddInvoice({ open, handleClose }) {
 		>
 			<Grid container spacing={2}>
 				<Grid item xs={12} sm={6}>
-					<InputField name="first name" />
+					<InputField label="first name" />
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<InputField name="last name" />
+					<InputField label="last name" />
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<InputField name="position title" />
+					<InputField label="position title" />
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<InputField select defaultValue="All" name="client name">
+					<InputField select defaultValue="All" label="client name">
 						<MenuItem value="All">All</MenuItem>
 					</InputField>
 				</Grid>
@@ -74,14 +74,14 @@ export default function AddInvoice({ open, handleClose }) {
 				</Grid>
 
 				<Grid item xs={12} sm={6}>
-					<InputField name="email" />
+					<InputField label="email" />
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<InputField name="phone" />
+					<InputField label="phone" />
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<InputField
-						name="mobile"
+						label="mobile"
 						onChange={handleChange}
 						value={values.mobile}
 						InputProps={{

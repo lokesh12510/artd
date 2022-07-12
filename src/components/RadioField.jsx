@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const RadioField = ({ label, dir, radioList }) => {
+const RadioField = ({ label, dir, radioList, value, onChange, ...rest }) => {
 	return (
 		<FormControl>
 			<StyledFormLabel id="demo-row-radio-buttons-group-label">
@@ -18,6 +18,9 @@ const RadioField = ({ label, dir, radioList }) => {
 				row={Boolean(dir)}
 				aria-labelledby="demo-row-radio-buttons-group-label"
 				name="row-radio-buttons-group"
+				value={value}
+				onChange={onChange}
+				{...rest}
 			>
 				{radioList?.map((item, index) => {
 					return (
@@ -39,4 +42,5 @@ export default RadioField;
 
 const StyledFormLabel = styled(FormLabel)({
 	fontSize: "13px !important",
+	fontWeight: 500,
 });

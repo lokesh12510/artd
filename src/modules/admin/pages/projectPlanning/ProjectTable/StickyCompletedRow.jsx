@@ -19,7 +19,7 @@ import {
 	StyledInput,
 	StyledTableCell,
 } from "../../../../../theme/GlobalStyles";
-import { DeleteIcon, EyeIcon } from "../../../../../constants/icons";
+import { AppIcon } from "../../../../../constants/icons";
 // Redux
 import { useSelector } from "react-redux";
 import {
@@ -61,15 +61,15 @@ const RowItem = memo(({ cols, row }) => {
 			{/* Icons Cell */}
 			<TableCell align="center" style={{ width: 100 }}>
 				<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
-					<IconButton color="primary" aria-label="upload picture" component="span">
-						<EyeIcon bg={palette.primary.main} />
+					<IconButton color="primary" aria-label="view" component="span">
+						<AppIcon icon={"Eye"} fontSize="small" />
 					</IconButton>
 					<IconButton
-						sx={{ color: palette.primary.light }}
 						aria-label="delete"
 						component="span"
+						style={{ color: palette.grey[400] }}
 					>
-						<DeleteIcon fontSize="small" />
+						<AppIcon icon={"Delete"} fontSize="small" />
 					</IconButton>
 				</Stack>
 			</TableCell>

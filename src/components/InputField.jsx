@@ -9,19 +9,19 @@ const InputField = (props) => {
 
 	return (
 		<Root variant="standard" sx={{ height: props.height || "auto" }}>
-			{props.name && (
+			{props.label && (
 				<StyledLabel
 					shrink
-					htmlFor={props.name}
+					htmlFor={props.label}
 					sx={{ color: focus ? palette.primary.main : palette.label }}
 				>
-					{props.name}
+					{props.label}
 				</StyledLabel>
 			)}
 
 			<CustomInput
 				fullWidth
-				id={props.name}
+				id={props.label}
 				InputProps={{
 					onFocus: () => {
 						setFocus(true);
@@ -31,6 +31,7 @@ const InputField = (props) => {
 					},
 				}}
 				{...props}
+				label=""
 			/>
 		</Root>
 	);

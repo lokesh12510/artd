@@ -45,7 +45,7 @@ export const projectList = {
 		},
 		{
 			id: 2,
-			project: 3897,
+			project: 3898,
 			title: "The Big Project 2",
 			team: "SLSJ",
 			status: "In Progress",
@@ -54,7 +54,7 @@ export const projectList = {
 		},
 		{
 			id: 3,
-			project: 3897,
+			project: 3899,
 			title: "The Big Project 3",
 			team: "SLSJ",
 			status: "In Progress",
@@ -63,7 +63,7 @@ export const projectList = {
 		},
 		{
 			id: 4,
-			project: 3897,
+			project: 3400,
 			title: "The Big Project 4",
 			team: "SLSJ",
 			status: "In Progress",
@@ -72,7 +72,7 @@ export const projectList = {
 		},
 		{
 			id: 5,
-			project: 3897,
+			project: 3401,
 			title: "The Big Project 5",
 			team: "SLSJ",
 			status: "In Progress",

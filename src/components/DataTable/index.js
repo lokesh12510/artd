@@ -12,7 +12,6 @@ const DataTable = (props) => {
 	return (
 		<>
 			<DataGrid
-				{...props}
 				components={{
 					NoRowsOverlay: CustomNoRowsOverlay,
 					ColumnSortedDescendingIcon: ExpandMoreIcon,
@@ -73,11 +72,15 @@ const DataTable = (props) => {
 						color: palette.grey[400],
 						border: `1px solid ${palette.grey[400]}`,
 					},
+					"& .MuiDataGrid-overlay": {
+						background: "transparent",
+					},
 					// ".MuiDataGrid-columnHeaders": {
 					// 	backgroundColor: theme.palette.secondary.main,
 					// 	color: theme.palette.primary.contrastText,
 					// },
 				}}
+				{...props}
 			/>
 		</>
 	);

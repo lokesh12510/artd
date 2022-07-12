@@ -1,21 +1,19 @@
-import styled from "@emotion/styled";
-import { Grid, InputAdornment, MenuItem } from "@mui/material";
-import { GridActionsCellItem } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
-import InputField from "../../../../components/InputField";
-import RadioField from "../../../../components/RadioField";
+import { GridActionsCellItem } from "@mui/x-data-grid";
+import { useCallback } from "react";
 import { AppIcon } from "../../../../constants/icons";
-import { clientApi } from "../../../../mockup/ClientApi";
 import {
-	CustomBox,
 	StyledBox,
-	StyledBtn,
 	StyledDataGrid,
-	StyledInput,
 	StyledPageTitle,
 } from "../../../../theme/GlobalStyles";
-import palette from "../../../../theme/palette";
+import { clientApi } from "../../api/clientApi";
 import AddClient from "./AddClient";
+// Redux
+import { useDispatch } from "react-redux";
+
+// Components
+import FilterBox from "./FilterBox";
 
 const initialTableValues = {
 	loading: false,
@@ -23,11 +21,28 @@ const initialTableValues = {
 	rowCount: 0,
 	page: 0,
 	pageSize: 10,
-	search: {},
+};
+
+const initialFilter = {
+	orgType: "All",
+	govType: "All",
+	state: "All",
+	country: "All",
+	status: "",
+	searchText: "",
 };
 
 const ClientMaintenance = () => {
+	const dispatch = useDispatch();
+
 	const [tableValues, setTableValues] = useState(initialTableValues);
+	const [filter, setFilter] = useState(initialFilter);
+
+	const handleFilterChange = (e) => {
+		const { name, value } = e.target;
+		console.log(name, value);
+		setFilter((f) => ({ ...f, [name]: value }));
+	};
 
 	// Add modal toggle state
 	const [openModal, setOpenModal] = useState(false);
@@ -36,88 +51,54 @@ const ClientMaintenance = () => {
 		setOpenModal((o) => !o);
 	};
 
-	// Adding mock data on load
+	// Client List api call
+	const getTableList = useCallback(() => {
+		const formData = {
+			page: tableValues.page + 1,
+			per_page: tableValues.pageSize,
+			ClientName: filter.searchText,
+			Active: filter.status,
+		};
+
+		setTableValues((prev) => ({ ...prev, loading: true }));
+
+		clientApi
+			.Clients(formData)
+			.then((response) => {
+				setTableValues((prev) => ({
+					...prev,
+					loading: false,
+					rows: response.data.rows,
+					rowCount: response.data.count,
+				}));
+			})
+			.catch((e) => {
+				console.log(e);
+			});
+	}, [tableValues.page, tableValues.pageSize, filter.status, filter.searchText]);
+
 	useEffect(() => {
-		setTableValues((v) => ({
-			...v,
-			rows: clientApi.rows,
-			rowCount: clientApi.rowCount,
-			page: 1,
-			pageSize: 4,
-		}));
-	}, []);
+		getTableList();
+	}, [
+		dispatch,
+		getTableList,
+		tableValues.page,
+		tableValues.pageSize,
+		filter.status,
+		filter.searchText,
+	]);
 
 	return (
 		<>
 			<StyledBox>
 				<StyledPageTitle>Client Maintenance</StyledPageTitle>
-
-				<CustomBox my={2}>
-					<Grid container spacing={2} justifyContent="space-between">
-						<Grid item xs={12} md={7} lg={8}>
-							<StyledInput
-								placeholder="Search"
-								variant="outlined"
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position="start">
-											<AppIcon icon="Search" sx={{ fontSize: "16px", color: palette.grey[400] }} />
-										</InputAdornment>
-									),
-								}}
-							/>
-						</Grid>
-						<Grid item xs={12} sm={6} md={2.5} lg={2}>
-							<StyledBtn size="small" variant="contained" color="primary" fullWidth>
-								Search
-							</StyledBtn>
-						</Grid>
-						<Grid item xs={12} sm={6} md={2.5} lg={2}>
-							<StyledBtn
-								variant="contained"
-								color="primary"
-								size="small"
-								fullWidth
-								startIcon={<AppIcon icon="Add" />}
-								onClick={handleModal}
-							>
-								Add Client
-							</StyledBtn>
-						</Grid>
-						<Grid item xs={2.2}>
-							<InputField select defaultValue="All" name="organization type">
-								<MenuItem value="All">All</MenuItem>
-							</InputField>
-						</Grid>
-						<Grid item xs={2.2}>
-							<InputField select defaultValue="All" name="government type">
-								<MenuItem value="All">All</MenuItem>
-							</InputField>
-						</Grid>
-						<Grid item xs={2.2}>
-							<InputField select defaultValue="All" name="state">
-								<MenuItem value="All">All</MenuItem>
-							</InputField>
-						</Grid>
-						<Grid item xs={2.2}>
-							<InputField select defaultValue="All" name="country">
-								<MenuItem value="All">All</MenuItem>
-							</InputField>
-						</Grid>
-						<Grid item xs={3}>
-							<StyledRadioField
-								label={"Status"}
-								dir="row"
-								radioList={[
-									{ label: "Active", value: "Active" },
-									{ label: "Inactive", value: "Inactive" },
-								]}
-							/>
-						</Grid>
-					</Grid>
-				</CustomBox>
+				<FilterBox
+					handleModal={handleModal}
+					filter={filter}
+					handleFilterChange={handleFilterChange}
+				/>
 				<StyledDataGrid
-					getRowId={(row) => row.id}
+					getRowId={(row) => row.ClientCode}
 					loading={tableValues.loading}
 					columns={columns}
 					rows={tableValues.rows}
@@ -141,12 +122,12 @@ const ClientMaintenance = () => {
 export default ClientMaintenance;
 
 const columns = [
-	{ field: "client_name", headerName: "Client Name", minWidth: 120, flex: 1 },
-	{ field: "abn", headerName: "ABN", minWidth: 120, flex: 1 },
-	{ field: "org_type", headerName: "Organization Type", minWidth: 120, flex: 1 },
-	{ field: "gov_type", headerName: "Government Type", minWidth: 120, flex: 1 },
-	{ field: "state", headerName: "State", minWidth: 120 },
-	{ field: "status", headerName: "Status", minWidth: 120 },
+	{ field: "ClientName", headerName: "Client Name", minWidth: 200, flex: 1 },
+	{ field: "ClientCode", headerName: "Client Code", minWidth: 120 },
+	{ field: "Country", headerName: "Country", minWidth: 120 },
+	// { field: "gov_type", headerName: "Government Type", minWidth: 120, flex: 1 },
+	{ field: "State", headerName: "State", minWidth: 120 },
+	// { field: "status", headerName: "Status", minWidth: 120 },
 	{
 		field: "action",
 		headerName: "Action",
@@ -169,12 +150,3 @@ const columns = [
 		],
 	},
 ];
-
-const StyledRadioField = styled(RadioField)(({ theme }) => ({
-	"& .MuiFormControlLabel-root": {
-		marginRight: 0,
-	},
-	"& .MuiFormControlLabel-label": {
-		fontWeight: 400,
-	},
-}));

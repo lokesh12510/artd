@@ -1,4 +1,6 @@
 import axios from "axios";
+import { authLogout } from "../app/slices/authSlice";
+import { store } from "../app/store";
 import { BASE_URL } from "../constants/config";
 
 const UNAUTHORIZED = 401;
@@ -14,9 +16,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
 	(config) => {
-		const token = localStorage.getItem("token");
+		const { token } = store.getState().auth;
 		if (token && token !== null) {
-			config.headers["Authorization"] = "Bearer " + token;
+			config.headers["Authorization"] = `Bearer ${token}`;
 		}
 		return config;
 	},
@@ -33,8 +35,8 @@ instance.interceptors.response.use(
 		if (error.response && error.response.status) {
 			const resStatus = error.response.status;
 			if (resStatus === UNAUTHORIZED || resStatus === FORBIDDEN) {
-				localStorage.removeItem("token");
-				window.location.reload();
+				store.dispatch(authLogout());
+				// window.location.reload();
 			}
 		}
 		return Promise.reject(error);

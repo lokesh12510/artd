@@ -44,14 +44,14 @@ const ProposalForm = () => {
 										/>
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<InputField name="Budget" />
+										<InputField label="Budget" />
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<InputField name="Variation" />
+										<InputField label="Variation" />
 									</Grid>
 									<Grid item xs={12} sm={6}>
 										<div>
-											<InputField name="Budget Total" />
+											<InputField label="Budget Total" />
 
 											<CheckboxField
 												label={"GST not applicable?"}
@@ -61,13 +61,13 @@ const ProposalForm = () => {
 										</div>
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<InputField name="Excluding GST" />
+										<InputField label="Excluding GST" />
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<InputField name="Less Expenses" />
+										<InputField label="Less Expenses" />
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<InputField name="Consultancy time budget" />
+										<InputField label="Consultancy time budget" />
 									</Grid>
 								</Grid>
 							</CustomBox>
@@ -100,13 +100,13 @@ const ProposalForm = () => {
 										<CheckboxField label={"Ethics required"} />
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<DateField name={"Ethics destroy date"} />
+										<DateField label={"Ethics destroy date"} />
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<DateField name={"Contract signed date"} />
+										<DateField label={"Contract signed date"} />
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<DateField name={"Contract filed date"} />
+										<DateField label={"Contract filed date"} />
 									</Grid>
 									<Grid item xs={12}>
 										<FormGroup row sx={{ justifyContent: "space-between" }}>
@@ -116,7 +116,7 @@ const ProposalForm = () => {
 										</FormGroup>
 									</Grid>
 									<Grid item xs={12} sm={6}>
-										<DateField name={"Completion Year"} />
+										<DateField label={"Completion Year"} />
 									</Grid>
 								</Grid>
 							</CustomBox>

@@ -80,7 +80,7 @@ const ProjectList = () => {
 					</StyledCornerBtn>
 				</Stack>
 				<DataTable
-					getRowId={(row) => row.id}
+					getRowId={(row) => row.project}
 					loading={tableValues.loading}
 					columns={columns}
 					rows={tableValues.rows}

@@ -1,4 +1,3 @@
-import { InputAdornment } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import React, { useState } from "react";
 import InputField from "./InputField";
@@ -55,7 +54,7 @@ const DateField = ({ helperText, error, name, label, ...props }) => {
 				renderInput={(params) => (
 					<InputField
 						fullWidth
-						name={name}
+						label={name}
 						{...params}
 						error={error}
 						helperText={helperText}

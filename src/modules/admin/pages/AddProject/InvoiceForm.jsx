@@ -17,14 +17,14 @@ const InvoiceForm = () => {
 				</CustomBox>
 				<Grid container spacing={2} my={1}>
 					<Grid item xs={12} sm={3}>
-						<InputField name="Budget Total" />
+						<InputField label="Budget Total" />
 					</Grid>
 					<Grid item xs={12} sm={3}>
-						<InputField name="Invoice Total" />
+						<InputField label="Invoice Total" />
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<InputField
-							name="Notes"
+							label="Notes"
 							placeholder="Notes here..."
 							multiple
 							height={"100px"}

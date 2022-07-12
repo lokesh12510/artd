@@ -1,9 +1,6 @@
 import React from "react";
 import CustomDialog from "../../../../components/CustomDialog";
-import {
-	StyledInput,
-	StyledTableContainer,
-} from "../../../../theme/GlobalStyles";
+import { StyledTableContainer } from "../../../../theme/GlobalStyles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";

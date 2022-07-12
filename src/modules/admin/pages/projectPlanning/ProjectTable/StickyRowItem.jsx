@@ -14,12 +14,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { StyledInput } from "../../../../../theme/GlobalStyles";
 import palette from "../../../../../theme/palette";
 // Custom Icons
-import {
-	CopyIcon,
-	DeleteIcon,
-	EditIcon,
-	EyeIcon,
-} from "../../../../../constants/icons";
+import { AppIcon, CopyIcon } from "../../../../../constants/icons";
 // Icons
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 // Redux
@@ -61,11 +56,15 @@ const StickyRowItem = ({ row, cols, isItemSelected, rowIndex }) => {
 			<TableCell align="center" style={{ width: 100 }}>
 				{isItemSelected || row.isCompleted ? (
 					<Stack direction="row" alignItems="center" justifyContent={"flex-end"}>
-						<IconButton color="primary" aria-label="upload picture" component="span">
-							<EyeIcon bg={palette.primary.main} />
+						<IconButton color="primary" aria-label="view" component="span">
+							<AppIcon icon={"Eye"} fontSize="small" />
 						</IconButton>
-						<IconButton color="primary" aria-label="upload picture" component="span">
-							<DeleteIcon bg={palette.grey[400]} />
+						<IconButton
+							aria-label="delete"
+							component="span"
+							style={{ color: palette.grey[400] }}
+						>
+							<AppIcon icon={"Delete"} fontSize="small" />
 						</IconButton>
 					</Stack>
 				) : (
@@ -84,7 +83,7 @@ const StickyRowItem = ({ row, cols, isItemSelected, rowIndex }) => {
 							component="span"
 							// onClick={() => handleEditModal()}
 						>
-							<EditIcon bg={palette.primary.light} />
+							<AppIcon icon={"Edit"} color="primary" fontSize="small" />
 						</IconButton>
 						<IconButton
 							sx={{ color: palette.primary.light }}
@@ -92,7 +91,7 @@ const StickyRowItem = ({ row, cols, isItemSelected, rowIndex }) => {
 							component="span"
 							// onClick={() => handleDeleteModal()}
 						>
-							<DeleteIcon fontSize="small" />
+							<AppIcon icon={"Delete"} color="primary" fontSize="small" />
 						</IconButton>
 					</Stack>
 				)}

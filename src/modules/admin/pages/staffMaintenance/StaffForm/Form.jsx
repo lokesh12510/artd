@@ -15,13 +15,13 @@ const Form = () => {
 				<Grid item xs>
 					<Stack direction={"column"} spacing={2}>
 						{/* Code */}
-						<InputField name="code" value={""} style={{ maxWidth: 100 }} />
+						<InputField label="code" value={""} style={{ maxWidth: 100 }} />
 						{/* Name */}
-						<InputField name="name" value={""} />
+						<InputField label="name" value={""} />
 						{/* Email */}
-						<InputField name="email" value={""} />
+						<InputField label="email" value={""} />
 						{/* User Type */}
-						<InputField name="User Type" value={""} select>
+						<InputField label="User Type" value={""} select>
 							<MenuItem value={"Marketing"}>Marketing</MenuItem>
 							<MenuItem value={"Developer"}>Developer</MenuItem>
 						</InputField>
@@ -37,19 +37,19 @@ const Form = () => {
 				<Grid item xs>
 					<Stack direction={"column"} spacing={2}>
 						{/* Type */}
-						<InputField name="Type" value={0} select>
+						<InputField label="Type" value={0} select>
 							<MenuItem value={0}>Select</MenuItem>
 							<MenuItem value={1}>News</MenuItem>
 						</InputField>
 						{/* Start Date */}
-						<DateField name={"Start Date"} />
+						<DateField label={"Start Date"} />
 						{/* Start Week */}
-						<InputField name="Start Week" value={0} select>
+						<InputField label="Start Week" value={0} select>
 							<MenuItem value={0}>Select</MenuItem>
 							<MenuItem value={1}>News</MenuItem>
 						</InputField>
 						{/* End Week */}
-						<InputField name="End Week" value={0} select>
+						<InputField label="End Week" value={0} select>
 							<MenuItem value={0}>Select</MenuItem>
 							<MenuItem value={1}>News</MenuItem>
 						</InputField>

@@ -22,14 +22,14 @@ const ProjectForm = () => {
 			{/* Project form Grid */}
 			<Grid container spacing={2} mb={2}>
 				<Grid item xs={12} sm={3}>
-					<InputField name="Project" placeholder="Project" />
+					<InputField label="Project" placeholder="Project" />
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<InputField name="Short Title" placeholder="Short Title" />
+					<InputField label="Short Title" placeholder="Short Title" />
 				</Grid>
 				<Grid item xs={12} sm={3}>
 					<InputField
-						name="Tender Type"
+						label="Tender Type"
 						placeholder="Tender Type"
 						select
 						defaultValue="Select"
@@ -42,7 +42,7 @@ const ProjectForm = () => {
 			<Grid container spacing={2} mb={2}>
 				<Grid item xs={12} sm={3}>
 					<InputField
-						name="Classification"
+						label="Classification"
 						placeholder="Classification"
 						select
 						defaultValue="0"
@@ -52,10 +52,10 @@ const ProjectForm = () => {
 					</InputField>
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<InputField name="Long Title" placeholder="Long Title" />
+					<InputField label="Long Title" placeholder="Long Title" />
 				</Grid>
 				<Grid item xs={12} sm={3}>
-					<InputField name="Panel" placeholder="Panel" select defaultValue="0">
+					<InputField label="Panel" placeholder="Panel" select defaultValue="0">
 						<MenuItem value="0">Select</MenuItem>
 						<MenuItem value="1">Option 2</MenuItem>
 					</InputField>
@@ -64,11 +64,11 @@ const ProjectForm = () => {
 			<Grid container spacing={2} mb={2}>
 				<Grid item xs={12} sm={3}>
 					<Stack spacing={2}>
-						<InputField name="Team" placeholder="Team" select defaultValue="0">
+						<InputField label="Team" placeholder="Team" select defaultValue="0">
 							<MenuItem value="0">Select</MenuItem>
 							<MenuItem value="1">Option 2</MenuItem>
 						</InputField>
-						<InputField name="Status" placeholder="Status" select defaultValue="0">
+						<InputField label="Status" placeholder="Status" select defaultValue="0">
 							<MenuItem value="0">Select</MenuItem>
 							<MenuItem value="1">Option 2</MenuItem>
 						</InputField>
@@ -76,7 +76,7 @@ const ProjectForm = () => {
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<InputField
-						name="Description"
+						label="Description"
 						placeholder="Description"
 						multiline
 						height={"100%"}
@@ -84,11 +84,11 @@ const ProjectForm = () => {
 				</Grid>
 				<Grid item xs={12} sm={3}>
 					<Stack spacing={2}>
-						<InputField name="Proj Mgr" placeholder="Proj Mgr" select defaultValue="0">
+						<InputField label="Proj Mgr" placeholder="Proj Mgr" select defaultValue="0">
 							<MenuItem value="0">Select</MenuItem>
 							<MenuItem value="1">Option 2</MenuItem>
 						</InputField>
-						<InputField name="Director" placeholder="Director" select defaultValue="0">
+						<InputField label="Director" placeholder="Director" select defaultValue="0">
 							<MenuItem value="0">Select</MenuItem>
 							<MenuItem value="1">Option 2</MenuItem>
 						</InputField>
@@ -97,7 +97,7 @@ const ProjectForm = () => {
 			</Grid>
 			<Grid container spacing={2} mb={2}>
 				<Grid item xs={12} sm={3}>
-					<InputField name="Type" placeholder="Type" select defaultValue="0">
+					<InputField label="Type" placeholder="Type" select defaultValue="0">
 						<MenuItem value="0">Select</MenuItem>
 						<MenuItem value="1">Option 2</MenuItem>
 					</InputField>
@@ -105,7 +105,7 @@ const ProjectForm = () => {
 				<Grid item xs={12} sm={6}>
 					<Grid container direction="row" alignItems="flex-end" spacing={2}>
 						<Grid item xs={12} sm>
-							<InputField name="Client" placeholder="Client" />
+							<InputField label="Client" placeholder="Client" />
 						</Grid>
 						<Grid item xs={12} sm="auto">
 							<FormBtn
@@ -119,7 +119,7 @@ const ProjectForm = () => {
 					</Grid>
 				</Grid>
 				<Grid item xs={12} sm={3}>
-					<InputField name="Invoice Reference" placeholder="Invoice Reference" />
+					<InputField label="Invoice Reference" placeholder="Invoice Reference" />
 				</Grid>
 				<Grid item xs={12}>
 					<Typography color={"primary"} variant="subtitle1" gutterBottom>
@@ -129,13 +129,13 @@ const ProjectForm = () => {
 					<KeywordWrapper>
 						<Grid container spacing={2}>
 							<Grid item xs={12} sm={6}>
-								<div className="">
+								<div>
 									<StyledLabel shrink>Subject</StyledLabel>
 									<MultiSelect height={"80px"} />
 								</div>
 							</Grid>
 							<Grid item xs={12} sm={6}>
-								<div className="">
+								<div>
 									<StyledLabel shrink>Methods</StyledLabel>
 									<MultiSelect height={"80px"} />
 								</div>

@@ -84,12 +84,12 @@ const InvoiceMaintenance = () => {
 							</StyledBtn>
 						</Grid>
 						<Grid item xs={4}>
-							<InputField select defaultValue="All" name="client Name">
+							<InputField select defaultValue="All" label="client Name">
 								<MenuItem value="All">All</MenuItem>
 							</InputField>
 						</Grid>
 						<Grid item xs={4}>
-							<InputField select defaultValue="All" name="contact type">
+							<InputField select defaultValue="All" label="contact type">
 								<MenuItem value="All">All</MenuItem>
 							</InputField>
 						</Grid>
@@ -162,7 +162,7 @@ const columns = [
 
 const StyledRadioField = styled(RadioField)(({ theme }) => ({
 	"& .MuiFormControlLabel-root": {
-		marginRight: 0,
+		marginRight: 20,
 	},
 	"& .MuiFormControlLabel-label": {
 		fontWeight: 400,

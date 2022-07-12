@@ -39,7 +39,7 @@ const Parameters = () => {
 					sx={{ borderRadius: 0, borderTopRightRadius: 5, borderTopLeftRadius: 5 }}
 				>
 					<StyledPageTitle mb={2}>Parameters</StyledPageTitle>
-					<InputField name="As of Week" value={0} select>
+					<InputField label="As of Week" value={0} select>
 						<MenuItem value={0}>Select</MenuItem>
 						<MenuItem value={1}>News</MenuItem>
 					</InputField>
@@ -53,7 +53,7 @@ const Parameters = () => {
 
 				{/* Role */}
 				<MergeStack className={`field ${findNode(1)}`}>
-					<InputField name="Role" value={""} select>
+					<InputField label="Role" value={""} select>
 						<MenuItem value={"Analyst"}>Analyst</MenuItem>
 						<MenuItem value={"FrontEnd"}>Developer</MenuItem>
 					</InputField>
@@ -69,7 +69,7 @@ const Parameters = () => {
 
 				{/* Rate */}
 				<MergeStack className={`field ${findNode(2)}`}>
-					<InputField name="Rate" value={""} select>
+					<InputField label="Rate" value={""} select>
 						<MenuItem value={"$940"}>$940</MenuItem>
 						<MenuItem value={"$840"}>$840</MenuItem>
 					</InputField>
@@ -85,7 +85,7 @@ const Parameters = () => {
 
 				{/* Portfolio */}
 				<MergeStack className={`field ${findNode(3)}`}>
-					<InputField name="Portfolio" value={0} select>
+					<InputField label="Portfolio" value={0} select>
 						<MenuItem value={0}>KoE</MenuItem>
 						<MenuItem value={1}>KoE</MenuItem>
 					</InputField>
@@ -101,7 +101,7 @@ const Parameters = () => {
 
 				{/* Chargeable Ratio */}
 				<MergeStack className={`field ${findNode(4)}`}>
-					<InputField name="Chargeable Ratio" value={0} select>
+					<InputField label="Chargeable Ratio" value={0} select>
 						<MenuItem value={0}>8000</MenuItem>
 						<MenuItem value={1}>2000</MenuItem>
 					</InputField>
@@ -117,7 +117,7 @@ const Parameters = () => {
 
 				{/* Productivity Rate */}
 				<MergeStack className={`field ${findNode(5)}`}>
-					<InputField name="Productivity Rate" value={0} select>
+					<InputField label="Productivity Rate" value={0} select>
 						<MenuItem value={0}>6500</MenuItem>
 						<MenuItem value={1}>2000</MenuItem>
 					</InputField>
@@ -133,7 +133,7 @@ const Parameters = () => {
 
 				{/* Agreement Days */}
 				<MergeStack className={`field ${findNode(6)}`}>
-					<InputField name="Agreement Days" value={0} select>
+					<InputField label="Agreement Days" value={0} select>
 						<MenuItem value={0}>5.0</MenuItem>
 						<MenuItem value={1}>2.0</MenuItem>
 					</InputField>
@@ -149,7 +149,7 @@ const Parameters = () => {
 
 				{/* Salary */}
 				<MergeStack className={`field ${findNode(7)}`}>
-					<InputField name="Salary" value={0} select>
+					<InputField label="Salary" value={0} select>
 						<MenuItem value={0}>$62,000</MenuItem>
 						<MenuItem value={1}>$34,000</MenuItem>
 					</InputField>
@@ -165,7 +165,7 @@ const Parameters = () => {
 
 				{/* Windows Logon */}
 				<MergeStack className={`field ${findNode(8)}`}>
-					<InputField name="Windows Logon" value={0} select>
+					<InputField label="Windows Logon" value={0} select>
 						<MenuItem value={0}>david.watling</MenuItem>
 						<MenuItem value={1}>david.watling</MenuItem>
 					</InputField>

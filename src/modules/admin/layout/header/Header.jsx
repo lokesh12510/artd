@@ -30,8 +30,6 @@ const Header = ({ handleToggle, open }) => {
 		disableHysteresis: true,
 	});
 
-	console.log(process.env.REACT_APP_PROJECT_NAME);
-
 	return (
 		<Root
 			position="sticky"
