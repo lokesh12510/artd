@@ -5,7 +5,7 @@ import adminRoutes from "../modules/admin/urls";
 // Components
 import AdminLayout from "../modules/admin/layout";
 import authRoutes from "../modules/auth/urls/Index";
-import SecureRoute from "../modules/auth/helpers/SecureRoute";
+// import SecureRoute from "../modules/auth/helpers/SecureRoute";
 import GuestRoute from "../modules/auth/helpers/GuestRoute";
 import Error from "../modules/auth/pages/Error";
 // Redux
@@ -40,13 +40,14 @@ const AppRoutes = () => {
 					key={admin.path}
 					path={admin.path}
 					element={
-						admin.auth ? (
-							<SecureRoute module_id={admin.module_id}>
-								<AdminLayout>{admin.element}</AdminLayout>
-							</SecureRoute>
-						) : (
-							<GuestRoute>{admin.element}</GuestRoute>
-						)
+						<AdminLayout>{admin.element}</AdminLayout>
+						// admin.auth ? (
+						// 	<SecureRoute module_id={admin.module_id}>
+						// 		<AdminLayout>{admin.element}</AdminLayout>
+						// 	</SecureRoute>
+						// ) : (
+						// 	<GuestRoute>{admin.element}</GuestRoute>
+						// )
 					}
 				/>
 			))}
